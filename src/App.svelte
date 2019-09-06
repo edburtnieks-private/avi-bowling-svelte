@@ -1,1 +1,5 @@
-<h1>AVI Bowling</h1>
+<script>
+  import Header from './components/Header/index.svelte'
+</script>
+
+<Header />
