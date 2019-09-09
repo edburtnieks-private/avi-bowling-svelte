@@ -1,17 +1,42 @@
+<script>
+  import Logo from "../Logo/index.svelte";
+  import NavigationToggle from "../NavigationToggle/index.svelte";
+  import HeaderContent from "../HeaderContent/index.svelte";
+
+  let isOpen = false;
+
+  const toggleNavigation = () => {
+    isOpen = !isOpen;
+  };
+</script>
+
 <style>
   header {
-    background-color: #fff;
-    padding: 24px;
+    background-color: var(--c-white);
   }
 
-  .container {
-    max-width: 1440px;
-    margin: 0 auto;
+  div {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: var(--m-0) auto;
+    max-width: var(--bp-desktop-xl);
+    padding: var(--p-xxs) var(--p-mobile);
+  }
+
+  @media (min-width: 1024px) {
+    div {
+      padding: var(--p-s) var(--p-mobile);
+    }
   }
 </style>
 
 <header>
-  <div class="container">
-    <img src="./assets/images/logo.svg" alt="Avi Bowling" />
+  <div>
+    <Logo />
+
+    <NavigationToggle on:toggleNavigation={toggleNavigation} {isOpen} />
+
+    <HeaderContent {isOpen} />
   </div>
 </header>

@@ -1,0 +1,76 @@
+:root {
+  /* Breakpoints */
+  --bp-desktop-xl: 1440px;
+
+  /* Border Radius */
+  --br-base: 4px;
+
+  /* Box Shadow */
+  --bs-navigation: 0px 0px 24px 4px var(--c-mercury-50);
+
+  /* Border Width */
+  --bw-btn-s: 1px;
+
+  /* Colors */
+  --c-green: #4cb114;
+  --c-white: #fff;
+  --c-mercury: #e1e1e1;
+  --c-mercury-50: #e1e1e180;
+  --c-mine-shaft: #3a3a3a;
+
+  /* Font Family */
+  --ff-base: 'Montserrat', sans-serif;
+
+  /* Font Sizes */
+  --fs-s: 0.8571rem;
+  --fs-base: 14px;
+
+  /* Font Weights */
+  --fw-bold: 700;
+
+  /* Letter Spacing */
+  --ls-btn-s: 0.48px;
+
+  /* Margin */
+  --m-0: 0;
+  --m-xs: 16px;
+  --m-s: 24px;
+  --m-m: 32px;
+  --m-l: 48px;
+  --m-xl: 72px;
+  --m-xxl: 96px;
+
+  /* Padding */
+  --p-0: 0;
+  --p-xxs: 8px;
+  --p-xs: 16px;
+  --p-s: 24px;
+  --p-l: 48px;
+  --p-btn-s-mobile: 8px 16px;
+  --p-btn-s: 4px 16px;
+  --p-mobile: 24px;
+
+  /* Z Index */
+  --zi-navigation: 1;
+  --zi-navigation-toggle: 2;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+html {
+  font-size: var(--fs-base);
+}
+
+body {
+  font-family: var(--ff-base);
+}
+
+#app {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
