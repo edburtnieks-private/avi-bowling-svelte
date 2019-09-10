@@ -44,7 +44,7 @@
 </style>
 
 <div class="content" data-show-navigation-content={isOpen}>
-  <Navigation />
+  <Navigation on:toggleNavigation />
 
   <div class="right">
     <Button>Make Reservation</Button>
