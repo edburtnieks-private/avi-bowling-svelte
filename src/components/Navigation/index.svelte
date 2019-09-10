@@ -1,5 +1,8 @@
 <script>
   import { Link } from "svelte-routing";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
 
   let navigationItems;
 
@@ -25,6 +28,7 @@
 
     // Calculate difference between active and clicked link
     const deltaX = first.left - last.left;
+    const deltaY = first.top - last.top;
 
     // Do animation
     lastElement.animate(
@@ -32,8 +36,8 @@
         {
           transformOrigin: "center",
           transform: `
-            translateX(${deltaX}px)
-            rotate(${deltaX < 0 ? "-" : ""}360deg)
+            translate(${deltaX}px, ${deltaY}px)
+            ${deltaY === 0 ? `rotate(${deltaX < 0 ? "-" : ""}360deg)` : ""}
           `
         },
         {
@@ -47,6 +51,9 @@
         fill: "both"
       }
     );
+
+    // Dispatch closing navigation menu
+    dispatch("toggleNavigation");
   };
 </script>
 
@@ -81,12 +88,12 @@
 
   li {
     padding: var(--p-xs) var(--p-0);
+    position: relative;
   }
 
   @media (min-width: 1024px) {
     li {
       padding: var(--p-0);
-      position: relative;
     }
 
     li:not(:last-of-type) {
@@ -100,9 +107,20 @@
     }
   }
 
+  .navigation-link {
+    padding-left: var(--p-m);
+  }
+
+  @media (min-width: 1024px) {
+    .navigation-link {
+      padding-left: var(--p-0);
+    }
+  }
+
   :global(.navigation-link a) {
     color: var(--c-mine-shaft);
     display: block;
+    line-height: 1;
     text-decoration: none;
   }
 
@@ -113,10 +131,16 @@
   }
 
   .active-indicator {
-    left: calc(50% - 8px);
     position: absolute;
-    top: calc(100% + 4px);
+    top: calc(50% - 8px);
     visibility: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .active-indicator {
+      left: calc(50% - 8px);
+      top: calc(100% + 4px);
+    }
   }
 
   [data-active] + .active-indicator {

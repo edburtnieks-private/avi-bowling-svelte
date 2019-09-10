@@ -37,6 +37,6 @@
 
     <NavigationToggle on:toggleNavigation={toggleNavigation} {isOpen} />
 
-    <HeaderContent {isOpen} />
+    <HeaderContent on:toggleNavigation={toggleNavigation} {isOpen} />
   </div>
 </header>
