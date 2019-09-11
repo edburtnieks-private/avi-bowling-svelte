@@ -33,7 +33,9 @@
 
 <header>
   <div>
-    <Logo />
+    <a href="/">
+      <Logo />
+    </a>
 
     <NavigationToggle on:toggleNavigation={toggleNavigation} {isOpen} />
 

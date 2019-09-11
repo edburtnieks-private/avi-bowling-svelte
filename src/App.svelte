@@ -6,6 +6,7 @@
   import News from "./pages/News/index.svelte";
   import Contacts from "./pages/Contacts/index.svelte";
   import Header from "./components/Header/index.svelte";
+  import Footer from "./components/Footer/index.svelte";
 </script>
 
 <Router>
@@ -16,4 +17,6 @@
   <Route path="special-offers" component={SpecialOffers} />
   <Route path="news" component={News} />
   <Route path="contacts" component={Contacts} />
+
+  <Footer />
 </Router>
