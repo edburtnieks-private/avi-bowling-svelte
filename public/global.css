@@ -80,7 +80,7 @@ body {
 #app {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
   position: relative;
   width: 100%;
 }
