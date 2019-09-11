@@ -22,10 +22,12 @@
   --ff-base: 'Montserrat', sans-serif;
 
   /* Font Sizes */
-  --fs-s: 0.8571rem;
+  --fs-s: 0.8571rem; /* 12px */
   --fs-base: 14px;
+  --fs-m: 1.7142rem; /* 24px */
 
   /* Font Weights */
+  --fw-regular: 400;
   --fw-bold: 700;
 
   /* Letter Spacing */
@@ -33,6 +35,8 @@
 
   /* Margin */
   --m-0: 0;
+  --m-xxxs: 4px;
+  --m-xxs: 8px;
   --m-xs: 16px;
   --m-s: 24px;
   --m-m: 32px;
@@ -47,6 +51,7 @@
   --p-s: 24px;
   --p-m: 32px;
   --p-l: 48px;
+  --p-xxl: 96px;
   --p-btn-s-mobile: 8px 16px;
   --p-btn-s: 4px 16px;
   --p-mobile: 24px;
@@ -64,14 +69,28 @@ body,
 
 html {
   font-size: var(--fs-base);
+  line-height: 1;
 }
 
 body {
+  color: var(--c-mine-shaft);
   font-family: var(--ff-base);
 }
 
 #app {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   position: relative;
   width: 100%;
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+h3 {
+  font-size: var(--fs-m);
+  font-weight: var(--fw-regular);
 }

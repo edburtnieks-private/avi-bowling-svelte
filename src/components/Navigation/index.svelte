@@ -7,57 +7,63 @@
   let navigationItems;
 
   const changeActive = event => {
-    // Get active link
-    const activeElement = document.querySelector("[data-active]");
+    if (!footer) {
+      // Get active link
+      const activeElement = document.querySelector("[data-active]");
 
-    // Get active link indicator
-    const firstElement = document.querySelector(
-      "[data-active] + .active-indicator"
-    );
-    const first = firstElement.getBoundingClientRect();
+      // Get active link indicator
+      const firstElement = document.querySelector(
+        "[data-active] + .active-indicator"
+      );
+      const first = firstElement.getBoundingClientRect();
 
-    // Change / move active indicator to clicked link
-    delete activeElement.dataset.active;
-    event.target.parentElement.dataset.active = true;
+      // Change / move active indicator to clicked link
+      delete activeElement.dataset.active;
+      event.target.parentElement.dataset.active = true;
 
-    // Get clicked link indicator
-    const lastElement = document.querySelector(
-      "[data-active] + .active-indicator"
-    );
-    const last = lastElement.getBoundingClientRect();
+      // Get clicked link indicator
+      const lastElement = document.querySelector(
+        "[data-active] + .active-indicator"
+      );
+      const last = lastElement.getBoundingClientRect();
 
-    // Calculate difference between active and clicked link
-    const deltaX = first.left - last.left;
-    const deltaY = first.top - last.top;
+      // Calculate difference between active and clicked link
+      const deltaX = first.left - last.left;
+      const deltaY = first.top - last.top;
 
-    // Do animation
-    lastElement.animate(
-      [
+      // Do animation
+      lastElement.animate(
+        [
+          {
+            transformOrigin: "center",
+            transform: `
+              translate(${deltaX}px, ${deltaY}px)
+              ${deltaY === 0 ? `rotate(${deltaX < 0 ? "-" : ""}360deg)` : ""}
+            `
+          },
+          {
+            transformOrigin: "center",
+            transform: "none"
+          }
+        ],
         {
-          transformOrigin: "center",
-          transform: `
-            translate(${deltaX}px, ${deltaY}px)
-            ${deltaY === 0 ? `rotate(${deltaX < 0 ? "-" : ""}360deg)` : ""}
-          `
-        },
-        {
-          transformOrigin: "center",
-          transform: "none"
+          duration: 500,
+          easing: "ease-in-out",
+          fill: "both"
         }
-      ],
-      {
-        duration: 500,
-        easing: "ease-in-out",
-        fill: "both"
-      }
-    );
+      );
 
-    // Dispatch closing navigation menu
-    dispatch("toggleNavigation");
+      // Dispatch closing navigation menu
+      dispatch("toggleNavigation");
+    }
   };
+
+  export let footer = false;
 </script>
 
 <style>
+  /* Header Navigation */
+
   nav {
     margin-bottom: var(--m-m);
   }
@@ -87,15 +93,10 @@
   }
 
   li {
-    padding: var(--p-xs) var(--p-0);
     position: relative;
   }
 
   @media (min-width: 1024px) {
-    li {
-      padding: var(--p-0);
-    }
-
     li:not(:last-of-type) {
       margin-right: var(--m-s);
     }
@@ -120,13 +121,14 @@
   :global(.navigation-link a) {
     color: var(--c-mine-shaft);
     display: block;
-    line-height: 1;
+    padding: var(--p-xs) var(--p-0);
     text-decoration: none;
   }
 
   @media (min-width: 1024px) {
     :global(.navigation-link a) {
       display: inline;
+      padding: var(--p-0);
     }
   }
 
@@ -146,63 +148,120 @@
   [data-active] + .active-indicator {
     visibility: visible;
   }
+
+  /* Footer Navigation */
+  .footer-navigation {
+    margin: var(--m-0);
+  }
+
+  .footer-navigation ul {
+    display: block;
+  }
+
+  @media (min-width: 1024px) {
+    .footer-navigation li {
+      padding: var(--p-0);
+    }
+
+    .footer-navigation li:not(:last-of-type) {
+      margin: var(--m-0) var(--m-0) var(--m-s);
+    }
+  }
+
+  .footer-navigation .navigation-link {
+    padding-left: var(--p-0);
+  }
+
+  .footer-navigation-first-link {
+    padding-top: var(--p-0);
+  }
 </style>
 
-<nav>
+<nav class:footer-navigation={footer}>
   <ul bind:this={navigationItems}>
     <li on:click={changeActive}>
       <div data-active class="navigation-link">
-        <Link to="/">Home</Link>
+        {#if footer}
+          <a class="footer-navigation-first-link" href="/">Home</a>
+        {:else}
+          <Link to="/">Home</Link>
+        {/if}
       </div>
 
-      <img
-        class="active-indicator"
-        src="./assets/icons/bowling-ball-icon.svg"
-        alt="Bowling ball" />
+      {#if !footer}
+        <img
+          class="active-indicator"
+          src="./assets/icons/bowling-ball-icon.svg"
+          alt="Bowling ball" />
+      {/if}
     </li>
 
     <li on:click={changeActive}>
       <div class="navigation-link">
-        <Link to="/gallery">Gallery</Link>
+        {#if footer}
+          <a href="/gallery">Gallery</a>
+        {:else}
+          <Link to="/gallery">Gallery</Link>
+        {/if}
       </div>
 
-      <img
-        class="active-indicator"
-        src="./assets/icons/bowling-ball-icon.svg"
-        alt="Bowling ball" />
+      {#if !footer}
+        <img
+          class="active-indicator"
+          src="./assets/icons/bowling-ball-icon.svg"
+          alt="Bowling ball" />
+      {/if}
     </li>
 
     <li on:click={changeActive}>
       <div class="navigation-link">
-        <Link to="/special-offers">Special offers</Link>
+        {#if footer}
+          <a href="/special-offers">Special offers</a>
+        {:else}
+          <Link to="/special-offers">Special offers</Link>
+        {/if}
       </div>
 
-      <img
-        class="active-indicator"
-        src="./assets/icons/bowling-ball-icon.svg"
-        alt="Bowling ball" />
+      {#if !footer}
+        <img
+          class="active-indicator"
+          src="./assets/icons/bowling-ball-icon.svg"
+          alt="Bowling ball" />
+      {/if}
     </li>
 
     <li on:click={changeActive}>
       <div class="navigation-link">
-        <Link to="/news">News</Link>
+        {#if footer}
+          <a href="/news">News</a>
+        {:else}
+          <Link to="/news">News</Link>
+        {/if}
       </div>
 
-      <img
-        class="active-indicator"
-        src="./assets/icons/bowling-ball-icon.svg"
-        alt="Bowling ball" />
+      {#if !footer}
+        <img
+          class="active-indicator"
+          src="./assets/icons/bowling-ball-icon.svg"
+          alt="Bowling ball" />
+      {/if}
     </li>
 
     <li on:click={changeActive}>
       <div class="navigation-link">
-        <Link to="/contacts">Contacts</Link>
+        {#if footer}
+          <a href="/contacts">Contacts</a>
+        {:else}
+          <Link to="/contacts">Contacts</Link>
+        {/if}
       </div>
 
-      <img
-        class="active-indicator"
-        src="./assets/icons/bowling-ball-icon.svg"
-        alt="Bowling ball" />
+      {#if !footer}
+        <img
+          class="active-indicator"
+          src="./assets/icons/bowling-ball-icon.svg"
+          alt="Bowling ball" />
+      {/if}
     </li>
   </ul>
 </nav>
