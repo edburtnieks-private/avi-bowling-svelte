@@ -47,7 +47,7 @@
   <Navigation on:toggleNavigation />
 
   <div class="right">
-    <Button>Make Reservation</Button>
+    <Button buttonType="secondary">Make Reservation</Button>
 
     <LanguageSwitcher />
   </div>
