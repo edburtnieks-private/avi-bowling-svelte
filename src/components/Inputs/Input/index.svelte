@@ -12,21 +12,14 @@
 </script>
 
 <style>
-  .input-label-wrapper:not(:last-of-type) {
-    margin-bottom: var(--m-s);
-  }
-
   @media (min-width: 1024px) {
-    .input-label-wrapper:not(:last-of-type) {
-      margin: var(--m-0) var(--m-xxs) var(--m-0) var(--m-0);
+    .input-label {
       max-width: 176px;
     }
-  }
 
-  label {
-    display: block;
-    font-size: var(--fs-s);
-    margin-bottom: var(--m-xxs);
+    .increment-input-label {
+      max-width: 104px;
+    }
   }
 
   .input-wrapper {
@@ -53,11 +46,12 @@
   }
 
   .increment-input-wrapper input {
+    padding: var(--p-xxs);
     text-align: center;
   }
 </style>
 
-<div class="input-label-wrapper">
+<div class="input-label" class:increment-input-label={incrementInput}>
   <label for={id}>{label}</label>
 
   <div class="input-wrapper" class:increment-input-wrapper={incrementInput}>
