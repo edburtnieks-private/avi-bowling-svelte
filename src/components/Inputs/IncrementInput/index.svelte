@@ -1,7 +1,7 @@
 <script>
   import Input from "../Input/index.svelte";
-  import MinusIcon from "../Icon/MinusIcon/index.svelte";
-  import PlusIcon from "../Icon/PlusIcon/index.svelte";
+  import MinusIcon from "../../Icons/MinusIcon/index.svelte";
+  import PlusIcon from "../../Icons/PlusIcon/index.svelte";
 
   const decrement = () => {
     if (value > minValue) {
