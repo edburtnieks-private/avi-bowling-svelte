@@ -20,6 +20,7 @@
   export let value;
   export let minValue;
   export let maxValue;
+  export let valueText = "";
 </script>
 
 <style>
@@ -50,7 +51,7 @@
   }
 </style>
 
-<Input {label} {value} {id} incrementInput>
+<Input {label} {value} {id} incrementInput {valueText}>
   <button
     slot="decrement-button"
     type="button"

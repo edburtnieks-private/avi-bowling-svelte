@@ -4,24 +4,31 @@
 
   const dispatch = createEventDispatcher();
 
-  let isActive = false;
+  let active = false;
 
   const toggleDropdown = () => {
-    isActive = !isActive;
+    active = !active;
     dispatch("toggleDropdown");
   };
+
+  export let isInput = false;
+  export let id = "";
 </script>
 
 <style>
   button {
-    align-items: center;
     background-color: var(--c-white);
     border: 0;
-    color: var(--c-blue);
     cursor: pointer;
+    padding: var(--p-0);
+    width: 100%;
+  }
+
+  .link {
+    align-items: center;
+    color: var(--c-blue);
     display: flex;
     font-size: var(--fs-s);
-    padding: var(--p-0);
   }
 
   .caret-icon-wrapper {
@@ -29,10 +36,16 @@
   }
 </style>
 
-<button type="button" on:click={toggleDropdown}>
-  <slot />
+<button type="button" on:click={toggleDropdown} {id}>
+  {#if isInput}
+    <slot />
+  {:else}
+    <div class="link">
+      <slot />
 
-  <div class="caret-icon-wrapper">
-    <CaretIcon {isActive} />
-  </div>
+      <div class="caret-icon-wrapper">
+        <CaretIcon link {active} />
+      </div>
+    </div>
+  {/if}
 </button>

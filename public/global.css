@@ -18,8 +18,10 @@
   --c-white: #fff;
   --c-mercury: #e1e1e1;
   --c-silver: #ccc;
-  --c-mercury-50: #e1e1e180;
   --c-mine-shaft: #3a3a3a;
+
+  /* Opacity Colors */
+  --c-mercury-50: #e1e1e180;
 
   /* Font Family */
   --ff-base: 'Montserrat', sans-serif;
