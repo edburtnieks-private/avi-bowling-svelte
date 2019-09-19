@@ -14,11 +14,14 @@
 
   /* Colors */
   --c-green: #4cb114;
+  --c-blue: #0680d1;
   --c-white: #fff;
   --c-mercury: #e1e1e1;
   --c-silver: #ccc;
-  --c-mercury-50: #e1e1e180;
   --c-mine-shaft: #3a3a3a;
+
+  /* Opacity Colors */
+  --c-mercury-50: #e1e1e180;
 
   /* Font Family */
   --ff-base: 'Montserrat', sans-serif;
@@ -60,6 +63,7 @@
 
   /* Z Index */
   --zi-navigation: 1;
+  --zi-dropdown: 1;
   --zi-navigation-toggle: 2;
 }
 
@@ -95,4 +99,10 @@ p {
 h3 {
   font-size: var(--fs-m);
   font-weight: var(--fw-regular);
+}
+
+label {
+  display: block;
+  font-size: var(--fs-s);
+  margin-bottom: var(--m-xxs);
 }
