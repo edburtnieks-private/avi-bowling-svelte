@@ -22,7 +22,7 @@
 
   $: dates = Array.from(Array(numberOfDatesInMonth), (_, index) => index + 1);
 
-  $: activeDate =
+  $: isTodaysMonthAndYear =
     selectedDate.getMonth() === new Date().getMonth() &&
     selectedDate.getYear() === new Date().getYear();
 
@@ -90,7 +90,6 @@
     background-color: var(--c-white);
     border: 0;
     color: var(--c-mine-shaft);
-    cursor: pointer;
     height: 32px;
     min-width: 32px;
     padding: 0;
@@ -119,8 +118,11 @@
 </style>
 
 <div class="month-year">
-  <button type="button" on:click={decreaseMonth}>
-    <CaretIcon left />
+  <button
+    type="button"
+    on:click={decreaseMonth}
+    disabled={isTodaysMonthAndYear}>
+    <CaretIcon left disabled={isTodaysMonthAndYear} />
   </button>
   {monthYear}
   <button type="button" on:click={increaseMonth}>
@@ -142,7 +144,7 @@
   {#each dates as date}
     <button
       type="button"
-      class:active={date === selectedDate.getDate() && activeDate}>
+      class:active={date === selectedDate.getDate() && isTodaysMonthAndYear}>
       <time datetime="2019-09-01">{date}</time>
     </button>
   {/each}

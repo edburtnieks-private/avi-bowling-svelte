@@ -7,7 +7,6 @@
   button {
     border-radius: var(--br-base);
     border: var(--bw-btn-s) solid var(--c-green);
-    cursor: pointer;
     font-size: var(--fs-s);
     font-weight: var(--fw-bold);
     letter-spacing: var(--ls-btn-s);

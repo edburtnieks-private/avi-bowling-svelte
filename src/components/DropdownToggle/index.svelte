@@ -19,7 +19,6 @@
   button {
     background-color: var(--c-white);
     border: 0;
-    cursor: pointer;
     padding: var(--p-0);
     width: 100%;
   }

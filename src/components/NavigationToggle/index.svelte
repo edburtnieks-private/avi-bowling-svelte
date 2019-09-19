@@ -11,7 +11,6 @@
   button {
     background-color: var(--c-white);
     border: 0;
-    cursor: pointer;
     padding: 15px 8px;
     z-index: var(--zi-navigation-toggle);
   }

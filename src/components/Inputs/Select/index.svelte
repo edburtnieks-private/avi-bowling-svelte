@@ -25,7 +25,6 @@
     border: 0;
     box-shadow: var(--bs-input);
     color: var(--c-mine-shaft);
-    cursor: pointer;
     display: block;
     font-size: var(--fs-base);
     padding: var(--p-xxs) var(--p-xs);

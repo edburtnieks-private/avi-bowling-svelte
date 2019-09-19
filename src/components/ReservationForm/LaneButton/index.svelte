@@ -20,7 +20,6 @@
     border: 0;
     box-shadow: var(--bs-input);
     color: var(--c-mine-shaft);
-    cursor: pointer;
     height: 32px;
     padding: 0;
     width: 100%;
