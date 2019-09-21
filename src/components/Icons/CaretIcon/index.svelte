@@ -3,6 +3,7 @@
   export let link = false;
   export let left = false;
   export let right = false;
+  export let disabled = false;
 </script>
 
 <style>
@@ -60,10 +61,21 @@
   .right {
     transform: rotate(-90deg);
   }
+
+  .disabled .right-part,
+  .disabled .left-part {
+    background-color: var(--c-silver);
+  }
 </style>
 
 <div class="icon">
-  <div class="caret-icon" class:active class:link class:left class:right>
+  <div
+    class="caret-icon"
+    class:active
+    class:link
+    class:left
+    class:right
+    class:disabled>
     <div class="left-part" />
     <div class="right-part" />
   </div>

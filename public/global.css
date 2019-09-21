@@ -106,3 +106,12 @@ label {
   font-size: var(--fs-s);
   margin-bottom: var(--m-xxs);
 }
+
+button,
+select {
+  cursor: pointer;
+}
+
+button:disabled select:disabled {
+  cursor: not-allowed;
+}

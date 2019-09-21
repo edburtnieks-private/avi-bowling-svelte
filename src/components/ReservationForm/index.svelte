@@ -20,11 +20,10 @@
 
   let selectedDate = new Date();
 
-  $: dateAndTime = selectedDate.toLocaleDateString("en", {
+  $: dateAndTime = `${selectedDate.toLocaleDateString("en", {
     month: "long",
-    day: "numeric",
-    hour: "numeric"
-  });
+    day: "numeric"
+  })}, ${startTime}`;
 
   let isMoreDetailsFormVisible = false;
   let isDateTimeFormVisible = false;
@@ -60,7 +59,20 @@
   ];
 
   const handleSubmit = event => {
-    console.log(event);
+    const reservation = {
+      name,
+      contact,
+      date: selectedDate,
+      startTime,
+      duration,
+      laneCount,
+      playerCount,
+      shoeCount,
+      players: playerNames,
+      lanes: laneNumbers
+    };
+
+    console.log(reservation);
   };
 
   const toggleMoreDetailsForm = () => {

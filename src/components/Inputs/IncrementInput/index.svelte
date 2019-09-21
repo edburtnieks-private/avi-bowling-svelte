@@ -27,12 +27,7 @@
   button {
     background-color: var(--c-white);
     border: 0;
-    cursor: pointer;
     padding: 15px 11px;
-  }
-
-  button:disabled {
-    cursor: not-allowed;
   }
 
   .decrement-button,
