@@ -11,26 +11,46 @@
   };
 
   export let value;
+  export let disabled = false;
 </script>
 
 <style>
   button {
     background-color: var(--c-white);
     border-radius: var(--br-base);
-    border: 0;
+    border: 2px solid var(--c-white);
     box-shadow: var(--bs-input);
     color: var(--c-mine-shaft);
     height: 32px;
-    padding: 0;
+    outline: 0;
+    padding: var(--p-0);
     width: 100%;
+  }
+
+  button:hover,
+  button:active,
+  button:focus {
+    border-color: var(--c-silver);
+  }
+
+  button:disabled {
+    background-color: var(--c-mercury);
+    border-color: var(--c-mercury);
+    color: var(--c-silver);
   }
 
   .active {
     background-color: var(--c-green);
+    border-color: var(--c-green);
     color: var(--c-white);
   }
 </style>
 
-<button type="button" class:active={isActive} on:click={toggleLane} {value}>
+<button
+  type="button"
+  class:active={isActive}
+  on:click={toggleLane}
+  {value}
+  {disabled}>
   <slot />
 </button>

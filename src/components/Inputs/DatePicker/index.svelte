@@ -88,11 +88,23 @@
 
   button {
     background-color: var(--c-white);
-    border: 0;
+    border-radius: var(--br-base);
+    border: 2px solid var(--c-white);
     color: var(--c-mine-shaft);
-    height: 32px;
-    min-width: 32px;
-    padding: 0;
+    height: 36px;
+    min-width: 36px;
+    outline: 0;
+    padding: var(--p-0);
+  }
+
+  button:hover,
+  button:active,
+  button:focus {
+    border-color: var(--c-silver);
+  }
+
+  button:disabled {
+    border-color: var(--c-white);
   }
 
   .date-grid button:first-child {
@@ -103,9 +115,9 @@
     align-items: center;
     border-radius: 50%;
     display: inline-flex;
-    height: 32px;
+    height: 100%;
     justify-content: center;
-    width: 32px;
+    width: 100%;
   }
 
   .active {

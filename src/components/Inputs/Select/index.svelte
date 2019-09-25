@@ -16,19 +16,33 @@
   export let id = "";
   export let label = "";
   export let options = [];
+  export let disabled = false;
 </script>
 
 <style>
   select {
     appearance: none;
     border-radius: var(--br-base);
-    border: 0;
+    border: 2px solid var(--c-white);
     box-shadow: var(--bs-input);
     color: var(--c-mine-shaft);
     display: block;
     font-size: var(--fs-base);
     padding: var(--p-xxs) var(--p-xs);
     width: 100%;
+    outline: 0;
+  }
+
+  select:hover,
+  select:active,
+  select:focus {
+    border-color: var(--c-silver);
+  }
+
+  select:disabled {
+    background-color: var(--c-mercury);
+    border-color: var(--c-mercury);
+    color: var(--c-silver);
   }
 
   .select-wrapper {
@@ -36,6 +50,7 @@
   }
 
   .caret-icon-wrapper {
+    pointer-events: none;
     position: absolute;
     right: 16px;
     top: calc(50% - 6px);
@@ -48,6 +63,7 @@
   <select
     bind:value={selectedOption}
     {id}
+    {disabled}
     on:blur={closeSelect}
     on:click={toggleSelect}>
     {#each options as option}
@@ -56,6 +72,6 @@
   </select>
 
   <div class="caret-icon-wrapper">
-    <CaretIcon {active} />
+    <CaretIcon {disabled} {active} />
   </div>
 </div>

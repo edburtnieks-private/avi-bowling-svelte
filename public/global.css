@@ -14,6 +14,7 @@
 
   /* Colors */
   --c-green: #4cb114;
+  --c-green-darker: #3c8c10;
   --c-blue: #0680d1;
   --c-white: #fff;
   --c-mercury: #e1e1e1;
@@ -112,6 +113,8 @@ select {
   cursor: pointer;
 }
 
-button:disabled select:disabled {
+input:disabled,
+button:disabled,
+select:disabled {
   cursor: not-allowed;
 }

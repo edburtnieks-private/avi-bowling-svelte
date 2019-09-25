@@ -16,6 +16,7 @@
   export let dropdownToggleText = "";
   export let isDropdownActive = "";
   export let valueText = "";
+  export let disabled = false;
 </script>
 
 <style>
@@ -45,10 +46,11 @@
   input,
   .dropdown-toggle-input {
     background-color: var(--c-white);
-    border-radius: inherit;
-    border: 0;
+    border-radius: var(--br-base);
+    border: 2px solid var(--c-white);
     color: var(--c-mine-shaft);
     font-size: 1rem;
+    outline: 0;
     padding: var(--p-xxs) var(--p-xs);
     width: 100%;
   }
@@ -57,6 +59,22 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
+  }
+
+  input:hover,
+  input:active,
+  input:focus,
+  :global(button:hover .dropdown-toggle-input),
+  :global(button:active .dropdown-toggle-input),
+  :global(button:focus .dropdown-toggle-input) {
+    border-color: var(--c-silver);
+  }
+
+  input:disabled,
+  :global(button:disabled .dropdown-toggle-input) {
+    background-color: var(--c-mercury);
+    border-color: var(--c-mercury);
+    color: var(--c-silver);
   }
 
   .caret-icon-wrapper {
@@ -73,7 +91,10 @@
   }
 
   .increment-input-wrapper input {
-    padding: var(--p-xxs);
+    background-color: var(--c-white);
+    border-color: var(--c-white);
+    color: var(--c-mine-shaft);
+    padding: var(--p-xxs) var(--p-0);
     text-align: center;
   }
 </style>
@@ -85,11 +106,15 @@
   <label for={id}>{label}</label>
 
   {#if isDropdownToggle}
-    <DropdownToggle {id} on:toggleDropdown isInput={isDropdownToggle}>
+    <DropdownToggle
+      {id}
+      on:toggleDropdown
+      isInput={isDropdownToggle}
+      {disabled}>
       <div class="input-wrapper dropdown-toggle-input">
         <span>{dropdownToggleText}</span>
         <div class="caret-icon-wrapper">
-          <CaretIcon active={isDropdownActive} />
+          <CaretIcon {disabled} active={isDropdownActive} />
         </div>
       </div>
     </DropdownToggle>
@@ -104,7 +129,7 @@
         {placeholder}
         {id}
         value={valueText || value}
-        disabled={incrementInput}
+        disabled={disabled || incrementInput}
         on:change={handleChange} />
 
       <slot name="increment-button" />
