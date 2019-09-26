@@ -88,13 +88,12 @@
 
   button {
     box-shadow: none;
-    height: 36px;
-    min-width: 36px;
+    height: 32px;
+    min-width: 32px;
   }
 
   button:disabled {
     background-color: var(--c-white);
-    border-color: var(--c-white);
   }
 
   .date-grid button:first-child {
@@ -111,11 +110,18 @@
   }
 
   .active {
+    box-shadow: none;
     color: var(--c-white);
   }
 
   .active time {
     background-color: var(--c-green);
+  }
+
+  .active:hover time,
+  .active:focus time,
+  .active:active time {
+    background-color: var(--c-green-darker);
   }
 </style>
 

@@ -21,7 +21,7 @@
 
   .active {
     background-color: var(--c-green);
-    border-color: var(--c-green);
+    box-shadow: none;
     color: var(--c-white);
   }
 
@@ -29,7 +29,6 @@
   .active:focus,
   .active:active {
     background-color: var(--c-green-darker);
-    border-color: var(--c-green-darker);
   }
 </style>
 
