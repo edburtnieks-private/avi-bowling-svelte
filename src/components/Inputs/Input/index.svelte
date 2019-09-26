@@ -58,6 +58,7 @@
     border-color: var(--c-white);
     box-shadow: none;
     color: var(--c-mine-shaft);
+    max-width: 32px;
     padding: var(--p-xxs) var(--p-0);
     text-align: center;
   }
