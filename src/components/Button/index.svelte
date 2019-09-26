@@ -1,6 +1,7 @@
 <script>
   export let type = "button";
   export let buttonType = "primary";
+  export let disabled = false;
 </script>
 
 <style>
@@ -10,6 +11,7 @@
     font-size: var(--fs-s);
     font-weight: var(--fw-bold);
     letter-spacing: var(--ls-btn-s);
+    outline: 0;
     padding: var(--p-btn-s-mobile);
     width: 100%;
   }
@@ -26,14 +28,37 @@
     color: var(--c-white);
   }
 
+  .primary:hover,
+  .primary:active,
+  .primary:focus,
+  .secondary:hover,
+  .secondary:active,
+  .secondary:focus {
+    background-color: var(--c-green-darker);
+    border-color: var(--c-green-darker);
+    color: var(--c-white);
+  }
+
+  .primary:disabled {
+    background-color: var(--c-mercury);
+    border-color: var(--c-mercury);
+    color: var(--c-silver);
+  }
+
   .secondary {
     background-color: var(--c-white);
     color: var(--c-green);
+  }
+
+  .secondary:disabled {
+    border-color: var(--c-silver);
+    color: var(--c-silver);
   }
 </style>
 
 <button
   {type}
+  {disabled}
   class:primary={buttonType === 'primary'}
   class:secondary={buttonType === 'secondary'}>
   <slot />

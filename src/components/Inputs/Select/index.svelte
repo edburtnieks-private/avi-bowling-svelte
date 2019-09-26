@@ -16,19 +16,12 @@
   export let id = "";
   export let label = "";
   export let options = [];
+  export let disabled = false;
 </script>
 
 <style>
   select {
     appearance: none;
-    border-radius: var(--br-base);
-    border: 0;
-    box-shadow: var(--bs-input);
-    color: var(--c-mine-shaft);
-    display: block;
-    font-size: var(--fs-base);
-    padding: var(--p-xxs) var(--p-xs);
-    width: 100%;
   }
 
   .select-wrapper {
@@ -36,6 +29,7 @@
   }
 
   .caret-icon-wrapper {
+    pointer-events: none;
     position: absolute;
     right: 16px;
     top: calc(50% - 6px);
@@ -46,8 +40,10 @@
 
 <div class="select-wrapper">
   <select
+    class="global-input"
     bind:value={selectedOption}
     {id}
+    {disabled}
     on:blur={closeSelect}
     on:click={toggleSelect}>
     {#each options as option}
@@ -56,6 +52,6 @@
   </select>
 
   <div class="caret-icon-wrapper">
-    <CaretIcon {active} />
+    <CaretIcon {disabled} {active} />
   </div>
 </div>

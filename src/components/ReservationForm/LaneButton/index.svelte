@@ -11,26 +11,27 @@
   };
 
   export let value;
+  export let disabled = false;
 </script>
 
 <style>
   button {
-    background-color: var(--c-white);
-    border-radius: var(--br-base);
-    border: 0;
-    box-shadow: var(--bs-input);
-    color: var(--c-mine-shaft);
     height: 32px;
-    padding: 0;
-    width: 100%;
   }
 
   .active {
     background-color: var(--c-green);
+    border-color: var(--c-green);
     color: var(--c-white);
   }
 </style>
 
-<button type="button" class:active={isActive} on:click={toggleLane} {value}>
+<button
+  type="button"
+  class="global-button-input"
+  class:active={isActive}
+  on:click={toggleLane}
+  {value}
+  {disabled}>
   <slot />
 </button>

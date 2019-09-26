@@ -16,6 +16,7 @@
   export let dropdownToggleText = "";
   export let isDropdownActive = "";
   export let valueText = "";
+  export let disabled = false;
 </script>
 
 <style>
@@ -37,22 +38,6 @@
     max-width: 100%;
   }
 
-  .input-wrapper {
-    border-radius: var(--br-base);
-    box-shadow: var(--bs-input);
-  }
-
-  input,
-  .dropdown-toggle-input {
-    background-color: var(--c-white);
-    border-radius: inherit;
-    border: 0;
-    color: var(--c-mine-shaft);
-    font-size: 1rem;
-    padding: var(--p-xxs) var(--p-xs);
-    width: 100%;
-  }
-
   .dropdown-toggle-input {
     align-items: center;
     display: flex;
@@ -64,16 +49,16 @@
     z-index: var(--zi-select-caret);
   }
 
-  input::placeholder {
-    color: var(--c-silver);
-  }
-
   .increment-input-wrapper {
     display: flex;
   }
 
   .increment-input-wrapper input {
-    padding: var(--p-xxs);
+    background-color: var(--c-white);
+    border-color: var(--c-white);
+    box-shadow: none;
+    color: var(--c-mine-shaft);
+    padding: var(--p-xxs) var(--p-0);
     text-align: center;
   }
 </style>
@@ -85,26 +70,33 @@
   <label for={id}>{label}</label>
 
   {#if isDropdownToggle}
-    <DropdownToggle {id} on:toggleDropdown isInput={isDropdownToggle}>
-      <div class="input-wrapper dropdown-toggle-input">
+    <DropdownToggle
+      {id}
+      on:toggleDropdown
+      isInput={isDropdownToggle}
+      {disabled}>
+      <div class="dropdown-toggle-input">
         <span>{dropdownToggleText}</span>
         <div class="caret-icon-wrapper">
-          <CaretIcon active={isDropdownActive} />
+          <CaretIcon {disabled} active={isDropdownActive} />
         </div>
       </div>
     </DropdownToggle>
 
     <slot name="dropdown-content" />
   {:else}
-    <div class="input-wrapper" class:increment-input-wrapper={incrementInput}>
+    <div
+      class:global-input-wrapper={incrementInput}
+      class:increment-input-wrapper={incrementInput}>
       <slot name="decrement-button" />
 
       <input
         {type}
         {placeholder}
         {id}
+        class="global-input"
         value={valueText || value}
-        disabled={incrementInput}
+        disabled={disabled || incrementInput}
         on:change={handleChange} />
 
       <slot name="increment-button" />

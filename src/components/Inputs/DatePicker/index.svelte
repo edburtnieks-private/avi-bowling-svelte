@@ -87,12 +87,14 @@
   }
 
   button {
+    box-shadow: none;
+    height: 36px;
+    min-width: 36px;
+  }
+
+  button:disabled {
     background-color: var(--c-white);
-    border: 0;
-    color: var(--c-mine-shaft);
-    height: 32px;
-    min-width: 32px;
-    padding: 0;
+    border-color: var(--c-white);
   }
 
   .date-grid button:first-child {
@@ -103,9 +105,9 @@
     align-items: center;
     border-radius: 50%;
     display: inline-flex;
-    height: 32px;
+    height: 100%;
     justify-content: center;
-    width: 32px;
+    width: 100%;
   }
 
   .active {
@@ -120,12 +122,13 @@
 <div class="month-year">
   <button
     type="button"
+    class="global-button-input"
     on:click={decreaseMonth}
     disabled={isTodaysMonthAndYear}>
     <CaretIcon left disabled={isTodaysMonthAndYear} />
   </button>
   {monthYear}
-  <button type="button" on:click={increaseMonth}>
+  <button class="global-button-input" type="button" on:click={increaseMonth}>
     <CaretIcon right />
   </button>
 </div>
@@ -144,6 +147,7 @@
   {#each dates as date}
     <button
       type="button"
+      class="global-button-input"
       class:active={date === selectedDate.getDate() && isTodaysMonthAndYear}>
       <time datetime="2019-09-01">{date}</time>
     </button>

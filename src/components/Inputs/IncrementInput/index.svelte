@@ -25,24 +25,13 @@
 
 <style>
   button {
-    background-color: var(--c-white);
-    border: 0;
+    box-shadow: none;
     padding: 15px 11px;
   }
 
-  .decrement-button,
-  .increment-button {
-    border-radius: var(--br-base);
-  }
-
-  .decrement-button {
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
-  }
-
-  .increment-button {
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
+  button:disabled {
+    background-color: var(--c-white);
+    border-color: var(--c-white);
   }
 </style>
 
@@ -50,7 +39,7 @@
   <button
     slot="decrement-button"
     type="button"
-    class="decrement-button"
+    class="global-button-input"
     on:click={decrement}
     disabled={value === minValue}>
     <MinusIcon disabled={value === minValue} />
@@ -59,7 +48,7 @@
   <button
     slot="increment-button"
     type="button"
-    class="increment-button"
+    class="global-button-input"
     on:click={increment}
     disabled={value === maxValue}>
     <PlusIcon disabled={value === maxValue} />

@@ -13,14 +13,27 @@
 
   export let isInput = false;
   export let id = "";
+  export let disabled = false;
 </script>
 
 <style>
-  button {
+  .link-button {
     background-color: var(--c-white);
     border: 0;
+    outline: 0;
     padding: var(--p-0);
-    width: 100%;
+  }
+
+  .link-button:hover .link,
+  .link-button:active .link,
+  .link-button:focus .link {
+    text-decoration-color: var(--c-blue);
+    text-decoration: underline;
+  }
+
+  .link-button:disabled .link {
+    color: var(--c-silver);
+    text-decoration: none;
   }
 
   .link {
@@ -35,7 +48,13 @@
   }
 </style>
 
-<button type="button" on:click={toggleDropdown} {id}>
+<button
+  type="button"
+  class:link-button={!isInput}
+  class:global-input={isInput}
+  on:click={toggleDropdown}
+  {disabled}
+  {id}>
   {#if isInput}
     <slot />
   {:else}
@@ -43,7 +62,7 @@
       <slot />
 
       <div class="caret-icon-wrapper">
-        <CaretIcon link {active} />
+        <CaretIcon {disabled} link {active} />
       </div>
     </div>
   {/if}
