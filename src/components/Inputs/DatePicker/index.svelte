@@ -62,6 +62,10 @@
       ).getUTCDay() + 1
     );
   };
+
+  const changeDate = date => {
+    dispatch("changeDate", date);
+  };
 </script>
 
 <style>
@@ -154,7 +158,8 @@
     <button
       type="button"
       class="global-button-input"
-      class:active={date === selectedDate.getDate() && isTodaysMonthAndYear}>
+      class:active={date === selectedDate.getDate()}
+      on:click={() => changeDate(date)}>
       <time datetime="2019-09-01">{date}</time>
     </button>
   {/each}
