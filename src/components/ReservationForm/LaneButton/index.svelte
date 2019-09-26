@@ -24,6 +24,13 @@
     border-color: var(--c-green);
     color: var(--c-white);
   }
+
+  .active:hover,
+  .active:focus,
+  .active:active {
+    background-color: var(--c-green-darker);
+    border-color: var(--c-green-darker);
+  }
 </style>
 
 <button
