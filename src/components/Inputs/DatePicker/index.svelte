@@ -87,23 +87,13 @@
   }
 
   button {
-    background-color: var(--c-white);
-    border-radius: var(--br-base);
-    border: 2px solid var(--c-white);
-    color: var(--c-mine-shaft);
+    box-shadow: none;
     height: 36px;
     min-width: 36px;
-    outline: 0;
-    padding: var(--p-0);
-  }
-
-  button:hover,
-  button:active,
-  button:focus {
-    border-color: var(--c-silver);
   }
 
   button:disabled {
+    background-color: var(--c-white);
     border-color: var(--c-white);
   }
 
@@ -132,12 +122,13 @@
 <div class="month-year">
   <button
     type="button"
+    class="global-button-input"
     on:click={decreaseMonth}
     disabled={isTodaysMonthAndYear}>
     <CaretIcon left disabled={isTodaysMonthAndYear} />
   </button>
   {monthYear}
-  <button type="button" on:click={increaseMonth}>
+  <button class="global-button-input" type="button" on:click={increaseMonth}>
     <CaretIcon right />
   </button>
 </div>
@@ -156,6 +147,7 @@
   {#each dates as date}
     <button
       type="button"
+      class="global-button-input"
       class:active={date === selectedDate.getDate() && isTodaysMonthAndYear}>
       <time datetime="2019-09-01">{date}</time>
     </button>

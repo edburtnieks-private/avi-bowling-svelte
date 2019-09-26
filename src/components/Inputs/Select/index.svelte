@@ -22,27 +22,6 @@
 <style>
   select {
     appearance: none;
-    border-radius: var(--br-base);
-    border: 2px solid var(--c-white);
-    box-shadow: var(--bs-input);
-    color: var(--c-mine-shaft);
-    display: block;
-    font-size: var(--fs-base);
-    padding: var(--p-xxs) var(--p-xs);
-    width: 100%;
-    outline: 0;
-  }
-
-  select:hover,
-  select:active,
-  select:focus {
-    border-color: var(--c-silver);
-  }
-
-  select:disabled {
-    background-color: var(--c-mercury);
-    border-color: var(--c-mercury);
-    color: var(--c-silver);
   }
 
   .select-wrapper {
@@ -61,6 +40,7 @@
 
 <div class="select-wrapper">
   <select
+    class="global-input"
     bind:value={selectedOption}
     {id}
     {disabled}

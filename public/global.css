@@ -118,3 +118,48 @@ button:disabled,
 select:disabled {
   cursor: not-allowed;
 }
+
+.global-input,
+.global-button-input,
+.global-input-wrapper {
+  border-radius: var(--br-base);
+  box-shadow: var(--bs-input);
+}
+
+.global-input,
+.global-button-input {
+  background-color: var(--c-white);
+  border: 2px solid var(--c-white);
+  color: var(--c-mine-shaft);
+  font-size: 1rem;
+  outline: 0;
+}
+
+.global-input {
+  padding: var(--p-xxs) var(--p-xs);
+  width: 100%;
+}
+
+.global-button-input {
+  padding: var(--p-0);
+}
+
+.global-input:hover,
+.global-input:focus,
+.global-input:active,
+.global-button-input:hover,
+.global-button-input:focus,
+.global-button-input:active {
+  border-color: var(--c-silver);
+}
+
+.global-input:disabled,
+.global-button-input:disabled {
+  background-color: var(--c-mercury);
+  border-color: var(--c-mercury);
+  color: var(--c-silver);
+}
+
+.global-input::placeholder {
+  color: var(--c-silver);
+}
