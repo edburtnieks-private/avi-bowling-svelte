@@ -55,7 +55,6 @@
 
   .increment-input-wrapper input {
     background-color: var(--c-white);
-    border-color: var(--c-white);
     box-shadow: none;
     color: var(--c-mine-shaft);
     max-width: 32px;

@@ -31,7 +31,6 @@
 
   button:disabled {
     background-color: var(--c-white);
-    border-color: var(--c-white);
   }
 </style>
 

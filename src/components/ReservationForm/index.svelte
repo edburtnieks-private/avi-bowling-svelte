@@ -114,6 +114,11 @@
     startTime = event.target.value;
     toggleStartTimeDropdown();
   };
+
+  const changeDate = event => {
+    const date = event.detail;
+    selectedDate = new Date(selectedDate.setDate(date));
+  }
 </script>
 
 <style>
@@ -257,7 +262,8 @@
                 <DatePicker
                   {selectedDate}
                   on:increaseMonth={increaseMonth}
-                  on:decreaseMonth={decreaseMonth} />
+                  on:decreaseMonth={decreaseMonth}
+                  on:changeDate={changeDate} />
               </div>
 
               <div class="time-duration-wrapper">

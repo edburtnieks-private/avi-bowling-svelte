@@ -8,6 +8,7 @@
   /* Box Shadow */
   --bs-navigation: 0px 0px 24px 4px var(--c-mercury-50);
   --bs-input: 0px 3px 9px var(--c-mercury-50);
+  --bs-input-hover: inset 0 0 0 1px var(--c-silver);
 
   /* Border Width */
   --bw-btn-s: 1px;
@@ -129,7 +130,7 @@ select:disabled {
 .global-input,
 .global-button-input {
   background-color: var(--c-white);
-  border: 2px solid var(--c-white);
+  border: 0;
   color: var(--c-mine-shaft);
   font-size: 1rem;
   outline: 0;
@@ -150,13 +151,13 @@ select:disabled {
 .global-button-input:hover,
 .global-button-input:focus,
 .global-button-input:active {
-  border-color: var(--c-silver);
+  box-shadow: var(--bs-input-hover), var(--bs-input);
 }
 
 .global-input:disabled,
 .global-button-input:disabled {
   background-color: var(--c-mercury);
-  border-color: var(--c-mercury);
+  box-shadow: none;
   color: var(--c-silver);
 }
 
