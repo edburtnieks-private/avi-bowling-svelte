@@ -2,6 +2,7 @@
   import Input from "../Input/index.svelte";
   import MinusIcon from "../../Icons/MinusIcon/index.svelte";
   import PlusIcon from "../../Icons/PlusIcon/index.svelte";
+  import Checkbox from "../Checkbox/index.svelte";
 
   const decrement = () => {
     if (value > minValue) {
@@ -21,6 +22,7 @@
   export let minValue;
   export let maxValue;
   export let valueText = "";
+  export let disabled = false;
 </script>
 
 <style>
@@ -29,27 +31,37 @@
     padding: 15px 11px;
   }
 
-  button:disabled {
+  .disabled-value {
     background-color: var(--c-white);
+  }
+
+  .disabled-input {
+    background-color: var(--c-mercury);
   }
 </style>
 
-<Input {label} {value} {id} incrementInput {valueText}>
+<slot name="label" />
+
+<Input {label} {value} {id} incrementInput {valueText} {disabled}>
   <button
     slot="decrement-button"
     type="button"
     class="global-button-input"
+    class:disabled-value={value === minValue}
+    class:disabled-input={disabled}
     on:click={decrement}
-    disabled={value === minValue}>
-    <MinusIcon disabled={value === minValue} />
+    disabled={disabled || value === minValue}>
+    <MinusIcon disabled={disabled || value === minValue} />
   </button>
 
   <button
     slot="increment-button"
     type="button"
     class="global-button-input"
+    class:disabled-value={value === maxValue}
+    class:disabled-input={disabled}
     on:click={increment}
-    disabled={value === maxValue}>
-    <PlusIcon disabled={value === maxValue} />
+    disabled={disabled || value === maxValue}>
+    <PlusIcon disabled={disabled || value === maxValue} />
   </button>
 </Input>

@@ -7,6 +7,7 @@
   import DatePicker from "../Inputs/DatePicker/index.svelte";
   import LaneButton from "./LaneButton/index.svelte";
   import Select from "../Inputs/Select/index.svelte";
+  import Checkbox from "../Inputs/Checkbox/index.svelte";
 
   let laneCount = 1;
   let playerCount = 2;
@@ -17,6 +18,7 @@
   let playerNames = [];
   let duration = 1;
   let startTime = "12:00";
+  let isShoesChecked = true;
 
   let selectedDate = new Date();
 
@@ -209,6 +211,10 @@
     margin-right: var(--m-xxs);
   }
 
+  .shoe-checkbox-wrapper {
+    margin-bottom: var(--m-xxs);
+  }
+
   .date-time-wrapper {
     min-width: 200px;
   }
@@ -347,12 +353,21 @@
                 maxValue={maxPlayerCount} />
             </div>
 
-            <IncrementInput
-              label="Shoes"
-              id="shoe-count"
-              bind:value={shoeCount}
-              minValue={minShoeCount}
-              maxValue={maxShoeCount} />
+            <div class="shoe-counter-wrapper">
+              <IncrementInput
+                id="shoe-count"
+                bind:value={shoeCount}
+                minValue={minShoeCount}
+                maxValue={maxShoeCount}
+                disabled={!isShoesChecked}>
+                <div slot="label" class="shoe-checkbox-wrapper">
+                  <Checkbox
+                    id="shoe-checkbox"
+                    label="Shoes"
+                    bind:checked={isShoesChecked} />
+                </div>
+              </IncrementInput>
+            </div>
           </div>
         </div>
 

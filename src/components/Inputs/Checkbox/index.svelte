@@ -7,7 +7,7 @@
 
 <style>
   .input-label {
-    display: inline-flex;
+    display: flex;
   }
 
   label {
@@ -54,9 +54,9 @@
   }
 
   /* Checkbox hover label style */
-  input:hover + label,
-  input:focus + label,
-  input:active + label {
+  input:hover:not(:disabled) + label,
+  input:focus:not(:disabled) + label,
+  input:active:not(:disabled) + label {
     text-decoration: underline;
   }
 
@@ -74,7 +74,7 @@
 </style>
 
 <div class="input-label">
-  <input type="checkbox" {checked} {id} {disabled} />
+  <input type="checkbox" bind:checked {id} {disabled} />
   <label for={id}>
     {label}
     <span />
