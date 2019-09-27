@@ -4,7 +4,7 @@
 
 <style>
   .reservation-form-wrapper {
-    margin: 0 auto;
+    margin: var(--m-0) auto;
     max-width: 320px;
     padding: var(--p-0) var(--p-mobile);
     width: 100%;
