@@ -118,7 +118,7 @@
   const changeDate = event => {
     const date = event.detail;
     selectedDate = new Date(selectedDate.setDate(date));
-  }
+  };
 </script>
 
 <style>
