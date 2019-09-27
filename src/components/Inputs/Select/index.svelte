@@ -2,7 +2,7 @@
   import CaretIcon from "../../Icons/CaretIcon/index.svelte";
 
   let value = "";
-  $: active = false;
+  let active = false;
 
   const toggleSelect = () => {
     active = !active;

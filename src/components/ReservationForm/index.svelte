@@ -211,10 +211,6 @@
     margin-right: var(--m-xxs);
   }
 
-  .shoe-checkbox-wrapper {
-    margin-bottom: var(--m-xxs);
-  }
-
   .date-time-wrapper {
     min-width: 200px;
   }
@@ -360,7 +356,7 @@
                 minValue={minShoeCount}
                 maxValue={maxShoeCount}
                 disabled={!isShoesChecked}>
-                <div slot="label" class="shoe-checkbox-wrapper">
+                <div slot="label">
                   <Checkbox
                     id="shoe-checkbox"
                     label="Shoes"

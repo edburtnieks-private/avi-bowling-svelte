@@ -20,24 +20,6 @@
 </script>
 
 <style>
-  .input-label {
-    width: 100%;
-  }
-
-  @media (min-width: 1024px) {
-    .input-label {
-      max-width: 176px;
-    }
-
-    .increment-input-label {
-      max-width: 104px;
-    }
-  }
-
-  .dropdown-toggle-input-label {
-    max-width: 100%;
-  }
-
   .dropdown-toggle-input {
     align-items: center;
     display: flex;
@@ -60,9 +42,7 @@
 
   .increment-input {
     background-color: var(--c-white);
-    box-shadow: none;
     color: var(--c-mine-shaft);
-    max-width: 32px;
     padding: var(--p-xxs) var(--p-0);
     text-align: center;
   }
@@ -74,48 +54,39 @@
   }
 </style>
 
-<div
-  class="input-label"
-  class:increment-input-label={incrementInput}
-  class:dropdown-toggle-input-label={isDropdownToggle}>
-  {#if label}
-    <label for={id}>{label}</label>
-  {/if}
+{#if label}
+  <label for={id}>{label}</label>
+{/if}
 
-  {#if isDropdownToggle}
-    <DropdownToggle
-      {id}
-      on:toggleDropdown
-      isInput={isDropdownToggle}
-      {disabled}>
-      <div class="dropdown-toggle-input">
-        <span>{dropdownToggleText}</span>
-        <div class="caret-icon-wrapper">
-          <CaretIcon {disabled} active={isDropdownActive} />
-        </div>
+{#if isDropdownToggle}
+  <DropdownToggle {id} on:toggleDropdown isInput={isDropdownToggle} {disabled}>
+    <div class="dropdown-toggle-input">
+      <span>{dropdownToggleText}</span>
+      <div class="caret-icon-wrapper">
+        <CaretIcon {disabled} active={isDropdownActive} />
       </div>
-    </DropdownToggle>
-
-    <slot name="dropdown-content" />
-  {:else}
-    <div
-      class:global-input-wrapper={incrementInput}
-      class:increment-input-wrapper={incrementInput}
-      class:increment-input-wrapper-disabled={disabled && incrementInput}>
-      <slot name="decrement-button" />
-
-      <input
-        {type}
-        {placeholder}
-        {id}
-        class="global-input"
-        class:increment-input={incrementInput}
-        class:increment-input-disabled={disabled && incrementInput}
-        value={valueText || value}
-        disabled={disabled || incrementInput}
-        on:change={handleChange} />
-
-      <slot name="increment-button" />
     </div>
-  {/if}
-</div>
+  </DropdownToggle>
+
+  <slot name="dropdown-content" />
+{:else}
+  <div
+    class:global-input-wrapper={incrementInput}
+    class:increment-input-wrapper={incrementInput}
+    class:increment-input-wrapper-disabled={disabled && incrementInput}>
+    <slot name="decrement-button" />
+
+    <input
+      {type}
+      {placeholder}
+      {id}
+      class="global-input"
+      class:increment-input={incrementInput}
+      class:increment-input-disabled={disabled && incrementInput}
+      value={valueText || value}
+      disabled={disabled || incrementInput}
+      on:change={handleChange} />
+
+    <slot name="increment-button" />
+  </div>
+{/if}

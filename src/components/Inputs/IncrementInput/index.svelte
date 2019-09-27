@@ -17,7 +17,7 @@
   };
 
   export let id;
-  export let label;
+  export let label = "";
   export let value;
   export let minValue;
   export let maxValue;
@@ -26,6 +26,10 @@
 </script>
 
 <style>
+  .label {
+    margin-bottom: var(--m-xxs);
+  }
+
   button {
     box-shadow: none;
     padding: 15px 11px;
@@ -40,7 +44,11 @@
   }
 </style>
 
-<slot name="label" />
+{#if !label}
+  <div class="label">
+    <slot name="label" />
+  </div>
+{/if}
 
 <Input {label} {value} {id} incrementInput {valueText} {disabled}>
   <button
