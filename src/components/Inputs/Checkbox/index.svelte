@@ -45,6 +45,7 @@
   /* Remove default checkbox style */
   input {
     appearance: none;
+    outline: 0;
   }
 
   /* Show tick mark on checked */
