@@ -8,7 +8,7 @@
 
   export let id;
   export let incrementInput = false;
-  export let label = "Label";
+  export let label = "";
   export let placeholder = "";
   export let type = "text";
   export let value = "";
@@ -50,10 +50,15 @@
   }
 
   .increment-input-wrapper {
+    background-color: var(--c-white);
     display: flex;
   }
 
-  .increment-input-wrapper input {
+  .increment-input-wrapper-disabled {
+    background-color: var(--c-mercury);
+  }
+
+  .increment-input {
     background-color: var(--c-white);
     box-shadow: none;
     color: var(--c-mine-shaft);
@@ -61,13 +66,21 @@
     padding: var(--p-xxs) var(--p-0);
     text-align: center;
   }
+
+  .increment-input-disabled {
+    background-color: var(--c-mercury);
+    border-radius: 0;
+    color: var(--c-silver);
+  }
 </style>
 
 <div
   class="input-label"
   class:increment-input-label={incrementInput}
   class:dropdown-toggle-input-label={isDropdownToggle}>
-  <label for={id}>{label}</label>
+  {#if label}
+    <label for={id}>{label}</label>
+  {/if}
 
   {#if isDropdownToggle}
     <DropdownToggle
@@ -87,7 +100,8 @@
   {:else}
     <div
       class:global-input-wrapper={incrementInput}
-      class:increment-input-wrapper={incrementInput}>
+      class:increment-input-wrapper={incrementInput}
+      class:increment-input-wrapper-disabled={disabled && incrementInput}>
       <slot name="decrement-button" />
 
       <input
@@ -95,6 +109,8 @@
         {placeholder}
         {id}
         class="global-input"
+        class:increment-input={incrementInput}
+        class:increment-input-disabled={disabled && incrementInput}
         value={valueText || value}
         disabled={disabled || incrementInput}
         on:change={handleChange} />
