@@ -6,17 +6,22 @@
     value = event.target.value;
   };
 
+  // Input props
+
   export let id;
-  export let incrementInput = false;
-  export let label = "";
+  export let label;
   export let placeholder = "";
+  export let value;
   export let type = "text";
-  export let value = "";
+  export let disabled = false;
+
+  // Increment input props
+  export let valueText = "";
+  export let incrementInput = false;
+
   export let isDropdownToggle = false;
   export let dropdownToggleText = "";
-  export let isDropdownActive = "";
-  export let valueText = "";
-  export let disabled = false;
+  export let isDropdownActive = false;
 </script>
 
 <style>

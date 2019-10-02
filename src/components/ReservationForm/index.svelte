@@ -4,7 +4,7 @@
   import IncrementInput from "../Inputs/IncrementInput/index.svelte";
   import DropdownToggle from "../DropdownToggle/index.svelte";
   import DropdownContent from "../DropdownContent/index.svelte";
-  import DatePicker from "../Inputs/DatePicker/index.svelte";
+  import Datepicker from "../Inputs/Datepicker/index.svelte";
   import LaneButton from "./LaneButton/index.svelte";
   import Select from "../Inputs/Select/index.svelte";
   import Checkbox from "../Inputs/Checkbox/index.svelte";
@@ -104,22 +104,16 @@
     }
   };
 
-  const increaseMonth = () => {
-    selectedDate = new Date(selectedDate.setMonth(selectedDate.getMonth() + 1));
+  const increaseMonth = event => {
+    selectedDate = event.detail;
   };
 
-  const decreaseMonth = () => {
-    selectedDate = new Date(selectedDate.setMonth(selectedDate.getMonth() - 1));
-  };
-
-  const changeStartTime = event => {
-    startTime = event.target.value;
-    toggleStartTimeDropdown();
+  const decreaseMonth = event => {
+    selectedDate = event.detail;
   };
 
   const changeDate = event => {
-    const date = event.detail;
-    selectedDate = new Date(selectedDate.setDate(date));
+    selectedDate = event.detail;
   };
 </script>
 
@@ -261,7 +255,7 @@
           <DropdownContent isContentVisible={isDateTimeFormVisible}>
             <div class="datepicker-time-wrapper">
               <div class="datepicker-wrapper">
-                <DatePicker
+                <Datepicker
                   {selectedDate}
                   on:increaseMonth={increaseMonth}
                   on:decreaseMonth={decreaseMonth}
@@ -274,7 +268,7 @@
                     label="Start time"
                     id="start-time"
                     options={availableTimes}
-                    selectedOption={startTime} />
+                    bind:value={startTime} />
                 </div>
 
                 <div class="input-label-wrapper-reverse">

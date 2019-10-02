@@ -38,7 +38,11 @@
   });
 
   const increaseMonth = () => {
-    dispatch("increaseMonth");
+    const newMonth = new Date(
+      selectedDate.setMonth(selectedDate.getMonth() + 1)
+    );
+
+    dispatch("increaseMonth", newMonth);
 
     dateGrid.style.setProperty(
       "--first-week-day",
@@ -51,7 +55,11 @@
   };
 
   const decreaseMonth = () => {
-    dispatch("decreaseMonth");
+    const newMonth = new Date(
+      selectedDate.setMonth(selectedDate.getMonth() - 1)
+    );
+
+    dispatch("decreaseMonth", newMonth);
 
     dateGrid.style.setProperty(
       "--first-week-day",
@@ -64,7 +72,9 @@
   };
 
   const changeDate = date => {
-    dispatch("changeDate", date);
+    const newDate = new Date(selectedDate.setDate(date));
+
+    dispatch("changeDate", newDate);
   };
 </script>
 
@@ -110,7 +120,7 @@
     display: inline-flex;
     height: 100%;
     justify-content: center;
-    width: 100%;
+    width: 32px;
   }
 
   .active {

@@ -17,7 +17,7 @@
   };
 
   export let id;
-  export let label = "";
+  export let label;
   export let value;
   export let minValue;
   export let maxValue;
