@@ -1,8 +1,8 @@
 <script>
   import Checkbox from "../../components/Inputs/Checkbox/index.svelte";
   import Datepicker from "../../components/Inputs/Datepicker/index.svelte";
-  import DropdownContent from "../../components/DropdownContent/index.svelte";
-  import DropdownToggle from "../../components/DropdownToggle/index.svelte";
+  import Dropdown from "../../components/Dropdown/index.svelte";
+  import DropdownInput from "../../components/DropdownInput/index.svelte";
   import IncrementInput from "../../components/Inputs/IncrementInput/index.svelte";
   import Input from "../../components/Inputs/Input/index.svelte";
   import Select from "../../components/Inputs/Select/index.svelte";
@@ -38,8 +38,11 @@
   let isDropdownContentVisible = false;
   let isDropdownDisabledContentVisible = false;
 
-  let inputDropdownValue = "";
-  let isInputDropdownContentVisible = false;
+  let dropdownInputValue = "Dropdown input value";
+  let isDropdownInputContentVisible = false;
+
+  let dropdownInputDisabledValue = "Disabled";
+  let isDropdownInputDisabledContentVisible = false;
 
   const datepickerIncreaseMonth = event => {
     datepickerSelectedDate = event.detail;
@@ -61,8 +64,12 @@
     isDropdownDisabledContentVisible = !isDropdownDisabledContentVisible;
   }
 
-  const toggleInputDropdownContent = () => {
-    isInputDropdownContentVisible = !isInputDropdownContentVisible;
+  const toggleDropdownInputContent = () => {
+    isDropdownInputContentVisible = !isDropdownInputContentVisible;
+  }
+
+  const toggleDropdownInputDisabledContent = () => {
+    isDropdownInputDisabledContentVisible = !isDropdownInputDisabledContentVisible;
   }
 </script>
 
@@ -300,37 +307,41 @@
 
   <div class="component-group">
     <div class="component">
-      <DropdownToggle
-        id="dropdown-toggle-link"
+      <Dropdown
+        isContentVisible={isDropdownContentVisible}
         on:toggleDropdown={toggleDropdownContent}>
-        Dropdown toggle
-      </DropdownToggle>
+        <div slot="toggle">
+          Dropdown toggle
+        </div>
 
-      <DropdownContent isContentVisible={isDropdownContentVisible}>
-        Dropdown content
-      </DropdownContent>
+        <div slot="content">
+          Dropdown content
+        </div>
+      </Dropdown>
 
       <pre>
         <code>
-&lt;DropdownToggle
-  id="dropdown-toggle-id"
+&lt;Dropdown
+  isContentVisible=&#123;isDropdownContentVisible&#125;
   on:toggleDropdown=&#123;() =&gt; isDropdownContentVisible = !isDropdownContentVisible&#125;&gt;
-  Dropdown toggle
-&lt;/DropdownToggle&gt;
+  &lt;div slot="toggle"&gt;
+    Dropdown toggle
+  &lt;/div&gt;
 
-&lt;DropdownContent isContentVisible=&#123;isDropdownContentVisible&#125;&gt;
-  Dropdown content
-&lt;/DropdownContent&gt;
+  &lt;div slot="content"&gt;
+    Dropdown content
+  &lt;/div&gt;
+&lt;/Dropdown&gt;
         </code>
       </pre>
     </div>
 
     <div class="component-details">
-      <h3>Toggle Props</h3>
+      <h3>Props</h3>
 
       <ul>
         <li>
-          <span class="required">id</span> - String
+          <span class="required">isContentVisible</span> - Variable with boolean value
         </li>
 
         <li>
@@ -338,7 +349,7 @@
         </li>
       </ul>
 
-      <h3>Toggle Events</h3>
+      <h3>Events</h3>
 
       <ul>
         <li>
@@ -346,40 +357,166 @@
         </li>
       </ul>
 
-      <h3>Content Props</h3>
+      <h3>Slots</h3>
 
       <ul>
         <li>
-          <span class="required">isContentVisible</span> - Variable with boolean value
+          <span class="required">toggle</span> - Dropdown toggle
+        </li>
+
+        <li>
+          <span class="required">content</span> - Dropdown content
         </li>
       </ul>
     </div>
 
     <div class="component-group variations">
       <div class="component">
-        <DropdownToggle
-          id="dropdown-toggle-link-disabled"
+        <Dropdown
+          isContentVisible={isDropdownDisabledContentVisible}
           on:toggleDropdown={toggleDropdownDisabledContent}
           disabled>
-          Dropdown toggle
-        </DropdownToggle>
+          <div slot="toggle">
+            Dropdown toggle
+          </div>
 
-        <DropdownContent isContentVisible={isDropdownDisabledContentVisible}>
-          Dropdown content
-        </DropdownContent>
+          <div slot="content">
+            Dropdown content
+          </div>
+        </Dropdown>
 
         <pre class="common">
           <code>
-&lt;DropdownToggle
-  id="dropdown-toggle-id"
+&lt;Dropdown
+  isContentVisible=&#123;isDropdownContentVisible&#125;
   on:toggleDropdown=&#123;() =&gt; isDropdownContentVisible = !isDropdownContentVisible&#125;
   <span class="difference">disabled</span>&gt;
-  Dropdown toggle
-&lt;/DropdownToggle&gt;
+  &lt;div slot="toggle"&gt;
+    Dropdown toggle
+  &lt;/div&gt;
 
-&lt;DropdownContent isContentVisible=&#123;isDropdownContentVisible&#125;&gt;
-  Dropdown content
-&lt;/DropdownContent&gt;
+  &lt;div slot="content"&gt;
+    Dropdown content
+  &lt;/div&gt;
+&lt;/Dropdown&gt;
+          </code>
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <h2>Dropdown as Input</h2>
+
+  <div class="component-group">
+    <div class="component">
+      <DropdownInput
+        id="dropdown-input"
+        label="Regular"
+        value={dropdownInputValue}
+        isContentVisible={isDropdownInputContentVisible}
+        on:toggleDropdown={toggleDropdownInputContent}>
+        <div slot="content">
+          <Input
+            id="dropdown-input-text-input"
+            label="Label"
+            bind:value={dropdownInputValue} />
+        </div>
+      </DropdownInput>
+
+      <pre>
+        <code>
+&lt;DropdownInput
+  id="dropdown-input-id"
+  label="Label"
+  value=&#123;dropdownInputValue&#125;
+  isContentVisible=&#123;isDropdownInputContentVisible&#125;
+  on:toggleDropdown=&#123;() =&gt; isDropdownInputContentVisible = !isDropdownInputContentVisible&#125;&gt;
+  &lt;div slot="content"&gt;
+    &lt;Input
+      id="dropdown-input-text-input-id"
+      label="Label"
+      bind:value=&#123;dropdownInputValue&#125; /&gt;
+  &lt;/div&gt;
+&lt;/DropdownInput&gt;
+        </code>
+      </pre>
+    </div>
+
+    <div class="component-details">
+      <h3>Props</h3>
+
+      <ul>
+        <li>
+          <span class="required">id</span> - String
+        </li>
+
+        <li>
+          <span class="required">label</span> - String
+        </li>
+
+        <li>
+          <span class="required">value</span> - Variable with string value
+        </li>
+
+        <li>
+          <span class="required">isContentVisible</span> - Variable with boolean value
+        </li>
+
+        <li>
+          disabled - Boolean (default = false)
+        </li>
+      </ul>
+
+      <h3>Events</h3>
+
+      <ul>
+        <li>
+          <span class="required">on:toggleDropdown</span> - Function to handle event that is called after toggling dropdown
+        </li>
+      </ul>
+
+      <h3>Slots</h3>
+
+      <ul>
+        <li>
+          <span class="required">content</span> - Dropdown content
+        </li>
+      </ul>
+    </div>
+
+    <div class="component-group variations">
+      <div class="component">
+        <DropdownInput
+          id="dropdown-input-disabled"
+          label="Disabled"
+          value={dropdownInputDisabledValue}
+          isContentVisible={isDropdownInputDisabledContentVisible}
+          on:toggleDropdown={toggleDropdownInputDisabledContent}
+          disabled>
+          <div slot="content">
+            <Input
+              id="dropdown-input-text-input-disabled"
+              label="Label"
+              bind:value={dropdownInputDisabledValue} />
+          </div>
+        </DropdownInput>
+
+        <pre class="common">
+          <code>
+&lt;DropdownInput
+  id="dropdown-input-id"
+  label="Label"
+  value=&#123;dropdownInputValue&#125;
+  isContentVisible=&#123;isDropdownInputContentVisible&#125;
+  on:toggleDropdown=&#123;() =&gt; isDropdownInputContentVisible = !isDropdownInputContentVisible&#125;
+  <span class="difference">disabled</span>&gt;
+  &lt;div slot="content"&gt;
+    &lt;Input
+      id="dropdown-input-text-input-id"
+      label="Label"
+      bind:value=&#123;dropdownInputValue&#125; /&gt;
+  &lt;/div&gt;
+&lt;/DropdownInput&gt;
           </code>
         </pre>
       </div>
@@ -443,6 +580,18 @@
       <ul>
         <li>
           <span class="required">bind:value</span> - Variable with whole number value
+        </li>
+      </ul>
+
+      <h3>Events</h3>
+
+      <ul>
+        <li>
+          on:decrement - Function to handle event that is called after decrement button is pressed
+        </li>
+
+        <li>
+          on:increment - Function to handle event that is called after increment button is pressed
         </li>
       </ul>
 
@@ -531,6 +680,30 @@
       bind:checked /&gt;
   &lt;/div&gt;</span>
 &lt;/IncrementInput&gt;
+        </code>
+      </pre>
+    </div>
+
+    <div class="component">
+      <IncrementInput
+        id="increment-input-events"
+        label="With events"
+        bind:value={incrementInputValue}
+        minValue={incrementInputMinValue}
+        maxValue={incrementInputMaxValue}
+        on:decrement={() => console.log("Decrement event fired")}
+        on:increment={() => console.log("Increment event fired")} />
+
+      <pre class="common">
+        <code>
+&lt;IncrementInput
+  id="increment-input-id"
+  label="Label"
+  bind:value=&#123;value&#125;
+  minValue=0
+  maxValue=3
+  <span class="difference">on:decrement=&#123;() =&gt; console.log("Decrement event fired")&#125;</span>
+  <span class="difference">on:increment=&#123;() =&gt; console.log("Increment event fired")&#125;</span> /&gt;
         </code>
       </pre>
     </div>
@@ -624,7 +797,7 @@
 &lt;Input
   id="text-input-id"
   label="Label"
-  bind:value=&#123;value&#125;
+  bind:value=&#123;value&#125; /&gt;
         </code>
       </pre>
     </div>

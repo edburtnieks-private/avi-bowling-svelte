@@ -1,19 +1,26 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import Input from "../Input/index.svelte";
   import MinusIcon from "../../Icons/MinusIcon/index.svelte";
   import PlusIcon from "../../Icons/PlusIcon/index.svelte";
   import Checkbox from "../Checkbox/index.svelte";
 
+  const dispatch = createEventDispatcher();
+
   const decrement = () => {
     if (value > minValue) {
       value -= 1;
     }
+
+    dispatch("decrement");
   };
 
   const increment = () => {
     if (value < maxValue) {
       value += 1;
     }
+
+    dispatch("increment");
   };
 
   export let id;

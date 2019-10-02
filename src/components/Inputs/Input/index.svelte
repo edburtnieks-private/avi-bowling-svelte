@@ -10,18 +10,18 @@
 
   export let id;
   export let label;
-  export let placeholder = "";
   export let value;
-  export let type = "text";
+  export let placeholder = "";
   export let disabled = false;
+  export let type = "text";
 
   // Increment input props
   export let valueText = "";
   export let incrementInput = false;
 
-  export let isDropdownToggle = false;
-  export let dropdownToggleText = "";
-  export let isDropdownActive = false;
+  // Dropdown input props
+  export let isDropdown = false;
+  export let isDropdownContentVisible = false;
 </script>
 
 <style>
@@ -29,6 +29,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
+    min-height: 16px;
   }
 
   .caret-icon-wrapper {
@@ -63,17 +64,19 @@
   <label for={id}>{label}</label>
 {/if}
 
-{#if isDropdownToggle}
-  <DropdownToggle {id} on:toggleDropdown isInput={isDropdownToggle} {disabled}>
+{#if isDropdown}
+  <DropdownToggle {id} on:toggleDropdown isInput={isDropdown} {disabled}>
     <div class="dropdown-toggle-input">
-      <span>{dropdownToggleText}</span>
+      <span>{value}</span>
       <div class="caret-icon-wrapper">
-        <CaretIcon {disabled} active={isDropdownActive} />
+        <CaretIcon {disabled} active={isDropdownContentVisible} />
       </div>
     </div>
   </DropdownToggle>
 
-  <slot name="dropdown-content" />
+  {#if isDropdownContentVisible}
+    <slot name="dropdown-content" />
+  {/if}
 {:else}
   <div
     class:global-input-wrapper={incrementInput}

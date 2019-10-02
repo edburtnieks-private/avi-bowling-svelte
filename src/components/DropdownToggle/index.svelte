@@ -11,7 +11,7 @@
     dispatch("toggleDropdown");
   };
 
-  export let id;
+  export let id = "";
   export let isInput = false;
   export let disabled = false;
 </script>
