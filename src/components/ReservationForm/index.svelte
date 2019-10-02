@@ -2,9 +2,9 @@
   import Form from "../Form/index.svelte";
   import Input from "../Inputs/Input/index.svelte";
   import IncrementInput from "../Inputs/IncrementInput/index.svelte";
-  import DropdownToggle from "../DropdownToggle/index.svelte";
-  import DropdownContent from "../DropdownContent/index.svelte";
-  import DatePicker from "../Inputs/DatePicker/index.svelte";
+  import Dropdown from "../Dropdown/index.svelte";
+  import DropdownInput from "../DropdownInput/index.svelte";
+  import Datepicker from "../Inputs/Datepicker/index.svelte";
   import LaneButton from "./LaneButton/index.svelte";
   import Select from "../Inputs/Select/index.svelte";
   import Checkbox from "../Inputs/Checkbox/index.svelte";
@@ -15,7 +15,7 @@
   let name = "";
   let contact = "";
   let laneNumbers = [];
-  let playerNames = [];
+  let playerNames = Array(playerCount).fill("");
   let duration = 1;
   let startTime = "12:00";
   let isShoesChecked = true;
@@ -104,22 +104,29 @@
     }
   };
 
-  const increaseMonth = () => {
-    selectedDate = new Date(selectedDate.setMonth(selectedDate.getMonth() + 1));
+  const increaseMonth = event => {
+    selectedDate = event.detail;
   };
 
-  const decreaseMonth = () => {
-    selectedDate = new Date(selectedDate.setMonth(selectedDate.getMonth() - 1));
-  };
-
-  const changeStartTime = event => {
-    startTime = event.target.value;
-    toggleStartTimeDropdown();
+  const decreaseMonth = event => {
+    selectedDate = event.detail;
   };
 
   const changeDate = event => {
-    const date = event.detail;
-    selectedDate = new Date(selectedDate.setDate(date));
+    selectedDate = event.detail;
+  };
+
+  const removeLastPlayerInput = () => {
+    const lastIndex = playerNames.length - 1;
+
+    playerNames = [
+      ...playerNames.slice(0, lastIndex),
+      ...playerNames.slice(lastIndex + 1)
+    ];
+  };
+
+  const addPlayerInput = () => {
+    playerNames = [...playerNames, ""];
   };
 </script>
 
@@ -211,10 +218,6 @@
     margin-right: var(--m-xxs);
   }
 
-  .shoe-checkbox-wrapper {
-    margin-bottom: var(--m-xxs);
-  }
-
   .date-time-wrapper {
     min-width: 200px;
   }
@@ -254,53 +257,50 @@
 <Form on:handleSubmit={handleSubmit} submitButtonText="Make Reservation">
   <div class="reservation-form-inner-wrapper">
     <div class="input-label-wrapper date-time-wrapper">
-      <Input
-        label="Date and Time"
+      <DropdownInput
         id="date-and-time"
-        isDropdownToggle
-        dropdownToggleText={dateAndTime}
-        on:toggleDropdown={toggleDateTimeForm}
-        isDropdownActive={isDateTimeFormVisible}>
-        <div slot="dropdown-content">
-          <DropdownContent isContentVisible={isDateTimeFormVisible}>
-            <div class="datepicker-time-wrapper">
-              <div class="datepicker-wrapper">
-                <DatePicker
-                  {selectedDate}
-                  on:increaseMonth={increaseMonth}
-                  on:decreaseMonth={decreaseMonth}
-                  on:changeDate={changeDate} />
+        label="Date and Time"
+        value={dateAndTime}
+        isContentVisible={isDateTimeFormVisible}
+        on:toggleDropdown={toggleDateTimeForm}>
+        <div slot="content">
+          <div class="datepicker-time-wrapper">
+            <div class="datepicker-wrapper">
+              <Datepicker
+                {selectedDate}
+                on:increaseMonth={increaseMonth}
+                on:decreaseMonth={decreaseMonth}
+                on:changeDate={changeDate} />
+            </div>
+
+            <div class="time-duration-wrapper">
+              <div class="input-label-wrapper-reverse start-time-wrapper">
+                <Select
+                  id="start-time"
+                  label="Start time"
+                  options={availableTimes}
+                  bind:value={startTime} />
               </div>
 
-              <div class="time-duration-wrapper">
-                <div class="input-label-wrapper-reverse start-time-wrapper">
-                  <Select
-                    label="Start time"
-                    id="start-time"
-                    options={availableTimes}
-                    selectedOption={startTime} />
-                </div>
-
-                <div class="input-label-wrapper-reverse">
-                  <IncrementInput
-                    label="Duration"
-                    id="duration"
-                    bind:value={duration}
-                    minValue={minDuration}
-                    maxValue={maxDuration}
-                    valueText={`${duration}h`} />
-                </div>
+              <div class="input-label-wrapper-reverse">
+                <IncrementInput
+                  id="duration"
+                  label="Duration"
+                  bind:value={duration}
+                  minValue={minDuration}
+                  maxValue={maxDuration}
+                  valueText={`${duration}h`} />
               </div>
             </div>
-          </DropdownContent>
+          </div>
         </div>
-      </Input>
+      </DropdownInput>
     </div>
 
     <div class="input-label-wrapper">
       <IncrementInput
-        label="Lane count"
         id="lane-count"
+        label="Lane count"
         bind:value={laneCount}
         minValue={minLaneCount}
         maxValue={maxLaneCount} />
@@ -308,81 +308,86 @@
 
     <div class="input-label-wrapper">
       <Input
-        label="Name"
-        placeholder="John Smith"
         id="name"
-        bind:value={name} />
+        label="Name"
+        bind:value={name}
+        placeholder="John Smith" />
     </div>
 
     <div class="input-label-wrapper">
       <Input
-        label="Phone or Email"
-        placeholder="+371 22 222 222"
         id="contact"
-        bind:value={contact} />
+        label="Phone or Email"
+        bind:value={contact}
+        placeholder="+371 22 222 222" />
     </div>
   </div>
 
   <div class="more-details-form-dropdown-wrapper">
-    <DropdownToggle on:toggleDropdown={toggleMoreDetailsForm}>
-      More details
-    </DropdownToggle>
+    <Dropdown
+      isContentVisible={isMoreDetailsFormVisible}
+      on:toggleDropdown={toggleMoreDetailsForm}>
+      <div slot="toggle">More details</div>
 
-    <DropdownContent isContentVisible={isMoreDetailsFormVisible}>
-      <div class="more-details-form">
-        <div class="lane-information-wrapper">
-          <div class="more-details-input-label-wrapper">
-            <label>Lane number</label>
-
-            <div class="lane-button-wrapper">
-              {#each lanes as lane}
-                <LaneButton on:toggleLane={toggleLane} value={lane}>
-                  {lane}
-                </LaneButton>
-              {/each}
-            </div>
-          </div>
-
-          <div class="player-shoe-wrapper">
-            <div class="player-counter-wrapper">
-              <IncrementInput
-                label="Players"
-                id="player-count"
-                bind:value={playerCount}
-                minValue={minPlayerCount}
-                maxValue={maxPlayerCount} />
-            </div>
-
-            <div class="shoe-counter-wrapper">
-              <IncrementInput
-                id="shoe-count"
-                bind:value={shoeCount}
-                minValue={minShoeCount}
-                maxValue={maxShoeCount}
-                disabled={!isShoesChecked}>
-                <div slot="label" class="shoe-checkbox-wrapper">
-                  <Checkbox
-                    id="shoe-checkbox"
-                    label="Shoes"
-                    bind:checked={isShoesChecked} />
-                </div>
-              </IncrementInput>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          {#each players as player}
+      <div slot="content">
+        <div class="more-details-form">
+          <div class="lane-information-wrapper">
             <div class="more-details-input-label-wrapper">
-              <Input
-                label={`Player ${player}`}
-                placeholder="Name"
-                id={`player-${player}`}
-                bind:value={playerNames[player - 1]} />
+              <label>Lane number</label>
+
+              <div class="lane-button-wrapper">
+                {#each lanes as lane}
+                  <LaneButton on:toggleLane={toggleLane} value={lane}>
+                    {lane}
+                  </LaneButton>
+                {/each}
+              </div>
             </div>
-          {/each}
+
+            <div class="player-shoe-wrapper">
+              <div class="player-counter-wrapper">
+                <IncrementInput
+                  id="player-count"
+                  label="Players"
+                  bind:value={playerCount}
+                  minValue={minPlayerCount}
+                  maxValue={maxPlayerCount}
+                  on:decrement={removeLastPlayerInput}
+                  on:increment={addPlayerInput} />
+              </div>
+
+              <div class="shoe-counter-wrapper">
+                <IncrementInput
+                  id="shoe-count"
+                  label=""
+                  bind:value={shoeCount}
+                  minValue={minShoeCount}
+                  maxValue={maxShoeCount}
+                  disabled={!isShoesChecked}>
+                  <div slot="label">
+                    <Checkbox
+                      id="shoe-checkbox"
+                      label="Shoes"
+                      bind:checked={isShoesChecked} />
+                  </div>
+                </IncrementInput>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            {#each players as player}
+              <div class="more-details-input-label-wrapper">
+                <Input
+                  id={`player-${player}`}
+                  label={`Player ${player}`}
+                  bind:value={playerNames[player - 1]}
+                  placeholder="Name" />
+              </div>
+            {/each}
+          </div>
         </div>
       </div>
-    </DropdownContent>
+    </Dropdown>
   </div>
 </Form>

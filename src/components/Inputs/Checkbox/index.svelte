@@ -1,7 +1,7 @@
 <script>
   export let id;
-  export let label = "Label";
-  export let checked = false;
+  export let label;
+  export let checked;
   export let disabled = false;
 </script>
 
@@ -75,6 +75,7 @@
 
 <div class="input-label">
   <input type="checkbox" bind:checked {id} {disabled} />
+
   <label for={id}>
     {label}
     <span />

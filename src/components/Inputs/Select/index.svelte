@@ -1,8 +1,7 @@
 <script>
   import CaretIcon from "../../Icons/CaretIcon/index.svelte";
 
-  let value = "";
-  $: active = false;
+  let active = false;
 
   const toggleSelect = () => {
     active = !active;
@@ -12,10 +11,10 @@
     active = false;
   };
 
-  export let selectedOption = "";
-  export let id = "";
-  export let label = "";
-  export let options = [];
+  export let value;
+  export let id;
+  export let label;
+  export let options;
   export let disabled = false;
 </script>
 
@@ -41,7 +40,7 @@
 <div class="select-wrapper">
   <select
     class="global-input"
-    bind:value={selectedOption}
+    bind:value
     {id}
     {disabled}
     on:blur={closeSelect}

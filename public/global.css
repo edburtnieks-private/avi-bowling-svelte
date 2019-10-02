@@ -18,6 +18,7 @@
   --c-green-darker: #3c8c10;
   --c-blue: #0680d1;
   --c-white: #fff;
+  --c-gallery: #eee;
   --c-mercury: #e1e1e1;
   --c-silver: #ccc;
   --c-mine-shaft: #3a3a3a;
@@ -31,7 +32,8 @@
   /* Font Sizes */
   --fs-s: 0.8571rem; /* 12px */
   --fs-base: 14px;
-  --fs-m: 1.7142rem; /* 24px */
+  --fs-m: 1.1428rem; /* 16px */
+  --fs-l: 1.7142rem; /* 24px */
 
   /* Font Weights */
   --fw-regular: 400;
@@ -99,7 +101,7 @@ p {
 }
 
 h3 {
-  font-size: var(--fs-m);
+  font-size: var(--fs-l);
   font-weight: var(--fw-regular);
 }
 

@@ -1,8 +1,7 @@
 <script>
   import { beforeUpdate } from "svelte";
 
-  export let isContentVisible = false;
-  export let select = false;
+  export let isContentVisible;
 </script>
 
 <style>
@@ -22,16 +21,10 @@
       max-width: 100%;
     }
   }
-
-  .select {
-    margin-top: var(--m-0);
-    padding: var(--p-0);
-    width: 100%;
-  }
 </style>
 
 {#if isContentVisible}
-  <div class:select>
+  <div>
     <slot />
   </div>
 {/if}
