@@ -1,11 +1,11 @@
 <script>
-  import Checkbox from "../../../components/Inputs/Checkbox/index.svelte";
-  import Datepicker from "../../../components/Inputs/Datepicker/index.svelte";
-  import Dropdown from "../../../components/Dropdown/index.svelte";
-  import DropdownInput from "../../../components/DropdownInput/index.svelte";
-  import IncrementInput from "../../../components/Inputs/IncrementInput/index.svelte";
-  import Input from "../../../components/Inputs/Input/index.svelte";
-  import Select from "../../../components/Inputs/Select/index.svelte";
+  import Checkbox from "../../components/Inputs/Checkbox/index.svelte";
+  import Datepicker from "../../components/Inputs/Datepicker/index.svelte";
+  import Dropdown from "../../components/Dropdown/index.svelte";
+  import DropdownInput from "../../components/DropdownInput/index.svelte";
+  import IncrementInput from "../../components/Inputs/IncrementInput/index.svelte";
+  import Input from "../../components/Inputs/Input/index.svelte";
+  import Select from "../../components/Inputs/Select/index.svelte";
 
   let textInputValue = "";
   let textInputPlaceholderValue = "";
