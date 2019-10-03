@@ -1,5 +1,5 @@
 <script>
-  import { Link } from "svelte-routing";
+  import NavigationLink from "../NavigationLink/index.svelte";
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
@@ -63,7 +63,6 @@
 
 <style>
   /* Header Navigation */
-
   nav {
     margin-bottom: var(--m-m);
   }
@@ -172,7 +171,7 @@
     padding-left: var(--p-0);
   }
 
-  .footer-navigation-first-link {
+  :global(.footer-navigation-first-link a) {
     padding-top: var(--p-0);
   }
 </style>
@@ -182,9 +181,11 @@
     <li on:click={changeActive}>
       <div data-active class="navigation-link">
         {#if footer}
-          <a class="footer-navigation-first-link" href="/">Home</a>
+          <div class="footer-navigation-first-link">
+            <NavigationLink to="/">Home</NavigationLink>
+          </div>
         {:else}
-          <Link to="/">Home</Link>
+          <NavigationLink to="/">Home</NavigationLink>
         {/if}
       </div>
 
@@ -198,11 +199,7 @@
 
     <li on:click={changeActive}>
       <div class="navigation-link">
-        {#if footer}
-          <a href="/gallery">Gallery</a>
-        {:else}
-          <Link to="/gallery">Gallery</Link>
-        {/if}
+        <NavigationLink to="gallery">Gallery</NavigationLink>
       </div>
 
       {#if !footer}
@@ -215,11 +212,7 @@
 
     <li on:click={changeActive}>
       <div class="navigation-link">
-        {#if footer}
-          <a href="/special-offers">Special offers</a>
-        {:else}
-          <Link to="/special-offers">Special offers</Link>
-        {/if}
+        <NavigationLink to="special-offers">Special offers</NavigationLink>
       </div>
 
       {#if !footer}
@@ -232,11 +225,7 @@
 
     <li on:click={changeActive}>
       <div class="navigation-link">
-        {#if footer}
-          <a href="/news">News</a>
-        {:else}
-          <Link to="/news">News</Link>
-        {/if}
+        <NavigationLink to="news">News</NavigationLink>
       </div>
 
       {#if !footer}
@@ -249,11 +238,7 @@
 
     <li on:click={changeActive}>
       <div class="navigation-link">
-        {#if footer}
-          <a href="/contacts">Contacts</a>
-        {:else}
-          <Link to="/contacts">Contacts</Link>
-        {/if}
+        <NavigationLink to="contacts">Contacts</NavigationLink>
       </div>
 
       {#if !footer}
@@ -263,5 +248,20 @@
           alt="Bowling ball" />
       {/if}
     </li>
+
+    {#if footer}
+      <li on:click={changeActive}>
+        <div class="navigation-link">
+          <NavigationLink to="styleguide">Styleguide</NavigationLink>
+        </div>
+
+        {#if !footer}
+          <img
+            class="active-indicator"
+            src="./assets/icons/bowling-ball-icon.svg"
+            alt="Bowling ball" />
+        {/if}
+      </li>
+    {/if}
   </ul>
 </nav>
