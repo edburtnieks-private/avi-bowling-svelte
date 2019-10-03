@@ -3,12 +3,12 @@
   "name": "avi-bowling",
   "builds": [
     {
-      "src": "server.js",
-      "use": "@now/node"
-    },
-    {
       "src": "package.json",
       "use": "@now/static-build"
+    },
+    {
+      "src": "server.js",
+      "use": "@now/node"
     }
   ],
   "routes": [
