@@ -8,17 +8,21 @@
   import Styleguide from "./pages/Styleguide/index.svelte";
   import Header from "./components/Header/index.svelte";
   import Footer from "./components/Footer/index.svelte";
+
+  export let url = "";
 </script>
 
-<Router>
+<Router {url}>
   <Header />
 
-  <Route path="/" component={Home} />
-  <Route path="gallery" component={Gallery} />
-  <Route path="special-offers" component={SpecialOffers} />
-  <Route path="news" component={News} />
-  <Route path="contacts" component={Contacts} />
-  <Route path="styleguide" component={Styleguide} />
+  <main>
+    <Route path="styleguide" component={Styleguide} />
+    <Route path="contacts" component={Contacts} />
+    <Route path="news" component={News} />
+    <Route path="special-offers" component={SpecialOffers} />
+    <Route path="gallery" component={Gallery} />
+    <Route path="/" component={Home} />
+  </main>
 
   <Footer />
 </Router>

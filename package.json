@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "devDependencies": {
     "autoprefixer": "^9.6.1",
+    "nodemon": "^1.19.3",
     "npm-run-all": "^4.1.5",
     "postcss": "^7.0.18",
     "postcss-load-config": "^2.1.0",
@@ -16,15 +17,16 @@
     "svelte-preprocess": "^3.1.1"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "sirv-cli": "^0.4.4",
     "svelte-routing": "^1.4.0"
   },
   "scripts": {
+    "dev": "run-p watch server:dev",
     "build": "rollup -c",
-    "autobuild": "rollup -c -w",
-    "dev": "run-p start:dev autobuild",
-    "start": "sirv public --single",
-    "start:dev": "sirv public --single --dev"
+    "watch": "rollup -c -w",
+    "server:dev": "nodemon server.js --watch server.js --watch public/App.js",
+    "start": "node server.js"
   },
   "browserslist": [
     "defaults"

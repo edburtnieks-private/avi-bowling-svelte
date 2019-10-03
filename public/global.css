@@ -92,7 +92,6 @@ body {
   flex-direction: column;
   overflow-x: hidden;
   position: relative;
-  width: 100%;
 }
 
 h3,

@@ -7,13 +7,13 @@
     margin: var(--m-0) auto;
     max-width: 320px;
     padding: var(--p-0) var(--p-mobile);
-    width: 100%;
   }
 
   @media (min-width: 1024px) {
     .reservation-form-wrapper {
+      display: flex;
+      justify-content: center;
       max-width: 100%;
-      width: auto;
     }
   }
 </style>
