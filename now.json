@@ -14,7 +14,7 @@
   "routes": [
     {
       "src": "/App.js",
-      "dest": "/public/App.js"
+      "dest": "/App.js"
     },
     {
       "src": "/.*",
