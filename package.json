@@ -26,7 +26,7 @@
     "build": "rollup -c",
     "watch": "rollup -c -w",
     "server:dev": "nodemon server.js --watch server.js --watch public/App.js",
-    "start": "node server.js App.js"
+    "start": "node server.js"
   },
   "browserslist": [
     "defaults"
