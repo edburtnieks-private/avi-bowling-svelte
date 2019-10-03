@@ -19,7 +19,6 @@ export default [
     },
     plugins: [
       svelte({
-        dev: isDev,
         hydratable: true,
         css: css => {
           css.write('public/bundle.css');
@@ -31,11 +30,7 @@ export default [
         ],
       }),
 
-      resolve({
-        browser: true,
-        dedupe: importee =>
-          importee === 'svelte' || importee.startsWith('svelte/'),
-      }),
+      resolve(),
 
       commonjs(),
 
@@ -59,7 +54,6 @@ export default [
     },
     plugins: [
       svelte({
-        dev: isDev,
         generate: 'ssr',
       }),
       resolve(),
