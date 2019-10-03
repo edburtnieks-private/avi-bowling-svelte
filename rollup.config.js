@@ -20,6 +20,7 @@ export default [
     plugins: [
       svelte({
         hydratable: true,
+        dev: isDev,
         css: css => {
           css.write('public/bundle.css');
         },
@@ -30,7 +31,11 @@ export default [
         ],
       }),
 
-      resolve(),
+      resolve({
+        browser: true,
+        dedupe: importee =>
+          importee === 'svelte' || importee.startsWith('svelte/'),
+      }),
 
       commonjs(),
 
