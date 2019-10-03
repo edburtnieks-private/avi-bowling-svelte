@@ -3,15 +3,19 @@
   "name": "avi-bowling",
   "builds": [
     {
-      "src": "package.json",
-      "use": "@now/static-build"
-    },
-    {
       "src": "server.js",
       "use": "@now/node"
+    },
+    {
+      "src": "package.json",
+      "use": "@now/static-build"
     }
   ],
   "routes": [
+    {
+      "src": "/App.js",
+      "dest": "/public/App.js"
+    },
     {
       "src": "/.*",
       "dest": "server.js"
