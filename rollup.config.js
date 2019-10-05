@@ -55,7 +55,7 @@ export default [
       sourcemap: false,
       format: 'cjs',
       name: 'app',
-      file: isDev ? 'public/App.js' : 'App.js',
+      file: isDev ? 'public/App.js' : '/App.js',
     },
     plugins: [
       svelte({
