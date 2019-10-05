@@ -8,17 +8,20 @@
     },
     {
       "src": "package.json",
-      "use": "@now/static-build"
+      "use": "@now/static-build",
+      "config": {
+        "distDir": "public"
+      }
     }
   ],
   "routes": [
     {
       "src": "/App.js",
-      "dest": "/App.js"
+      "dest": "/public/App.js"
     },
     {
       "src": "/.*",
-      "dest": "server.js"
+      "dest": "/server.js"
     }
   ]
 }
