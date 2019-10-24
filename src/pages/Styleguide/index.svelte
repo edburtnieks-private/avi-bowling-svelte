@@ -6,6 +6,7 @@
   import IncrementInput from '../../components/Inputs/IncrementInput/index.svelte';
   import Input from '../../components/Inputs/Input/index.svelte';
   import Select from '../../components/Inputs/Select/index.svelte';
+  import Button from '../../components/Button/index.svelte';
 
   let textInputValue = '';
   let textInputPlaceholderValue = '';
@@ -91,6 +92,18 @@
     margin: var(--m-0);
   }
 
+  nav li:first-of-type {
+    font-weight: var(--fw-bold);
+  }
+
+  nav li:not(:first-of-type) {
+    padding-left: var(--p-xs);
+  }
+
+  nav li:last-of-type {
+    margin-bottom: var(--m-s);
+  }
+
   nav a {
     color: var(--c-mine-shaft);
     text-decoration: none;
@@ -100,8 +113,13 @@
     padding-left: 164px;
   }
 
-  h1 {
-    margin: var(--m-0);
+  .section-title {
+    font-size: 2em;
+    font-weight: var(--fw-bold);
+  }
+
+  .section-title:not(:first-of-type) {
+    padding-top: var(--p-xxl);
   }
 
   .component-group {
@@ -169,6 +187,10 @@
   <nav>
     <ul>
       <li>
+        <a href="#inputs-section">Inputs</a>
+      </li>
+
+      <li>
         <a href="#checkbox">Checkbox</a>
       </li>
 
@@ -196,10 +218,20 @@
         <a href="#text-input">Text Input</a>
       </li>
     </ul>
+
+    <ul>
+      <li>
+        <a href="#buttons-section">Buttons</a>
+      </li>
+
+      <li>
+        <a href="#cta-button">CTA Button</a>
+      </li>
+    </ul>
   </nav>
 
   <div class="styleguide-wrapper">
-    <h1>Styleguide - Inputs</h1>
+    <div id="inputs-section" class="section-title">Styleguide - Inputs</div>
 
     <h2 id="checkbox">Checkbox</h2>
 
@@ -939,6 +971,72 @@
   label="Label"
   bind:value=&#123;value&#125;
   <span class="difference">disabled</span> /&gt;
+          </code>
+        </pre>
+      </div>
+    </div>
+
+    <div id="buttons-section" class="section-title">Styleguide - Buttons</div>
+
+    <h2 id="cta-button">CTA Button</h2>
+
+    <div class="component-group">
+      <div class="component">
+        <Button>Primary (default)</Button>
+
+        <pre>
+          <code>
+&lt;Button&gt;Text&lt;/Button&gt;
+          </code>
+        </pre>
+      </div>
+
+      <div class="component-details">
+        <h3>Props</h3>
+
+        <ul>
+          <li>
+            type - String (default = "button")
+          </li>
+
+          <li>
+            buttonType ("primary" | "secondary") - String (default = "primary")
+          </li>
+
+          <li>
+            disabled - Boolean (default = false)
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="component-group variations">
+      <div class="component">
+        <Button buttonType="secondary">Secondary</Button>
+
+        <pre class="common">
+          <code>
+&lt;Button <span class="difference">buttonType="secondary"</span>&gt;Text&lt;/Button&gt;
+          </code>
+        </pre>
+      </div>
+
+      <div class="component">
+        <Button disabled>Primary disabled</Button>
+
+        <pre class="common">
+          <code>
+&lt;Button <span class="difference">disabled</span>&gt;Text&lt;/Button&gt;
+          </code>
+        </pre>
+      </div>
+
+      <div class="component">
+        <Button buttonType="secondary" disabled>Secondary disabled</Button>
+
+        <pre class="common">
+          <code>
+&lt;Button <span class="difference">buttonType="secondary" disabled</span>&gt;Text&lt;/Button&gt;
           </code>
         </pre>
       </div>

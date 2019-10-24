@@ -51,6 +51,7 @@
   }
 
   .secondary:disabled {
+    background-color: var(--c-white);
     border-color: var(--c-silver);
     color: var(--c-silver);
   }
