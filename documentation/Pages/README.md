@@ -25,5 +25,7 @@ See [svelte-routing](https://github.com/EmilTholin/svelte-routing) documentation
 ---
 
 [Assets](../Assets)
+
 [Components](../Components)
+
 [Styling](../Styling)

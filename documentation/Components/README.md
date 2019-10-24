@@ -19,5 +19,7 @@ Component directory name should be in `PascalCase` (e.g. `ReservationForm`)
 ---
 
 [Assets](../Assets)
+
 [Pages](../Pages)
+
 [Styling](../Styling)

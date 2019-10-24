@@ -21,5 +21,7 @@ Variables should be prefixed with some css rule shortened name (e.g. `--bs-navig
 ---
 
 [Assets](../Assets)
+
 [Components](../Components)
+
 [Pages](../Pages)

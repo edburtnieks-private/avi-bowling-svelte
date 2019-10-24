@@ -8,7 +8,7 @@
 
 All icons are placed inside [public/assets/icons](../../public/assets/icons) directory and usually will be with `.svg` extension
 
-All images are placed inside [public/assets/images](../../public/assets/images) directory with possibly different extensions (`.png`, `.jpg`, .svg` etc.)
+All images are placed inside [public/assets/images](../../public/assets/images) directory with possibly different extensions (`.png`, `.jpg`, `.svg` etc.)
 
 ### Naming
 
@@ -31,5 +31,7 @@ Icon directory name should be in `PascalCase` (e.g. `CaretIcon`) and should end 
 ---
 
 [Components](../Components)
+
 [Pages](../Pages)
+
 [Styling](../Styling)
