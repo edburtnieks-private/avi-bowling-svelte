@@ -1,5 +1,8 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher } from 'svelte';
+
+  export let value;
+  export let disabled = false;
 
   const dispatch = createEventDispatcher();
 
@@ -7,11 +10,8 @@
 
   const toggleLane = event => {
     isActive = !isActive;
-    dispatch("toggleLane", event.target.value);
+    dispatch('toggleLane', event.target.value);
   };
-
-  export let value;
-  export let disabled = false;
 </script>
 
 <style>

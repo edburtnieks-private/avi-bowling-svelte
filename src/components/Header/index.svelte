@@ -1,7 +1,7 @@
 <script>
-  import Logo from "../Logo/index.svelte";
-  import NavigationToggle from "../NavigationToggle/index.svelte";
-  import HeaderContent from "../HeaderContent/index.svelte";
+  import Logo from '../Logo/index.svelte';
+  import NavigationToggle from '../NavigationToggle/index.svelte';
+  import HeaderContent from '../HeaderContent/index.svelte';
 
   let isOpen = false;
 

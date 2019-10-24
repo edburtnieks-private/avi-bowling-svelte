@@ -1,5 +1,11 @@
 <script>
-  import CaretIcon from "../../Icons/CaretIcon/index.svelte";
+  import CaretIcon from '../../Icons/CaretIcon/index.svelte';
+
+  export let value;
+  export let id;
+  export let label;
+  export let options;
+  export let disabled = false;
 
   let active = false;
 
@@ -10,12 +16,6 @@
   const closeSelect = () => {
     active = false;
   };
-
-  export let value;
-  export let id;
-  export let label;
-  export let options;
-  export let disabled = false;
 </script>
 
 <style>

@@ -1,6 +1,4 @@
 <script>
-  import { beforeUpdate } from "svelte";
-
   export let isContentVisible;
 </script>
 

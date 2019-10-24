@@ -1,6 +1,6 @@
 <script>
-  import Logo from "../Logo/index.svelte";
-  import Navigation from "../Navigation/index.svelte";
+  import Logo from '../Logo/index.svelte';
+  import Navigation from '../Navigation/index.svelte';
 </script>
 
 <style>

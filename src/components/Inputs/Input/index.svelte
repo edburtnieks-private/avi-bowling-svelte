@@ -1,27 +1,26 @@
 <script>
-  import DropdownToggle from "../../DropdownToggle/index.svelte";
-  import CaretIcon from "../../Icons/CaretIcon/index.svelte";
-
-  const handleChange = event => {
-    value = event.target.value;
-  };
+  import DropdownToggle from '../../DropdownToggle/index.svelte';
+  import CaretIcon from '../../Icons/CaretIcon/index.svelte';
 
   // Input props
-
   export let id;
   export let label;
   export let value;
-  export let placeholder = "";
+  export let placeholder = '';
   export let disabled = false;
-  export let type = "text";
+  export let type = 'text';
 
   // Increment input props
-  export let valueText = "";
+  export let valueText = '';
   export let incrementInput = false;
 
   // Dropdown input props
   export let isDropdown = false;
   export let isDropdownContentVisible = false;
+
+  const handleChange = event => {
+    value = event.target.value;
+  };
 </script>
 
 <style>

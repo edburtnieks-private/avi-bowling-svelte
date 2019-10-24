@@ -1,5 +1,5 @@
 <script>
-  import MinusIcon from "../MinusIcon/index.svelte";
+  import MinusIcon from '../MinusIcon/index.svelte';
 
   export let disabled = false;
 </script>

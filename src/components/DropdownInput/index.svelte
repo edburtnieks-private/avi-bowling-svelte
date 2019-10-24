@@ -1,6 +1,6 @@
 <script>
-  import Input from "../Inputs/Input/index.svelte";
-  import DropdownContent from "../DropdownContent/index.svelte";
+  import Input from '../Inputs/Input/index.svelte';
+  import DropdownContent from '../DropdownContent/index.svelte';
 
   export let id;
   export let label;

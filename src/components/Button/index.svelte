@@ -1,6 +1,6 @@
 <script>
-  export let type = "button";
-  export let buttonType = "primary";
+  export let type = 'button';
+  export let buttonType = 'primary';
   export let disabled = false;
 </script>
 

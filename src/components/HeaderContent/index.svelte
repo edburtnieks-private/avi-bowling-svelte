@@ -1,7 +1,7 @@
 <script>
-  import Button from "../Button/index.svelte";
-  import LanguageSwitcher from "../LanguageSwitcher/index.svelte";
-  import Navigation from "../Navigation/index.svelte";
+  import Button from '../Button/index.svelte';
+  import LanguageSwitcher from '../LanguageSwitcher/index.svelte';
+  import Navigation from '../Navigation/index.svelte';
 
   export let isOpen;
 </script>

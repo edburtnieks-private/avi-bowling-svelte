@@ -1,5 +1,5 @@
 <script>
-  import ReservationForm from "../../components/ReservationForm/index.svelte";
+  import ReservationForm from '../../components/ReservationForm/index.svelte';
 </script>
 
 <style>

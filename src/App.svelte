@@ -1,15 +1,15 @@
 <script>
-  import { Router, Route } from "svelte-routing";
-  import Home from "./pages/Home/index.svelte";
-  import Gallery from "./pages/Gallery/index.svelte";
-  import SpecialOffers from "./pages/SpecialOffers/index.svelte";
-  import News from "./pages/News/index.svelte";
-  import Contacts from "./pages/Contacts/index.svelte";
-  import Styleguide from "./pages/Styleguide/index.svelte";
-  import Header from "./components/Header/index.svelte";
-  import Footer from "./components/Footer/index.svelte";
+  import { Router, Route } from 'svelte-routing';
+  import Home from './pages/Home/index.svelte';
+  import Gallery from './pages/Gallery/index.svelte';
+  import SpecialOffers from './pages/SpecialOffers/index.svelte';
+  import News from './pages/News/index.svelte';
+  import Contacts from './pages/Contacts/index.svelte';
+  import Styleguide from './pages/Styleguide/index.svelte';
+  import Header from './components/Header/index.svelte';
+  import Footer from './components/Footer/index.svelte';
 
-  export let url = "";
+  export let url = '';
 </script>
 
 <Router {url}>
