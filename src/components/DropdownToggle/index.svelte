@@ -1,6 +1,10 @@
 <script>
-  import { createEventDispatcher } from "svelte";
-  import CaretIcon from "../Icons/CaretIcon/index.svelte";
+  import { createEventDispatcher } from 'svelte';
+  import CaretIcon from '../Icons/CaretIcon/index.svelte';
+
+  export let id = '';
+  export let isInput = false;
+  export let disabled = false;
 
   const dispatch = createEventDispatcher();
 
@@ -8,12 +12,8 @@
 
   const toggleDropdown = () => {
     active = !active;
-    dispatch("toggleDropdown");
+    dispatch('toggleDropdown');
   };
-
-  export let id = "";
-  export let isInput = false;
-  export let disabled = false;
 </script>
 
 <style>

@@ -1,10 +1,10 @@
 <script>
-  import { createEventDispatcher } from "svelte";
-  import NavigationToggleIcon from "../Icons/NavigationToggleIcon/index.svelte";
-
-  const dispatch = createEventDispatcher();
+  import { createEventDispatcher } from 'svelte';
+  import NavigationToggleIcon from '../Icons/NavigationToggleIcon/index.svelte';
 
   export let isOpen;
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <style>

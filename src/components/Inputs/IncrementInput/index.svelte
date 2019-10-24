@@ -1,9 +1,16 @@
 <script>
-  import { createEventDispatcher } from "svelte";
-  import Input from "../Input/index.svelte";
-  import MinusIcon from "../../Icons/MinusIcon/index.svelte";
-  import PlusIcon from "../../Icons/PlusIcon/index.svelte";
-  import Checkbox from "../Checkbox/index.svelte";
+  import { createEventDispatcher } from 'svelte';
+  import Input from '../Input/index.svelte';
+  import MinusIcon from '../../Icons/MinusIcon/index.svelte';
+  import PlusIcon from '../../Icons/PlusIcon/index.svelte';
+
+  export let id;
+  export let label;
+  export let value;
+  export let minValue;
+  export let maxValue;
+  export let valueText = '';
+  export let disabled = false;
 
   const dispatch = createEventDispatcher();
 
@@ -12,7 +19,7 @@
       value -= 1;
     }
 
-    dispatch("decrement");
+    dispatch('decrement');
   };
 
   const increment = () => {
@@ -20,16 +27,8 @@
       value += 1;
     }
 
-    dispatch("increment");
+    dispatch('increment');
   };
-
-  export let id;
-  export let label;
-  export let value;
-  export let minValue;
-  export let maxValue;
-  export let valueText = "";
-  export let disabled = false;
 </script>
 
 <style>

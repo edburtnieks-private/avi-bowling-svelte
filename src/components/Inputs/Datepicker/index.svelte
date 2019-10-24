@@ -1,7 +1,7 @@
 <script>
-  import { onMount } from "svelte";
-  import { createEventDispatcher } from "svelte";
-  import CaretIcon from "../../Icons/CaretIcon/index.svelte";
+  import { onMount } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
+  import CaretIcon from '../../Icons/CaretIcon/index.svelte';
 
   export let selectedDate;
 
@@ -9,9 +9,9 @@
 
   let dateGrid;
 
-  $: monthYear = selectedDate.toLocaleDateString("en", {
-    month: "long",
-    year: "numeric"
+  $: monthYear = selectedDate.toLocaleDateString('en', {
+    month: 'long',
+    year: 'numeric'
   });
 
   $: numberOfDatesInMonth = new Date(
@@ -28,7 +28,7 @@
 
   onMount(() => {
     dateGrid.style.setProperty(
-      "--first-week-day",
+      '--first-week-day',
       new Date(
         selectedDate.getFullYear(),
         selectedDate.getMonth(),
@@ -42,10 +42,10 @@
       selectedDate.setMonth(selectedDate.getMonth() + 1)
     );
 
-    dispatch("increaseMonth", newMonth);
+    dispatch('increaseMonth', newMonth);
 
     dateGrid.style.setProperty(
-      "--first-week-day",
+      '--first-week-day',
       new Date(
         selectedDate.getFullYear(),
         selectedDate.getMonth(),
@@ -59,10 +59,10 @@
       selectedDate.setMonth(selectedDate.getMonth() - 1)
     );
 
-    dispatch("decreaseMonth", newMonth);
+    dispatch('decreaseMonth', newMonth);
 
     dateGrid.style.setProperty(
-      "--first-week-day",
+      '--first-week-day',
       new Date(
         selectedDate.getFullYear(),
         selectedDate.getMonth(),
@@ -74,7 +74,7 @@
   const changeDate = date => {
     const newDate = new Date(selectedDate.setDate(date));
 
-    dispatch("changeDate", newDate);
+    dispatch('changeDate', newDate);
   };
 </script>
 

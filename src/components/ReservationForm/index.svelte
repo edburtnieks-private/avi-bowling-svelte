@@ -1,35 +1,34 @@
 <script>
-  import Form from "../Form/index.svelte";
-  import Input from "../Inputs/Input/index.svelte";
-  import IncrementInput from "../Inputs/IncrementInput/index.svelte";
-  import Dropdown from "../Dropdown/index.svelte";
-  import DropdownInput from "../DropdownInput/index.svelte";
-  import Datepicker from "../Inputs/Datepicker/index.svelte";
-  import LaneButton from "./LaneButton/index.svelte";
-  import Select from "../Inputs/Select/index.svelte";
-  import Checkbox from "../Inputs/Checkbox/index.svelte";
+  import Form from '../Form/index.svelte';
+  import Input from '../Inputs/Input/index.svelte';
+  import IncrementInput from '../Inputs/IncrementInput/index.svelte';
+  import Dropdown from '../Dropdown/index.svelte';
+  import DropdownInput from '../DropdownInput/index.svelte';
+  import Datepicker from '../Inputs/Datepicker/index.svelte';
+  import LaneButton from './LaneButton/index.svelte';
+  import Select from '../Inputs/Select/index.svelte';
+  import Checkbox from '../Inputs/Checkbox/index.svelte';
 
   let laneCount = 1;
   let playerCount = 2;
   let shoeCount = 2;
-  let name = "";
-  let contact = "";
+  let name = '';
+  let contact = '';
   let laneNumbers = [];
-  let playerNames = Array(playerCount).fill("");
+  let playerNames = Array(playerCount).fill('');
   let duration = 1;
-  let startTime = "12:00";
+  let startTime = '12:00';
   let isShoesChecked = true;
 
   let selectedDate = new Date();
 
-  $: dateAndTime = `${selectedDate.toLocaleDateString("en", {
-    month: "long",
-    day: "numeric"
+  $: dateAndTime = `${selectedDate.toLocaleDateString('en', {
+    month: 'long',
+    day: 'numeric'
   })}, ${startTime}`;
 
   let isMoreDetailsFormVisible = false;
   let isDateTimeFormVisible = false;
-  let isStartTimeDropdownVisible = false;
 
   const minLaneCount = 1;
   const minPlayerCount = 1;
@@ -45,22 +44,22 @@
   $: players = Array.from(Array(playerCount), (_, index) => index + 1);
 
   const availableTimes = [
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-    "22:00",
-    "23:00"
+    '11:00',
+    '12:00',
+    '13:00',
+    '14:00',
+    '15:00',
+    '16:00',
+    '17:00',
+    '18:00',
+    '19:00',
+    '20:00',
+    '21:00',
+    '22:00',
+    '23:00'
   ];
 
-  const handleSubmit = event => {
+  const handleSubmit = () => {
     const reservation = {
       name,
       contact,
@@ -83,10 +82,6 @@
 
   const toggleDateTimeForm = () => {
     isDateTimeFormVisible = !isDateTimeFormVisible;
-  };
-
-  const toggleStartTimeDropdown = () => {
-    isStartTimeDropdownVisible = !isStartTimeDropdownVisible;
   };
 
   const toggleLane = event => {
@@ -126,7 +121,7 @@
   };
 
   const addPlayerInput = () => {
-    playerNames = [...playerNames, ""];
+    playerNames = [...playerNames, ''];
   };
 </script>
 

@@ -1,6 +1,8 @@
 <script>
-  import NavigationLink from "../NavigationLink/index.svelte";
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher } from 'svelte';
+  import NavigationLink from '../NavigationLink/index.svelte';
+
+  export let footer = false;
 
   const dispatch = createEventDispatcher();
 
@@ -9,21 +11,22 @@
   const changeActive = event => {
     if (!footer) {
       // Get active link
-      const activeElement = document.querySelector("[data-active]");
+      const activeElement = document.querySelector('[data-active]');
 
       // Get active link indicator
       const firstElement = document.querySelector(
-        "[data-active] + .active-indicator"
+        '[data-active] + .active-indicator'
       );
       const first = firstElement.getBoundingClientRect();
 
       // Change / move active indicator to clicked link
       delete activeElement.dataset.active;
+      // eslint-disable-next-line no-param-reassign
       event.target.parentElement.dataset.active = true;
 
       // Get clicked link indicator
       const lastElement = document.querySelector(
-        "[data-active] + .active-indicator"
+        '[data-active] + .active-indicator'
       );
       const last = lastElement.getBoundingClientRect();
 
@@ -35,30 +38,28 @@
       lastElement.animate(
         [
           {
-            transformOrigin: "center",
+            transformOrigin: 'center',
             transform: `
               translate(${deltaX}px, ${deltaY}px)
-              ${deltaY === 0 ? `rotate(${deltaX < 0 ? "-" : ""}360deg)` : ""}
+              ${deltaY === 0 ? `rotate(${deltaX < 0 ? '-' : ''}360deg)` : ''}
             `
           },
           {
-            transformOrigin: "center",
-            transform: "none"
+            transformOrigin: 'center',
+            transform: 'none'
           }
         ],
         {
           duration: 500,
-          easing: "ease-in-out",
-          fill: "both"
+          easing: 'ease-in-out',
+          fill: 'both'
         }
       );
 
       // Dispatch closing navigation menu
-      dispatch("toggleNavigation");
+      dispatch('toggleNavigation');
     }
   };
-
-  export let footer = false;
 </script>
 
 <style>

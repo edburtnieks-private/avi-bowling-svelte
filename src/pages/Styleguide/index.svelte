@@ -1,31 +1,31 @@
 <script>
-  import Checkbox from "../../components/Inputs/Checkbox/index.svelte";
-  import Datepicker from "../../components/Inputs/Datepicker/index.svelte";
-  import Dropdown from "../../components/Dropdown/index.svelte";
-  import DropdownInput from "../../components/DropdownInput/index.svelte";
-  import IncrementInput from "../../components/Inputs/IncrementInput/index.svelte";
-  import Input from "../../components/Inputs/Input/index.svelte";
-  import Select from "../../components/Inputs/Select/index.svelte";
+  import Checkbox from '../../components/Inputs/Checkbox/index.svelte';
+  import Datepicker from '../../components/Inputs/Datepicker/index.svelte';
+  import Dropdown from '../../components/Dropdown/index.svelte';
+  import DropdownInput from '../../components/DropdownInput/index.svelte';
+  import IncrementInput from '../../components/Inputs/IncrementInput/index.svelte';
+  import Input from '../../components/Inputs/Input/index.svelte';
+  import Select from '../../components/Inputs/Select/index.svelte';
 
-  let textInputValue = "";
-  let textInputPlaceholderValue = "";
-  let textInputTypeValue = "info@avibowling.com";
-  let textInputDisabledValue = "Disabled";
+  let textInputValue = '';
+  let textInputPlaceholderValue = '';
+  let textInputTypeValue = 'info@avibowling.com';
+  let textInputDisabledValue = 'Disabled';
 
   let incrementInputValue = 0;
-  let incrementInputMinValue = 0;
-  let incrementInputMaxValue = 3;
+  const incrementInputMinValue = 0;
+  const incrementInputMaxValue = 3;
 
   let incrementInputCustomValueTextValue = 0;
-  let incrementInputCustomValueTextMinValue = 0;
-  let incrementInputCustomValueTextMaxValue = 3;
+  const incrementInputCustomValueTextMinValue = 0;
+  const incrementInputCustomValueTextMaxValue = 3;
 
   let incrementInputLabelCheckbox = false;
   let incrementInputCustomLabelValue = 0;
-  let incrementInputCustomLabelMinValue = 0;
-  let incrementInputCustomLabelMaxValue = 3;
+  const incrementInputCustomLabelMinValue = 0;
+  const incrementInputCustomLabelMaxValue = 3;
 
-  let selectOptions = [1, 2, 3, 4, 5];
+  const selectOptions = [1, 2, 3, 4, 5];
   let selectSelectedOption = selectOptions[0];
 
   let checkboxUnchecked = false;
@@ -38,10 +38,10 @@
   let isDropdownContentVisible = false;
   let isDropdownDisabledContentVisible = false;
 
-  let dropdownInputValue = "Dropdown input value";
+  let dropdownInputValue = 'Dropdown input value';
   let isDropdownInputContentVisible = false;
 
-  let dropdownInputDisabledValue = "Disabled";
+  let dropdownInputDisabledValue = 'Disabled';
   let isDropdownInputDisabledContentVisible = false;
 
   const datepickerIncreaseMonth = event => {
@@ -742,8 +742,8 @@
           bind:value={incrementInputValue}
           minValue={incrementInputMinValue}
           maxValue={incrementInputMaxValue}
-          on:decrement={() => console.log("Decrement event fired")}
-          on:increment={() => console.log("Increment event fired")} />
+          on:decrement={() => console.log('Decrement event fired')}
+          on:increment={() => console.log('Increment event fired')} />
 
         <pre class="common">
           <code>

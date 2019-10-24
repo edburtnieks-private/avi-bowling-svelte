@@ -1,8 +1,4 @@
 module.exports = {
-  extends: [
-    'airbnb-base',
-    'prettier'
-  ],
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: 'module'
@@ -11,6 +7,10 @@ module.exports = {
     es6: true,
     browser: true
   },
+  extends: [
+    'airbnb-base',
+    'prettier'
+  ],
   plugins: [
     'prettier',
     'svelte3'
@@ -23,7 +23,17 @@ module.exports = {
         'import/first': 'off',
         'import/no-duplicates': 'off',
         'import/no-mutable-exports': 'off',
-        'import/no-unresolved': 'off'
+        'import/no-unresolved': 'off',
+        'import/no-extraneous-dependencies': 'off',
+        'import/prefer-default-export': 'off',
+        'quotes': [
+          'error',
+          'single',
+          {
+            'avoidEscape': true,
+            'allowTemplateLiterals': true
+          }
+        ]
       }
     }
   ]
