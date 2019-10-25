@@ -74,10 +74,10 @@
 </style>
 
 <div class="input-label">
-  <input type="checkbox" bind:checked {id} {disabled} />
+  <input type="checkbox" bind:checked {id} {disabled} data-cy="checkbox-input" />
 
   <label for={id}>
-    {label}
-    <span />
+    <div data-cy="checkbox-label">{label}</div>
+    <span data-cy="custom-checkbox" />
   </label>
 </div>

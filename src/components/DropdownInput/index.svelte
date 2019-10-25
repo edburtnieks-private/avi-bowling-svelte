@@ -17,7 +17,6 @@
   isDropdownContentVisible={isContentVisible}
   {disabled}
   on:toggleDropdown>
-
   <div slot="dropdown-content">
     <DropdownContent {isContentVisible}>
       <slot name="content" />
