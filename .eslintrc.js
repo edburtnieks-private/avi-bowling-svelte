@@ -9,6 +9,7 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
+    'plugin:cypress/recommended',
     'prettier'
   ],
   plugins: [

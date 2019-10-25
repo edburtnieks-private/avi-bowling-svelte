@@ -2,10 +2,13 @@
   "name": "avi-bowling",
   "version": "1.0.0",
   "devDependencies": {
+    "@cypress/webpack-preprocessor": "^4.1.0",
     "autoprefixer": "^9.6.1",
+    "cypress": "^3.5.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-cypress": "^2.7.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-svelte3": "^2.7.3",
@@ -22,9 +25,11 @@
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^4.0.4",
     "svelte": "^3.0.0",
-    "svelte-preprocess": "^3.1.1"
+    "svelte-loader": "^2.13.6",
+    "webpack": "^4.41.2"
   },
   "dependencies": {
+    "cypress-svelte-unit-test": "^1.5.0",
     "express": "^4.17.1",
     "sirv-cli": "^0.4.4",
     "svelte-routing": "^1.4.0"
@@ -35,7 +40,8 @@
     "watch": "rollup -c -w",
     "server:dev": "nodemon server.js --watch server.js --watch public/App.js",
     "start": "node server.js public/App.js",
-    "lint": "eslint --ext .svelte,.js src/"
+    "lint": "eslint --ext .svelte,.js src/",
+    "cy:open": "cypress open"
   },
   "browserslist": [
     "defaults"
