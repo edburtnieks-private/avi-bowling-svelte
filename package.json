@@ -42,7 +42,8 @@
     "server:dev": "nodemon server.js --watch server.js --watch public/App.js",
     "start": "node server.js public/App.js",
     "lint": "eslint --ext .svelte,.js src/",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "browserslist": [
     "defaults"
