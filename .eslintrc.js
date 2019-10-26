@@ -25,7 +25,6 @@ module.exports = {
         'import/no-duplicates': 'off',
         'import/no-mutable-exports': 'off',
         'import/no-unresolved': 'off',
-        'import/no-extraneous-dependencies': 'off',
         'import/prefer-default-export': 'off',
         'quotes': [
           'error',
@@ -37,5 +36,8 @@ module.exports = {
         ]
       }
     }
-  ]
+  ],
+  rules: {
+    "import/no-extraneous-dependencies": "off"
+  }
 };

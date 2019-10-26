@@ -1,5 +1,5 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 const webpack = require('@cypress/webpack-preprocessor');
+const percyHealthCheck = require("@percy/cypress/task");
 
 module.exports = on => {
   const options = {
@@ -8,4 +8,5 @@ module.exports = on => {
   };
 
   on('file:preprocessor', webpack(options));
+  on("task", percyHealthCheck);
 };
