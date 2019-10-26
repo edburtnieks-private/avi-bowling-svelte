@@ -60,7 +60,7 @@
 </style>
 
 {#if label}
-  <label for={id}>{label}</label>
+  <label for={id} data-cy="label">{label}</label>
 {/if}
 
 {#if isDropdown}
@@ -80,7 +80,8 @@
   <div
     class:global-input-wrapper={incrementInput}
     class:increment-input-wrapper={incrementInput}
-    class:increment-input-wrapper-disabled={disabled && incrementInput}>
+    class:increment-input-wrapper-disabled={disabled && incrementInput}
+    data-cy="input-wrapper">
     <slot name="decrement-button" />
 
     <input
@@ -92,7 +93,8 @@
       class:increment-input-disabled={disabled && incrementInput}
       value={valueText || value}
       disabled={disabled || incrementInput}
-      on:change={handleChange} />
+      on:change={handleChange}
+      data-cy="input" />
 
     <slot name="increment-button" />
   </div>

@@ -25,3 +25,13 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import '@percy/cypress';
+
+// Asserts custom checkmark as ::after pseudo element content
+Cypress.Commands.add('customCheckboxContent', content => {
+  cy.get('@custom-checkbox').then($element => {
+    const win = $element[0].ownerDocument.defaultView;
+    const after = win.getComputedStyle($element[0], 'after');
+    const contentValue = after.getPropertyValue('content');
+    expect(contentValue).to.eq(content);
+  });
+});
