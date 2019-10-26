@@ -1,7 +1,7 @@
 import mount from 'cypress-svelte-unit-test';
 import IncrementInput from '../../src/components/Inputs/IncrementInput/index.svelte';
 
-describe('Increment input', () => {
+describe('increment input', () => {
   beforeEach(() => {
     // Default increment input
     mount(IncrementInput, {
@@ -22,7 +22,7 @@ describe('Increment input', () => {
     cy.get('[data-cy=increment-button]').as('increment-button');
   });
   
-  it('Shows increment input with changing states', () => {
+  it('should show increment input with changing states', () => {
     // Default
     cy.get('@label').should('have.text', 'Label');
 
@@ -69,7 +69,7 @@ describe('Increment input', () => {
     cy.get('@increment-button').should('not.be.disabled');
   });
 
-  it('Shows increment input with minimum starting value', () => {
+  it('should show increment input with minimum starting value', () => {
     mount(IncrementInput, {
       props: {
         id: "increment-input",
@@ -85,7 +85,7 @@ describe('Increment input', () => {
     cy.get('@increment-button').should('not.be.disabled');
   });
 
-  it('Shows increment input with maximum starting value', () => {
+  it('should show increment input with maximum starting value', () => {
     mount(IncrementInput, {
       props: {
         id: "increment-input",
@@ -101,7 +101,7 @@ describe('Increment input', () => {
     cy.get('@increment-button').should('be.disabled');
   });
 
-  it('Shows increment input with valueText prop', () => {
+  it('should show increment input with valueText prop', () => {
     mount(IncrementInput, {
       props: {
         id: "increment-input",
@@ -116,7 +116,7 @@ describe('Increment input', () => {
     cy.get('@input').should('have.value', '1 point')
   });
 
-  it('Shows increment input with disabled prop', () => {
+  it('should show increment input with disabled prop', () => {
     mount(IncrementInput, {
       props: {
         id: "increment-input",

@@ -1,7 +1,7 @@
 import mount from 'cypress-svelte-unit-test';
 import Checkbox from '../../src/components/Inputs/Checkbox/index.svelte';
 
-describe('Checkbox', () => {
+describe('checkbox', () => {
   beforeEach(() => {
     // Default checkbox
     mount(Checkbox, {
@@ -17,7 +17,7 @@ describe('Checkbox', () => {
     cy.get('[data-cy=custom-checkbox]').as('custom-checkbox');
   });
 
-  it('Shows checkbox with changing states', () => {
+  it('should show checkbox with changing states', () => {
     // Default (unchecked)
     cy.get('@checkbox-label').should('have.text', 'Label');
     cy.get('@checkbox-input')
@@ -52,7 +52,7 @@ describe('Checkbox', () => {
     cy.get('@checkbox-input').should('be.disabled');
   });
 
-  it('Shows checkbox with checked prop', () => {
+  it('should show checkbox with checked prop', () => {
     mount(Checkbox, {
       props: {
         id: 'checkbox',
@@ -65,7 +65,7 @@ describe('Checkbox', () => {
     cy.customCheckboxContent('""');
   });
 
-  it('Shows checkbox with disabled prop', () => {
+  it('should show checkbox with disabled prop', () => {
     mount(Checkbox, {
       props: {
         id: 'checkbox',
@@ -77,7 +77,7 @@ describe('Checkbox', () => {
     cy.get('@checkbox-input').should('be.disabled');
   });
 
-  it('Shows checkbox with checked and disabled props', () => {
+  it('shoul show checkbox with checked and disabled props', () => {
     mount(Checkbox, {
       props: {
         id: 'checkbox',
