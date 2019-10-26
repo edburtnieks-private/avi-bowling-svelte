@@ -75,7 +75,8 @@
     class:link
     class:left
     class:right
-    class:disabled>
+    class:disabled
+    data-cy="caret-icon">
     <div class="left-part" />
     <div class="right-part" />
   </div>
