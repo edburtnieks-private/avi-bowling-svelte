@@ -25,6 +25,7 @@ describe('increment input', () => {
   it('should show increment input with changing states', () => {
     // Default
     cy.get('@label').should('have.text', 'Label');
+    cy.get('[data-cy=custom-label]').should('not.exist');
 
     cy.get('@input-wrapper')
       .should('have.class', 'global-input-wrapper')
@@ -139,5 +140,18 @@ describe('increment input', () => {
     cy.get('@increment-button')
       .should('be.disabled')
       .and('have.class', 'disabled-input');
+  });
+
+  it('should show increment input with custom label', () => {
+    mount(IncrementInput, {
+      props: {
+        id: "increment-input",
+        value: 1,
+        minValue: 0,
+        maxValue: 3
+      }
+    });
+
+    cy.get('[data-cy=custom-label]').should('exist');
   });
 });

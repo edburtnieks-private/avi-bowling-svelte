@@ -51,7 +51,7 @@
 </style>
 
 {#if !label}
-  <div class="label">
+  <div class="label" data-cy="custom-label">
     <slot name="label" />
   </div>
 {/if}
