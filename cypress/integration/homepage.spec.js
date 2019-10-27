@@ -1,9 +1,7 @@
 describe('Homepage', () => {
-  beforeEach(() => {
+  it.skip('Shows homepage', () => {
     cy.visit('http://localhost:3000');
-  });
 
-  it('Shows homepage', () => {
     cy.percySnapshot('homepage');
   });
 });
