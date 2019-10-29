@@ -18,6 +18,6 @@
   }
 </style>
 
-<div class="reservation-form-wrapper">
+<div class="reservation-form-wrapper" data-cy="reservation-form">
   <ReservationForm />
 </div>

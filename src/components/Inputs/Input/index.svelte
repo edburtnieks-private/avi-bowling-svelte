@@ -66,7 +66,7 @@
 {#if isDropdown}
   <DropdownToggle {id} on:toggleDropdown isInput={isDropdown} {disabled}>
     <div class="dropdown-toggle-input">
-      <span>{value}</span>
+      <span data-cy="dropdown-toggle-input-text">{value}</span>
       <div class="caret-icon-wrapper">
         <CaretIcon {disabled} active={isDropdownContentVisible} />
       </div>

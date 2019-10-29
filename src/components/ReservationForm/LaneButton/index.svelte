@@ -3,13 +3,11 @@
 
   export let value;
   export let disabled = false;
+  export let isActive = false;
 
   const dispatch = createEventDispatcher();
 
-  let isActive = false;
-
   const toggleLane = event => {
-    isActive = !isActive;
     dispatch('toggleLane', event.target.value);
   };
 </script>
@@ -37,6 +35,7 @@
   class="global-button-input"
   class:active={isActive}
   on:click={toggleLane}
+  data-cy="lane-button"
   {value}
   {disabled}>
   <slot />

@@ -22,7 +22,7 @@
 </style>
 
 {#if isContentVisible}
-  <div>
+  <div data-cy="dropdown-content">
     <slot />
   </div>
 {/if}
