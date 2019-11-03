@@ -74,8 +74,12 @@
 </style>
 
 <div class="input-label">
-  <input type="checkbox" bind:checked {id} {disabled} data-cy="checkbox-input" />
-
+  <input
+    type="checkbox"
+    bind:checked
+    {id}
+    {disabled}
+    data-cy="checkbox-input" />
   <label for={id}>
     <div data-cy="checkbox-label">{label}</div>
     <span data-cy="custom-checkbox" />

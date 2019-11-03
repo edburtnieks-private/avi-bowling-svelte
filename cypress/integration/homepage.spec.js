@@ -3,7 +3,7 @@ describe('homepage', () => {
     cy.visit('http://localhost:3000');
   });
 
-  it('should create new reservation by changing every value and no empty fields left', () => {
+  it.skip('should create new reservation by changing every value and no empty fields left', () => {
     cy.get('[data-cy=reservation-form] form').within(() => {
       // Reservation form aliases
       cy.get('[data-cy=date-and-time-dropdown] [data-cy=dropdown-toggle-button]').as('date-and-time-dropdown-button');

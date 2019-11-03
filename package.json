@@ -46,7 +46,7 @@
     "start": "node server.js public/App.js",
     "lint": "eslint --ext .svelte,.js src/",
     "cy:open": "cypress open",
-    "cy:run": "cypress run",
+    "cy:run": "cypress run --record --key d241f18c-1d4e-451e-98c5-a0ff679854ed",
     "test": "percy exec -- cypress run"
   },
   "browserslist": [

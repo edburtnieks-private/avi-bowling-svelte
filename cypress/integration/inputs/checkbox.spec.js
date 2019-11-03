@@ -1,5 +1,5 @@
 import mount from 'cypress-svelte-unit-test';
-import Checkbox from '../../src/components/Inputs/Checkbox/index.svelte';
+import Checkbox from '../../../src/components/Inputs/Checkbox/index.svelte';
 
 describe('checkbox', () => {
   beforeEach(() => {

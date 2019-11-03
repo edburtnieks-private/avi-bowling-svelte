@@ -1,5 +1,5 @@
 import mount from 'cypress-svelte-unit-test';
-import IncrementInput from '../../src/components/Inputs/IncrementInput/index.svelte';
+import IncrementInput from '../../../src/components/Inputs/IncrementInput/index.svelte';
 
 describe('increment input', () => {
   beforeEach(() => {

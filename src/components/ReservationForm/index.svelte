@@ -1,3 +1,12 @@
+<script context="module">
+  export const formatDateAndTime = (date, startTime) => {
+    return `${date.toLocaleDateString('en', {
+      month: 'long',
+      day: 'numeric'
+    })}, ${startTime}`;
+  };
+</script>
+
 <script>
   import Form from '../Form/index.svelte';
   import Input from '../Inputs/Input/index.svelte';
@@ -22,10 +31,7 @@
 
   let selectedDate = new Date();
 
-  $: dateAndTime = `${selectedDate.toLocaleDateString('en', {
-    month: 'long',
-    day: 'numeric'
-  })}, ${startTime}`;
+  $: dateAndTime = formatDateAndTime(selectedDate, startTime);
 
   let isMoreDetailsFormVisible = false;
   let isDateTimeFormVisible = false;
@@ -45,7 +51,8 @@
 
   $: isLaneButtonDisabled = lane => laneNumbers.length >= laneCount && !laneNumbers.includes(lane);
 
-  let lastSelectedLane = [];
+  let lastSelectedLanes = [];
+  let lastPlayerNames = [];
 
   const availableTimes = [
     '11:00',
@@ -70,8 +77,6 @@
       date: selectedDate,
       startTime,
       duration,
-      laneCount,
-      playerCount,
       shoeCount,
       players: playerNames,
       lanes: laneNumbers
@@ -105,28 +110,30 @@
     }
   };
 
-  const removeLastSelectedLane = () => {
-    if (laneNumbers.length > laneCount) {
-      const index = laneNumbers.length - 1;
+  const handleLaneCountDecrement = event => {
+    // Removed last selected lane
+    if (laneNumbers.length > event.detail) {
+      const lastIndex = laneNumbers.length - 1;
 
-      lastSelectedLane = [...lastSelectedLane, laneNumbers[index]];
+      lastSelectedLanes = [...lastSelectedLanes, laneNumbers[lastIndex]];
 
       laneNumbers = [
-        ...laneNumbers.slice(0, index),
-        ...laneNumbers.slice(index + 1)
+        ...laneNumbers.slice(0, lastIndex),
+        ...laneNumbers.slice(lastIndex + 1)
       ];
     }
   };
 
-  const addLastRemovedLane = () => {
-    if (laneNumbers.length && lastSelectedLane.length && laneNumbers.length < laneCount) {
-      const index = lastSelectedLane.length - 1;
+  const handleLaneCountIncrement = event => {
+    // Add last removed lane to selected lanes
+    if (laneNumbers.length && lastSelectedLanes.length && laneNumbers.length < event.detail) {
+      const lastIndex = lastSelectedLanes.length - 1;
 
-      laneNumbers = [...laneNumbers, lastSelectedLane[index]];
+      laneNumbers = [...laneNumbers, lastSelectedLanes[lastIndex]];
 
-      lastSelectedLane = [
-        ...lastSelectedLane.slice(0, index),
-        ...lastSelectedLane.slice(index + 1)
+      lastSelectedLanes = [
+        ...lastSelectedLanes.slice(0, lastIndex),
+        ...lastSelectedLanes.slice(lastIndex + 1)
       ];
     }
   };
@@ -143,20 +150,42 @@
     selectedDate = event.detail;
   };
 
-  const removeLastPlayer = () => {
+  const handlePlayerCountDecrement = () => {
+    // Remove last player name
     const lastIndex = playerNames.length - 1;
+
+    if (playerNames[lastIndex]) {
+      lastPlayerNames = [...lastPlayerNames, playerNames[lastIndex]];
+    }
 
     playerNames = [
       ...playerNames.slice(0, lastIndex),
       ...playerNames.slice(lastIndex + 1)
     ];
 
-    // Set shoe count back to player count
-    if (shoeCount > playerCount) shoeCount = playerCount;
+    // Set shoe count to player count
+    if (shoeCount === playerCount) shoeCount -= 1;
   };
 
-  const addPlayer = () => {
-    playerNames = [...playerNames, ''];
+  const handlePlayerCountIncrement = () => {
+    if (lastPlayerNames.length) {
+      // If there is saved last player name, add last removed player name
+      const lastIndex = lastPlayerNames.length - 1;
+
+      playerNames = [...playerNames, lastPlayerNames[lastIndex]];
+
+      lastPlayerNames = [
+        ...lastPlayerNames.slice(0, lastIndex),
+        ...lastPlayerNames.slice(lastIndex + 1)
+      ];
+
+    } else {
+      // If there is no saved last player name, add empty value
+      playerNames = [...playerNames, ''];
+    }
+
+    // Set shoe count to player count
+    if (shoeCount === playerCount) shoeCount += 1;
   };
 </script>
 
@@ -334,8 +363,8 @@
         bind:value={laneCount}
         minValue={minLaneCount}
         maxValue={maxLaneCount}
-        on:decrement={removeLastSelectedLane}
-        on:increment={addLastRemovedLane} />
+        on:decrement={handleLaneCountDecrement}
+        on:increment={handleLaneCountIncrement} />
     </div>
 
     <div class="input-label-wrapper" data-cy="name-input">
@@ -365,7 +394,7 @@
         <div class="more-details-form">
           <div class="lane-information-wrapper">
             <div class="more-details-input-label-wrapper">
-              <label>Lane number</label>
+              <label data-cy="lane-button-label">Lane numbers</label>
 
               <div class="lane-button-wrapper">
                 {#each lanes as lane}
@@ -373,9 +402,7 @@
                     value={lane}
                     isActive={laneNumbers.includes(lane)}
                     on:toggleLane={toggleLane}
-                    disabled={isLaneButtonDisabled(lane)}>
-                    {lane}
-                  </LaneButton>
+                    disabled={isLaneButtonDisabled(lane)} />
                 {/each}
               </div>
             </div>
@@ -388,8 +415,8 @@
                   bind:value={playerCount}
                   minValue={minPlayerCount}
                   maxValue={maxPlayerCount}
-                  on:decrement={removeLastPlayer}
-                  on:increment={addPlayer} />
+                  on:decrement={handlePlayerCountDecrement}
+                  on:increment={handlePlayerCountIncrement} />
               </div>
 
               <div class="shoe-counter-wrapper" data-cy="shoe-count-increment-input">

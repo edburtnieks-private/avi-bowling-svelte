@@ -1,5 +1,5 @@
 import mount from 'cypress-svelte-unit-test';
-import Datepicker from '../../src/components/Inputs/Datepicker/index.svelte';
+import Datepicker from '../../../src/components/Inputs/Datepicker/index.svelte';
 
 describe('datepicker', () => {
   beforeEach(() => {

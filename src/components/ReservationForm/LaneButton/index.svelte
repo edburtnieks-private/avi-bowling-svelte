@@ -38,5 +38,5 @@
   data-cy="lane-button"
   {value}
   {disabled}>
-  <slot />
+  {value}
 </button>

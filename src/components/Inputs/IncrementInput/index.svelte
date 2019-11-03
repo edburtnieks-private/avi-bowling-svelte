@@ -16,18 +16,22 @@
 
   const decrement = () => {
     if (value > minValue) {
-      value -= 1;
-    }
+      const newValue = value - 1;
 
-    dispatch('decrement');
+      dispatch('decrement', newValue);
+
+      value = newValue;
+    }
   };
 
   const increment = () => {
     if (value < maxValue) {
-      value += 1;
-    }
+      const newValue = value + 1;
 
-    dispatch('increment');
+      dispatch('increment', newValue);
+      
+      value = newValue;
+    }
   };
 </script>
 

@@ -1,3 +1,12 @@
+<script context="module">
+  export const formatMonthAndYear = date => {
+    return date.toLocaleDateString('en', {
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+</script>
+
 <script>
   import { onMount } from 'svelte';
   import { createEventDispatcher } from 'svelte';
@@ -9,10 +18,7 @@
 
   let dateGrid;
 
-  $: monthYear = selectedDate.toLocaleDateString('en', {
-    month: 'long',
-    year: 'numeric'
-  });
+  $: monthYear = formatMonthAndYear(selectedDate);
 
   $: numberOfDatesInMonth = new Date(
     selectedDate.getYear(),
@@ -183,8 +189,13 @@
       class="global-button-input"
       class:active={date === selectedDate.getDate()}
       on:click={() => changeDate(date)}
-      data-cy='date-button'>
-      <time datetime="2019-09-01" data-cy="date-text">{date}</time>
+      data-cy='date-button'
+      value={selectedDate}>
+      <time
+        datetime={`${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${date}`}
+        data-cy="date-text">
+        {date}
+      </time>
     </button>
   {/each}
 </div>
