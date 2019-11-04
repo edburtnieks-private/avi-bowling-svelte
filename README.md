@@ -56,3 +56,5 @@ Project boilerplate was generated using `npx degit sveltejs/template avi-bowling
 - [PostCSS](https://postcss.org/) - For auto prefixing css rules
 - [ESLint](https://eslint.org/) - For linting javascript and svelte files
 - [Prettier](https://prettier.io/) - For code formatting
+- [Cypress](https://www.cypress.io/) - For End to End testing
+- [Percy](https://percy.io/) - For visual testing

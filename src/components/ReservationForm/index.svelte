@@ -1,3 +1,12 @@
+<script context="module">
+  export const formatDateAndTime = (date, startTime) => {
+    return `${date.toLocaleDateString('en', {
+      month: 'long',
+      day: 'numeric'
+    })}, ${startTime}`;
+  };
+</script>
+
 <script>
   import Form from '../Form/index.svelte';
   import Input from '../Inputs/Input/index.svelte';
@@ -22,10 +31,7 @@
 
   let selectedDate = new Date();
 
-  $: dateAndTime = `${selectedDate.toLocaleDateString('en', {
-    month: 'long',
-    day: 'numeric'
-  })}, ${startTime}`;
+  $: dateAndTime = formatDateAndTime(selectedDate, startTime);
 
   let isMoreDetailsFormVisible = false;
   let isDateTimeFormVisible = false;
@@ -42,6 +48,11 @@
 
   const lanes = Array.from(Array(maxLaneCount), (_, index) => index + 1);
   $: players = Array.from(Array(playerCount), (_, index) => index + 1);
+
+  $: isLaneButtonDisabled = lane => laneNumbers.length >= laneCount && !laneNumbers.includes(lane);
+
+  let lastSelectedLanes = [];
+  let lastPlayerNames = [];
 
   const availableTimes = [
     '11:00',
@@ -66,8 +77,6 @@
       date: selectedDate,
       startTime,
       duration,
-      laneCount,
-      playerCount,
       shoeCount,
       players: playerNames,
       lanes: laneNumbers
@@ -85,9 +94,10 @@
   };
 
   const toggleLane = event => {
-    const lane = event.detail;
+    const lane = +event.detail;
 
     if (laneNumbers.includes(lane)) {
+      // Remove if lane exists
       const index = laneNumbers.indexOf(lane);
 
       laneNumbers = [
@@ -95,7 +105,36 @@
         ...laneNumbers.slice(index + 1)
       ];
     } else {
+      // Add if lane doesn't exists
       laneNumbers = [...laneNumbers, lane];
+    }
+  };
+
+  const handleLaneCountDecrement = event => {
+    // Removed last selected lane
+    if (laneNumbers.length > event.detail) {
+      const lastIndex = laneNumbers.length - 1;
+
+      lastSelectedLanes = [...lastSelectedLanes, laneNumbers[lastIndex]];
+
+      laneNumbers = [
+        ...laneNumbers.slice(0, lastIndex),
+        ...laneNumbers.slice(lastIndex + 1)
+      ];
+    }
+  };
+
+  const handleLaneCountIncrement = event => {
+    // Add last removed lane to selected lanes
+    if (laneNumbers.length && lastSelectedLanes.length && laneNumbers.length < event.detail) {
+      const lastIndex = lastSelectedLanes.length - 1;
+
+      laneNumbers = [...laneNumbers, lastSelectedLanes[lastIndex]];
+
+      lastSelectedLanes = [
+        ...lastSelectedLanes.slice(0, lastIndex),
+        ...lastSelectedLanes.slice(lastIndex + 1)
+      ];
     }
   };
 
@@ -111,17 +150,42 @@
     selectedDate = event.detail;
   };
 
-  const removeLastPlayerInput = () => {
+  const handlePlayerCountDecrement = () => {
+    // Remove last player name
     const lastIndex = playerNames.length - 1;
+
+    if (playerNames[lastIndex]) {
+      lastPlayerNames = [...lastPlayerNames, playerNames[lastIndex]];
+    }
 
     playerNames = [
       ...playerNames.slice(0, lastIndex),
       ...playerNames.slice(lastIndex + 1)
     ];
+
+    // Set shoe count to player count
+    if (shoeCount === playerCount) shoeCount -= 1;
   };
 
-  const addPlayerInput = () => {
-    playerNames = [...playerNames, ''];
+  const handlePlayerCountIncrement = () => {
+    if (lastPlayerNames.length) {
+      // If there is saved last player name, add last removed player name
+      const lastIndex = lastPlayerNames.length - 1;
+
+      playerNames = [...playerNames, lastPlayerNames[lastIndex]];
+
+      lastPlayerNames = [
+        ...lastPlayerNames.slice(0, lastIndex),
+        ...lastPlayerNames.slice(lastIndex + 1)
+      ];
+
+    } else {
+      // If there is no saved last player name, add empty value
+      playerNames = [...playerNames, ''];
+    }
+
+    // Set shoe count to player count
+    if (shoeCount === playerCount) shoeCount += 1;
   };
 </script>
 
@@ -251,7 +315,7 @@
 
 <Form on:handleSubmit={handleSubmit} submitButtonText="Make Reservation">
   <div class="reservation-form-inner-wrapper">
-    <div class="input-label-wrapper date-time-wrapper">
+    <div class="input-label-wrapper date-time-wrapper" data-cy="date-and-time-dropdown">
       <DropdownInput
         id="date-and-time"
         label="Date and Time"
@@ -260,7 +324,7 @@
         on:toggleDropdown={toggleDateTimeForm}>
         <div slot="content">
           <div class="datepicker-time-wrapper">
-            <div class="datepicker-wrapper">
+            <div class="datepicker-wrapper" data-cy="datepicker">
               <Datepicker
                 {selectedDate}
                 on:increaseMonth={increaseMonth}
@@ -269,7 +333,7 @@
             </div>
 
             <div class="time-duration-wrapper">
-              <div class="input-label-wrapper-reverse start-time-wrapper">
+              <div class="input-label-wrapper-reverse start-time-wrapper" data-cy="start-time-select">
                 <Select
                   id="start-time"
                   label="Start time"
@@ -277,7 +341,7 @@
                   bind:value={startTime} />
               </div>
 
-              <div class="input-label-wrapper-reverse">
+              <div class="input-label-wrapper-reverse" data-cy="duration-increment-input">
                 <IncrementInput
                   id="duration"
                   label="Duration"
@@ -292,16 +356,18 @@
       </DropdownInput>
     </div>
 
-    <div class="input-label-wrapper">
+    <div class="input-label-wrapper" data-cy="lane-count-increment-input">
       <IncrementInput
         id="lane-count"
         label="Lane count"
         bind:value={laneCount}
         minValue={minLaneCount}
-        maxValue={maxLaneCount} />
+        maxValue={maxLaneCount}
+        on:decrement={handleLaneCountDecrement}
+        on:increment={handleLaneCountIncrement} />
     </div>
 
-    <div class="input-label-wrapper">
+    <div class="input-label-wrapper" data-cy="name-input">
       <Input
         id="name"
         label="Name"
@@ -309,7 +375,7 @@
         placeholder="John Smith" />
     </div>
 
-    <div class="input-label-wrapper">
+    <div class="input-label-wrapper" data-cy="contact-input">
       <Input
         id="contact"
         label="Phone or Email"
@@ -318,7 +384,7 @@
     </div>
   </div>
 
-  <div class="more-details-form-dropdown-wrapper">
+  <div class="more-details-form-dropdown-wrapper" data-cy="more-details-dropdown">
     <Dropdown
       isContentVisible={isMoreDetailsFormVisible}
       on:toggleDropdown={toggleMoreDetailsForm}>
@@ -328,30 +394,32 @@
         <div class="more-details-form">
           <div class="lane-information-wrapper">
             <div class="more-details-input-label-wrapper">
-              <label>Lane number</label>
+              <label data-cy="lane-button-label">Lane numbers</label>
 
               <div class="lane-button-wrapper">
                 {#each lanes as lane}
-                  <LaneButton on:toggleLane={toggleLane} value={lane}>
-                    {lane}
-                  </LaneButton>
+                  <LaneButton
+                    value={lane}
+                    isActive={laneNumbers.includes(lane)}
+                    on:toggleLane={toggleLane}
+                    disabled={isLaneButtonDisabled(lane)} />
                 {/each}
               </div>
             </div>
 
             <div class="player-shoe-wrapper">
-              <div class="player-counter-wrapper">
+              <div class="player-counter-wrapper" data-cy="player-count-increment-input">
                 <IncrementInput
                   id="player-count"
                   label="Players"
                   bind:value={playerCount}
                   minValue={minPlayerCount}
                   maxValue={maxPlayerCount}
-                  on:decrement={removeLastPlayerInput}
-                  on:increment={addPlayerInput} />
+                  on:decrement={handlePlayerCountDecrement}
+                  on:increment={handlePlayerCountIncrement} />
               </div>
 
-              <div class="shoe-counter-wrapper">
+              <div class="shoe-counter-wrapper" data-cy="shoe-count-increment-input">
                 <IncrementInput
                   id="shoe-count"
                   label=""
@@ -359,7 +427,7 @@
                   minValue={minShoeCount}
                   maxValue={maxShoeCount}
                   disabled={!isShoesChecked}>
-                  <div slot="label">
+                  <div slot="label" data-cy="shoe-checkbox">
                     <Checkbox
                       id="shoe-checkbox"
                       label="Shoes"
@@ -370,7 +438,7 @@
             </div>
           </div>
 
-          <div>
+          <div data-cy="player-name-input">
             {#each players as player}
               <div class="more-details-input-label-wrapper">
                 <Input

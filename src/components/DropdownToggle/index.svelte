@@ -54,12 +54,15 @@
   class:global-input={isInput}
   on:click={toggleDropdown}
   {disabled}
-  {id}>
+  {id}
+  data-cy="dropdown-toggle-button">
   {#if isInput}
     <slot />
   {:else}
     <div class="link">
-      <slot />
+      <div data-cy="dropdown-toggle-text">
+        <slot />
+      </div>
 
       <div class="caret-icon-wrapper">
         <CaretIcon {disabled} link {active} />

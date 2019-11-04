@@ -35,7 +35,7 @@
   }
 </style>
 
-<label for={id}>{label}</label>
+<label for={id} data-cy="label">{label}</label>
 
 <div class="select-wrapper">
   <select
@@ -44,7 +44,8 @@
     {id}
     {disabled}
     on:blur={closeSelect}
-    on:click={toggleSelect}>
+    on:click={toggleSelect}
+    data-cy="select">
     {#each options as option}
       <option value={option} on:click={closeSelect}>{option}</option>
     {/each}

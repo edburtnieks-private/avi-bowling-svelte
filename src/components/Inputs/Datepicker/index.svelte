@@ -1,3 +1,12 @@
+<script context="module">
+  export const formatMonthAndYear = date => {
+    return date.toLocaleDateString('en', {
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+</script>
+
 <script>
   import { onMount } from 'svelte';
   import { createEventDispatcher } from 'svelte';
@@ -9,10 +18,7 @@
 
   let dateGrid;
 
-  $: monthYear = selectedDate.toLocaleDateString('en', {
-    month: 'long',
-    year: 'numeric'
-  });
+  $: monthYear = formatMonthAndYear(selectedDate);
 
   $: numberOfDatesInMonth = new Date(
     selectedDate.getYear(),
@@ -38,11 +44,13 @@
   });
 
   const increaseMonth = () => {
-    const newMonth = new Date(
+    const newDate = new Date(
       selectedDate.setMonth(selectedDate.getMonth() + 1)
     );
 
-    dispatch('increaseMonth', newMonth);
+    selectedDate = newDate;
+  
+    dispatch('increaseMonth', newDate);
 
     dateGrid.style.setProperty(
       '--first-week-day',
@@ -55,11 +63,13 @@
   };
 
   const decreaseMonth = () => {
-    const newMonth = new Date(
+    const newDate = new Date(
       selectedDate.setMonth(selectedDate.getMonth() - 1)
     );
 
-    dispatch('decreaseMonth', newMonth);
+    selectedDate = newDate;
+
+    dispatch('decreaseMonth', newDate);
 
     dateGrid.style.setProperty(
       '--first-week-day',
@@ -73,6 +83,8 @@
 
   const changeDate = date => {
     const newDate = new Date(selectedDate.setDate(date));
+
+    selectedDate = newDate;
 
     dispatch('changeDate', newDate);
   };
@@ -144,11 +156,18 @@
     type="button"
     class="global-button-input"
     on:click={decreaseMonth}
-    disabled={isTodaysMonthAndYear}>
+    disabled={isTodaysMonthAndYear}
+    data-cy="previous-month-button">
     <CaretIcon left disabled={isTodaysMonthAndYear} />
   </button>
-  {monthYear}
-  <button class="global-button-input" type="button" on:click={increaseMonth}>
+
+  <span data-cy="month-year">{monthYear}</span>
+
+  <button
+    class="global-button-input"
+    type="button"
+    on:click={increaseMonth}
+    data-cy="next-month-button">
     <CaretIcon right />
   </button>
 </div>
@@ -169,8 +188,14 @@
       type="button"
       class="global-button-input"
       class:active={date === selectedDate.getDate()}
-      on:click={() => changeDate(date)}>
-      <time datetime="2019-09-01">{date}</time>
+      on:click={() => changeDate(date)}
+      data-cy='date-button'
+      value={selectedDate}>
+      <time
+        datetime={`${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${date}`}
+        data-cy="date-text">
+        {date}
+      </time>
     </button>
   {/each}
 </div>

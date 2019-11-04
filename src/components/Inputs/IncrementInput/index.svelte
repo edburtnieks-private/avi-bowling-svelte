@@ -16,18 +16,22 @@
 
   const decrement = () => {
     if (value > minValue) {
-      value -= 1;
-    }
+      const newValue = value - 1;
 
-    dispatch('decrement');
+      dispatch('decrement', newValue);
+
+      value = newValue;
+    }
   };
 
   const increment = () => {
     if (value < maxValue) {
-      value += 1;
-    }
+      const newValue = value + 1;
 
-    dispatch('increment');
+      dispatch('increment', newValue);
+      
+      value = newValue;
+    }
   };
 </script>
 
@@ -51,12 +55,18 @@
 </style>
 
 {#if !label}
-  <div class="label">
+  <div class="label" data-cy="custom-label">
     <slot name="label" />
   </div>
 {/if}
 
-<Input {label} {value} {id} incrementInput {valueText} {disabled}>
+<Input
+  {id}
+  {label}
+  {value}
+  {valueText}
+  {disabled}
+  incrementInput>
   <button
     slot="decrement-button"
     type="button"
@@ -64,7 +74,8 @@
     class:disabled-value={value === minValue}
     class:disabled-input={disabled}
     on:click={decrement}
-    disabled={disabled || value === minValue}>
+    disabled={disabled || value === minValue}
+    data-cy="decrement-button">
     <MinusIcon disabled={disabled || value === minValue} />
   </button>
 
@@ -75,7 +86,8 @@
     class:disabled-value={value === maxValue}
     class:disabled-input={disabled}
     on:click={increment}
-    disabled={disabled || value === maxValue}>
+    disabled={disabled || value === maxValue}
+    data-cy="increment-button">
     <PlusIcon disabled={disabled || value === maxValue} />
   </button>
 </Input>

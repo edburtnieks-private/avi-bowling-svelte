@@ -4,6 +4,8 @@
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^4.1.0",
     "@percy/cypress": "^2.2.0",
+    "@testing-library/cypress": "^5.0.2",
+    "@testing-library/svelte": "^1.9.0",
     "autoprefixer": "^9.6.1",
     "cypress": "^3.5.0",
     "eslint": "^6.1.0",
@@ -44,7 +46,7 @@
     "start": "node server.js public/App.js",
     "lint": "eslint --ext .svelte,.js src/",
     "cy:open": "cypress open",
-    "cy:run": "cypress run",
+    "cy:run": "cypress run --record --key d241f18c-1d4e-451e-98c5-a0ff679854ed",
     "test": "percy exec -- cypress run"
   },
   "browserslist": [
