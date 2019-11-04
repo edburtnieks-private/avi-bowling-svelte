@@ -8,7 +8,6 @@
 </script>
 
 <script>
-  import Form from '../Form/index.svelte';
   import Input from '../Inputs/Input/index.svelte';
   import IncrementInput from '../Inputs/IncrementInput/index.svelte';
   import Dropdown from '../Dropdown/index.svelte';
@@ -17,6 +16,7 @@
   import LaneButton from './LaneButton/index.svelte';
   import Select from '../Inputs/Select/index.svelte';
   import Checkbox from '../Inputs/Checkbox/index.svelte';
+  import Button from '../Button/index.svelte';
 
   let laneCount = 1;
   let playerCount = 2;
@@ -241,7 +241,6 @@
   @media (min-width: 1024px) {
     .more-details-form-dropdown-wrapper {
       margin-bottom: var(--m-0);
-      margin-right: var(--m-xs);
     }
   }
 
@@ -277,7 +276,7 @@
     justify-content: space-between;
   }
 
-  .player-counter-wrapper {
+  .player-count-input-wrapper {
     margin-right: var(--m-xxs);
   }
 
@@ -315,9 +314,31 @@
   .start-time-wrapper {
     position: relative;
   }
+
+  @media (min-width: 1024px) {
+    .time-duration-wrapper,
+    .player-count-input-wrapper,
+    .shoe-count-input-wrapper,
+    .lane-count-input-wrapper {
+      width: 104px;
+    }
+
+    .name-input-wrapper,
+    .contact-input-wrapper,
+    .player-name-input-wrapper {
+      width: 176px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .form-footer {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 </style>
 
-<Form on:handleSubmit={handleSubmit} submitButtonText="Make Reservation">
+<form on:submit|preventDefault={handleSubmit}>
   <div class="reservation-form-inner-wrapper">
     <div class="input-label-wrapper date-time-wrapper" data-cy="date-and-time-dropdown">
       <DropdownInput
@@ -360,7 +381,7 @@
       </DropdownInput>
     </div>
 
-    <div class="input-label-wrapper" data-cy="lane-count-increment-input">
+    <div class="input-label-wrapper lane-count-input-wrapper" data-cy="lane-count-increment-input">
       <IncrementInput
         id="lane-count"
         label="Lane count"
@@ -371,7 +392,7 @@
         on:increment={handleLaneCountIncrement} />
     </div>
 
-    <div class="input-label-wrapper" data-cy="name-input">
+    <div class="input-label-wrapper name-input-wrapper" data-cy="name-input">
       <Input
         id="name"
         label="Name"
@@ -379,7 +400,7 @@
         placeholder="John Smith" />
     </div>
 
-    <div class="input-label-wrapper" data-cy="contact-input">
+    <div class="input-label-wrapper contact-input-wrapper" data-cy="contact-input">
       <Input
         id="contact"
         label="Phone or Email"
@@ -388,73 +409,77 @@
     </div>
   </div>
 
-  <div class="more-details-form-dropdown-wrapper" data-cy="more-details-dropdown">
-    <Dropdown
-      isContentVisible={isMoreDetailsFormVisible}
-      on:toggleDropdown={toggleMoreDetailsForm}>
-      <div slot="toggle">More details</div>
+  <div class="form-footer">
+    <div class="more-details-form-dropdown-wrapper" data-cy="more-details-dropdown">
+      <Dropdown
+        isContentVisible={isMoreDetailsFormVisible}
+        on:toggleDropdown={toggleMoreDetailsForm}>
+        <div slot="toggle">More details</div>
 
-      <div slot="content">
-        <div class="more-details-form">
-          <div class="lane-information-wrapper">
-            <div class="more-details-input-label-wrapper">
-              <label data-cy="lane-button-label">Lane numbers</label>
-
-              <div class="lane-button-wrapper">
-                {#each lanes as lane}
-                  <LaneButton
-                    value={lane}
-                    isActive={laneNumbers.includes(lane)}
-                    on:toggleLane={toggleLane}
-                    disabled={isLaneButtonDisabled(lane)} />
-                {/each}
-              </div>
-            </div>
-
-            <div class="player-shoe-wrapper">
-              <div class="player-counter-wrapper" data-cy="player-count-increment-input">
-                <IncrementInput
-                  id="player-count"
-                  label="Players"
-                  bind:value={playerCount}
-                  minValue={minPlayerCount}
-                  maxValue={maxPlayerCount}
-                  on:decrement={handlePlayerCountDecrement}
-                  on:increment={handlePlayerCountIncrement} />
-              </div>
-
-              <div class="shoe-counter-wrapper" data-cy="shoe-count-increment-input">
-                <IncrementInput
-                  id="shoe-count"
-                  label=""
-                  bind:value={shoeCount}
-                  minValue={minShoeCount}
-                  maxValue={maxShoeCount}
-                  disabled={!isShoesChecked}>
-                  <div slot="label" data-cy="shoe-checkbox">
-                    <Checkbox
-                      id="shoe-checkbox"
-                      label="Shoes"
-                      bind:checked={isShoesChecked} />
-                  </div>
-                </IncrementInput>
-              </div>
-            </div>
-          </div>
-
-          <div data-cy="player-name-input">
-            {#each players as player}
+        <div slot="content">
+          <div class="more-details-form">
+            <div class="lane-information-wrapper">
               <div class="more-details-input-label-wrapper">
-                <Input
-                  id={`player-${player}`}
-                  label={`Player ${player}`}
-                  bind:value={playerNames[player - 1]}
-                  placeholder="Name" />
+                <label data-cy="lane-button-label">Lane numbers</label>
+
+                <div class="lane-button-wrapper">
+                  {#each lanes as lane}
+                    <LaneButton
+                      value={lane}
+                      isActive={laneNumbers.includes(lane)}
+                      on:toggleLane={toggleLane}
+                      disabled={isLaneButtonDisabled(lane)} />
+                  {/each}
+                </div>
               </div>
-            {/each}
+
+              <div class="player-shoe-wrapper">
+                <div class="player-count-input-wrapper" data-cy="player-count-increment-input">
+                  <IncrementInput
+                    id="player-count"
+                    label="Players"
+                    bind:value={playerCount}
+                    minValue={minPlayerCount}
+                    maxValue={maxPlayerCount}
+                    on:decrement={handlePlayerCountDecrement}
+                    on:increment={handlePlayerCountIncrement} />
+                </div>
+
+                <div class="shoe-count-input-wrapper" data-cy="shoe-count-increment-input">
+                  <IncrementInput
+                    id="shoe-count"
+                    label=""
+                    bind:value={shoeCount}
+                    minValue={minShoeCount}
+                    maxValue={maxShoeCount}
+                    disabled={!isShoesChecked}>
+                    <div slot="label" data-cy="shoe-checkbox">
+                      <Checkbox
+                        id="shoe-checkbox"
+                        label="Shoes"
+                        bind:checked={isShoesChecked} />
+                    </div>
+                  </IncrementInput>
+                </div>
+              </div>
+            </div>
+
+            <div class="player-name-input-wrapper" data-cy="player-name-input">
+              {#each players as player}
+                <div class="more-details-input-label-wrapper">
+                  <Input
+                    id={`player-${player}`}
+                    label={`Player ${player}`}
+                    bind:value={playerNames[player - 1]}
+                    placeholder="Name" />
+                </div>
+              {/each}
+            </div>
           </div>
         </div>
-      </div>
-    </Dropdown>
+      </Dropdown>  
+    </div>
+
+    <Button type="submit">Make reservation</Button>
   </div>
-</Form>
+</form>
