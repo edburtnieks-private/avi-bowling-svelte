@@ -12,14 +12,18 @@ describe('checkbox', () => {
     });
 
     // Aliases
-    cy.get('[data-cy=checkbox-label]').as('checkbox-label');
-    cy.get('[data-cy=checkbox-input]').as('checkbox-input');
-    cy.get('[data-cy=custom-checkbox]').as('custom-checkbox');
+    cy.get('[data-cy=checkbox-label]')
+      .as('checkbox-label');
+    cy.get('[data-cy=checkbox-input]')
+      .as('checkbox-input');
+    cy.get('[data-cy=custom-checkbox]')
+      .as('custom-checkbox');
   });
 
   it('should show checkbox with changing states', () => {
     // Default (unchecked)
-    cy.get('@checkbox-label').should('have.text', 'Label');
+    cy.get('@checkbox-label')
+      .should('have.text', 'Label');
     cy.get('@checkbox-input')
       .should('have.id', 'checkbox')
       .and('not.be.disabled')
@@ -27,29 +31,34 @@ describe('checkbox', () => {
     cy.customCheckboxContent('none');
 
     // Check
-    cy.get('@checkbox-input').check();
-    cy.get('@checkbox-input').should('be.checked');
+    cy.get('@checkbox-input')
+      .check()
+      .should('be.checked');
     cy.customCheckboxContent('""');
 
     // Uncheck
-    cy.get('@checkbox-input').uncheck();
-    cy.get('@checkbox-input').should('not.be.checked');
+    cy.get('@checkbox-input')
+      .uncheck()
+      .should('not.be.checked');
     cy.customCheckboxContent('none');
 
     // Disable
-    cy.get('@checkbox-input').invoke('attr', 'disabled', true);
-    cy.get('@checkbox-input').should('be.disabled');
+    cy.get('@checkbox-input')
+      .invoke('attr', 'disabled', true)
+      .should('be.disabled');
 
     // Enable
-    cy.get('@checkbox-input').invoke('attr', 'disabled', false);
-    cy.get('@checkbox-input').should('not.be.disabled');
+    cy.get('@checkbox-input')
+      .invoke('attr', 'disabled', false)
+      .should('not.be.disabled');
 
     // Check and disable
-    cy.get('@checkbox-input').check();
-    cy.get('@checkbox-input').invoke('attr', 'disabled', true);
-    cy.get('@checkbox-input').should('be.checked');
+    cy.get('@checkbox-input')
+      .check()
+      .invoke('attr', 'disabled', true)
+      .should('be.checked')
+      .and('be.disabled');
     cy.customCheckboxContent('""');
-    cy.get('@checkbox-input').should('be.disabled');
   });
 
   it('should show checkbox with checked prop', () => {
@@ -61,7 +70,8 @@ describe('checkbox', () => {
       }
     });
 
-    cy.get('@checkbox-input').should('be.checked');
+    cy.get('@checkbox-input')
+      .should('be.checked');
     cy.customCheckboxContent('""');
   });
 
@@ -74,10 +84,11 @@ describe('checkbox', () => {
       }
     });
 
-    cy.get('@checkbox-input').should('be.disabled');
+    cy.get('@checkbox-input')
+      .should('be.disabled');
   });
 
-  it('shoul show checkbox with checked and disabled props', () => {
+  it('should show checkbox with checked and disabled props', () => {
     mount(Checkbox, {
       props: {
         id: 'checkbox',
@@ -87,8 +98,9 @@ describe('checkbox', () => {
       }
     });
 
-    cy.get('@checkbox-input').should('be.checked');
+    cy.get('@checkbox-input')
+      .should('be.checked')
+      .and('be.disabled');
     cy.customCheckboxContent('""');
-    cy.get('@checkbox-input').should('be.disabled');
   });
 });

@@ -15,17 +15,24 @@ describe('increment input', () => {
     });
 
     // Aliases
-    cy.get('[data-cy=label]').as('label');
-    cy.get('[data-cy=input-wrapper]').as('input-wrapper');
-    cy.get('[data-cy=input]').as('input');
-    cy.get('[data-cy=decrement-button]').as('decrement-button');
-    cy.get('[data-cy=increment-button]').as('increment-button');
+    cy.get('[data-cy=label]')
+      .as('label');
+    cy.get('[data-cy=input-wrapper]')
+      .as('input-wrapper');
+    cy.get('[data-cy=input]')
+      .as('input');
+    cy.get('[data-cy=decrement-button]')
+      .as('decrement-button');
+    cy.get('[data-cy=increment-button]')
+      .as('increment-button');
   });
   
   it('should show increment input with changing states', () => {
     // Default
-    cy.get('@label').should('have.text', 'Label');
-    cy.get('[data-cy=custom-label]').should('not.exist');
+    cy.get('@label')
+      .should('have.text', 'Label');
+    cy.get('[data-cy=custom-label]')
+      .should('not.exist');
 
     cy.get('@input-wrapper')
       .should('have.class', 'global-input-wrapper')
@@ -37,8 +44,10 @@ describe('increment input', () => {
       .and('have.value', '1')
       .and('have.class', 'increment-input');
       
-    cy.get('@decrement-button').should('not.be.disabled');
-    cy.get('@increment-button').should('not.be.disabled');
+    cy.get('@decrement-button')
+      .should('not.be.disabled');
+    cy.get('@increment-button')
+      .should('not.be.disabled');
 
     // Increment value by 2
     cy.get('@increment-button')
@@ -46,9 +55,12 @@ describe('increment input', () => {
       .click();
 
     // Value should be 3 and increment button disabled
-    cy.get('@input').should('have.value', '3');
-    cy.get('@decrement-button').should('not.be.disabled');
-    cy.get('@increment-button').should('be.disabled');
+    cy.get('@input')
+      .should('have.value', '3');
+    cy.get('@decrement-button')
+      .should('not.be.disabled');
+    cy.get('@increment-button')
+      .should('be.disabled');
 
     // Decrement value by 2
     cy.get('@decrement-button')
@@ -56,18 +68,24 @@ describe('increment input', () => {
       .click();
 
     // Value should be 1 and both buttons clickable
-    cy.get('@input').should('have.value', '1');
-    cy.get('@decrement-button').should('not.be.disabled');
-    cy.get('@increment-button').should('not.be.disabled');
+    cy.get('@input')
+      .should('have.value', '1');
+    cy.get('@decrement-button')
+      .should('not.be.disabled');
+    cy.get('@increment-button')
+      .should('not.be.disabled');
 
     // Decrement value by 1
     cy.get('@decrement-button')
       .click();
 
     // Value should be 0 and decrement button disabled
-    cy.get('@input').should('have.value', '0');
-    cy.get('@decrement-button').should('be.disabled');
-    cy.get('@increment-button').should('not.be.disabled');
+    cy.get('@input')
+      .should('have.value', '0');
+    cy.get('@decrement-button')
+      .should('be.disabled');
+    cy.get('@increment-button')
+      .should('not.be.disabled');
   });
 
   it('should show increment input with minimum starting value', () => {
@@ -81,9 +99,12 @@ describe('increment input', () => {
       }
     });
 
-    cy.get('@input').should('have.value', '0');
-    cy.get('@decrement-button').should('be.disabled');
-    cy.get('@increment-button').should('not.be.disabled');
+    cy.get('@input')
+      .should('have.value', '0');
+    cy.get('@decrement-button')
+      .should('be.disabled');
+    cy.get('@increment-button')
+      .should('not.be.disabled');
   });
 
   it('should show increment input with maximum starting value', () => {
@@ -97,9 +118,12 @@ describe('increment input', () => {
       }
     });
 
-    cy.get('@input').should('have.value', '3');
-    cy.get('@decrement-button').should('not.be.disabled');
-    cy.get('@increment-button').should('be.disabled');
+    cy.get('@input')
+      .should('have.value', '3');
+    cy.get('@decrement-button')
+      .should('not.be.disabled');
+    cy.get('@increment-button')
+      .should('be.disabled');
   });
 
   it('should show increment input with valueText prop', () => {
@@ -114,7 +138,8 @@ describe('increment input', () => {
       }
     });
 
-    cy.get('@input').should('have.value', '1 point')
+    cy.get('@input')
+      .should('have.value', '1 point')
   });
 
   it('should show increment input with disabled prop', () => {
@@ -129,9 +154,11 @@ describe('increment input', () => {
       }
     });
 
-    cy.get('@input-wrapper').should('have.class', 'increment-input-wrapper-disabled');
+    cy.get('@input-wrapper')
+      .should('have.class', 'increment-input-wrapper-disabled');
 
-    cy.get('@input').should('have.class', 'increment-input-disabled');
+    cy.get('@input')
+      .should('have.class', 'increment-input-disabled');
 
     cy.get('@decrement-button')
       .should('be.disabled')
@@ -152,6 +179,7 @@ describe('increment input', () => {
       }
     });
 
-    cy.get('[data-cy=custom-label]').should('exist');
+    cy.get('[data-cy=custom-label]')
+      .should('exist');
   });
 });
