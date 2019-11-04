@@ -774,8 +774,8 @@
           bind:value={incrementInputValue}
           minValue={incrementInputMinValue}
           maxValue={incrementInputMaxValue}
-          on:decrement={() => console.log('Decrement event fired')}
-          on:increment={() => console.log('Increment event fired')} />
+          on:decrement={event => console.log('Decremented value: ', event.detail)}
+          on:increment={event => console.log('Incremented value: ', event.detail)} />
 
         <pre class="common">
           <code>
@@ -785,8 +785,8 @@
   bind:value=&#123;value&#125;
   minValue=0
   maxValue=3
-  <span class="difference">on:decrement=&#123;() =&gt; console.log("Decrement event fired")&#125;</span>
-  <span class="difference">on:increment=&#123;() =&gt; console.log("Increment event fired")&#125;</span> /&gt;
+  <span class="difference">on:decrement=&#123;event =&gt; decrementedValue = event.detail&#125;</span>
+  <span class="difference">on:increment=&#123;event =&gt; incrementedValue = event.detail&#125;</span> /&gt;
           </code>
         </pre>
       </div>
