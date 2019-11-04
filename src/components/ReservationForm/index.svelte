@@ -29,7 +29,11 @@
   let startTime = '12:00';
   let isShoesChecked = true;
 
-  let selectedDate = new Date();
+  let selectedDate = new Date(
+    new Date().getFullYear(),
+    new Date().getMonth(),
+    new Date().getDate()
+  );
 
   $: dateAndTime = formatDateAndTime(selectedDate, startTime);
 

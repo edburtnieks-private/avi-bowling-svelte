@@ -2,8 +2,11 @@ import { formatDateAndTime } from '../../../../src/components/ReservationForm/in
 import { formatMonthAndYear } from '../../../../src/components/Inputs/Datepicker/index.svelte';
 
 // Set today's date
-const now = new Date();
-const todaysDate = now.getDate();
+const now = new Date(
+  new Date().getFullYear(),
+  new Date().getMonth(),
+  new Date().getDate()
+);
 
 describe('datepicker', () => {
   beforeEach(() => {
@@ -37,14 +40,30 @@ describe('datepicker', () => {
     cy.get('@datepicker')
       .should('exist')
       .and('be.visible');
-  
+
     // Assert that can't go to previous month
     cy.get('@previous-month-button')
       .should('be.disabled');
 
+    // Assert that can't select past dates
+    cy.get('@date-button')
+      .each($element => {
+        cy.wrap($element)
+          .invoke('val')
+          .then(value => {
+            if (Date.parse(value) < now) {
+              cy.wrap($element)
+                .should('be.disabled');
+            } else {
+              cy.wrap($element)
+                .should('not.be.disabled');
+            }
+          })
+      });
+
     // Assert that todays date is selected
     cy.get('@date-button')
-      .eq(todaysDate - 1)
+      .eq(now.getDate() - 1)
       .should('have.class', 'active');
   });
 
@@ -107,14 +126,18 @@ describe('datepicker', () => {
       .click();
 
     // Set the new date
-    const newDate = new Date(now.setDate(14));
+    const newDate = new Date(new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate()
+    ).setDate(14));
     
     // Get todays date
     const selectedDate = newDate.getDate();
 
     // Assert that todays date isn't selected
     cy.get('@date-button')
-      .eq(todaysDate - 1)
+      .eq(now.getDate() - 1)
       .should('not.have.class', 'active');
 
     // Assert that selected date is selected
