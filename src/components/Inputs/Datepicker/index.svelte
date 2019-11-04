@@ -15,6 +15,11 @@
   export let selectedDate;
 
   const dispatch = createEventDispatcher();
+  const today = new Date(
+    new Date().getFullYear(),
+    new Date().getMonth(),
+    new Date().getDate()
+  );
 
   let dateGrid;
 
@@ -29,8 +34,8 @@
   $: dates = Array.from(Array(numberOfDatesInMonth), (_, index) => index + 1);
 
   $: isTodaysMonthAndYear =
-    selectedDate.getMonth() === new Date().getMonth() &&
-    selectedDate.getYear() === new Date().getYear();
+    selectedDate.getMonth() === today.getMonth() &&
+    selectedDate.getYear() === today.getYear();
 
   onMount(() => {
     dateGrid.style.setProperty(
@@ -44,9 +49,7 @@
   });
 
   const increaseMonth = () => {
-    const newDate = new Date(
-      selectedDate.setMonth(selectedDate.getMonth() + 1)
-    );
+    const newDate = new Date(selectedDate.setMonth(selectedDate.getMonth() + 1));
 
     selectedDate = newDate;
   
@@ -63,9 +66,7 @@
   };
 
   const decreaseMonth = () => {
-    const newDate = new Date(
-      selectedDate.setMonth(selectedDate.getMonth() - 1)
-    );
+    const newDate = new Date(selectedDate.setMonth(selectedDate.getMonth() - 1));
 
     selectedDate = newDate;
 
@@ -87,6 +88,10 @@
     selectedDate = newDate;
 
     dispatch('changeDate', newDate);
+  };
+
+  const createDate = date => {
+    return new Date(selectedDate.getFullYear(), selectedDate.getMonth(), date);
   };
 </script>
 
@@ -190,7 +195,8 @@
       class:active={date === selectedDate.getDate()}
       on:click={() => changeDate(date)}
       data-cy='date-button'
-      value={selectedDate}>
+      value={createDate(date)}
+      disabled={createDate(date) < today}>
       <time
         datetime={`${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${date}`}
         data-cy="date-text">
