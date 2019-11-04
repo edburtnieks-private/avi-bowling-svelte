@@ -25,7 +25,7 @@
   let contact = '';
   let laneNumbers = [];
   let playerNames = Array(playerCount).fill('');
-  let duration = 1;
+  let duration = 2;
   let startTime = '12:00';
   let isShoesChecked = true;
 
