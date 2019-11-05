@@ -1,7 +1,12 @@
 import { formatDateAndTime } from '../../../src/components/ReservationForm/index.svelte';
 
 // Set today's date
-const now = new Date();
+const now = new Date(
+  new Date().getFullYear(),
+  new Date().getMonth(),
+  new Date().getDate(),
+  new Date().getHours() + 1
+);
 
 describe('date and time dropdown', () => {
   beforeEach(() => {
@@ -36,7 +41,7 @@ describe('date and time dropdown', () => {
 
     // Default value
     // Format date and time string
-    const dateTimeText = formatDateAndTime(now, '12:00');
+    const dateTimeText = formatDateAndTime(now, `${now.getHours()}:00`);
   
     // Assert that date and time text is correctly formatted
     cy.get('@date-and-time-dropdown-toggle-input-text')

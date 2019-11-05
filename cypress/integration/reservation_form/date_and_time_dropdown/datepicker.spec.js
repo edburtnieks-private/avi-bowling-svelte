@@ -81,7 +81,7 @@ describe('datepicker', () => {
     const nextMonthDate = new Date(now.setMonth(now.getMonth() + 1));
 
     // Format date and time string
-    const nextMonthDateTimeText = formatDateAndTime(nextMonthDate, '12:00');
+    const nextMonthDateTimeText = formatDateAndTime(nextMonthDate, `${now.getHours()}:00`);
 
     // Assert that date and time text is correctly formatted
     cy.get('@date-and-time-dropdown-toggle-input-text')
@@ -106,7 +106,7 @@ describe('datepicker', () => {
     const previousMonthDate = new Date(now.setMonth(now.getMonth() - 1));
 
     // Format date and time string
-    const previousMonthDateTimeText = formatDateAndTime(previousMonthDate, '12:00');
+    const previousMonthDateTimeText = formatDateAndTime(previousMonthDate, `${now.getHours()}:00`);
 
     // Assert that date and time text is correctly formatted
     cy.get('@date-and-time-dropdown-toggle-input-text')
@@ -130,7 +130,8 @@ describe('datepicker', () => {
     const newDate = new Date(new Date(
       new Date().getFullYear(),
       new Date().getMonth(),
-      new Date().getDate()
+      new Date().getDate(),
+      new Date().getHours() + 1
     ).setDate(14));
     
     // Get todays date
@@ -147,7 +148,7 @@ describe('datepicker', () => {
       .should('have.class', 'active');
 
     // Format date and time string
-    const newMonthDateTimeText = formatDateAndTime(newDate, '12:00');
+    const newMonthDateTimeText = formatDateAndTime(newDate, `${now.getHours()}:00`);
 
     // Assert that date and time text is correctly formatted
     cy.get('@date-and-time-dropdown-toggle-input-text')

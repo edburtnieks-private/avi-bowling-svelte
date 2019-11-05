@@ -88,7 +88,6 @@
       name,
       contact,
       date: selectedDate,
-      startTime,
       duration,
       shoeCount,
       players: playerNames,

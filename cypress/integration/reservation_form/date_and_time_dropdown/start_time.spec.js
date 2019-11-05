@@ -1,7 +1,12 @@
 import { formatDateAndTime } from '../../../../src/components/ReservationForm/index.svelte';
 
 // Set today's date
-const now = new Date();
+const now = new Date(
+  new Date().getFullYear(),
+  new Date().getMonth(),
+  new Date().getDate(),
+  new Date().getHours() + 1
+);
 
 describe('start time', () => {
   beforeEach(() => {
@@ -30,7 +35,7 @@ describe('start time', () => {
     cy.get('@start-time-select')
       .should('exist')
       .and('be.visible')
-      .and('have.value', '12:00');
+      .and('have.value', `${now.getHours()}:00`);
 
     // Label
     cy.get('@start-time-label')
