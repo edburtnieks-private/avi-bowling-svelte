@@ -5,7 +5,8 @@ import { formatMonthAndYear } from '../../../../src/components/Inputs/Datepicker
 const now = new Date(
   new Date().getFullYear(),
   new Date().getMonth(),
-  new Date().getDate()
+  new Date().getDate(),
+  new Date().getHours() + 1
 );
 
 describe('datepicker', () => {
