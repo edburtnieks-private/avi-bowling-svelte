@@ -21,6 +21,7 @@
   const nextHour = new Date().getHours() + 1;
   const isWorkingHours = nextHour >= 11 && nextHour <= 23
   const isOverWorkingHours = nextHour > 23;
+  const maxDuration = 4;
 
   let laneCount = 1;
   let playerCount = 2;
@@ -30,6 +31,7 @@
   let laneNumbers = [];
   let playerNames = Array(playerCount).fill('');
   let duration = 2;
+  let maxAvailableDuration = maxDuration;
   let startTime = isWorkingHours ? `${nextHour}:00` : '11:00';
   let isShoesChecked = true;
 
@@ -42,6 +44,19 @@
   // When selecting start time add it to date
   $: if (startTime) {
     selectedDate.setHours(startTime.replace(':00', ''));
+
+    // Dynamically change maximum duration depending on start time
+    const availableDuration = 24 - selectedDate.getHours();
+
+    if (availableDuration < maxDuration) {
+      maxAvailableDuration = availableDuration;
+
+      if (duration > maxAvailableDuration) {
+        duration = maxAvailableDuration;
+      }
+    } else {
+      maxAvailableDuration = maxDuration;
+    }
   }
 
   $: dateAndTime = formatDateAndTime(selectedDate, startTime);
@@ -57,7 +72,6 @@
   const maxLaneCount = 10;
   const maxPlayerCount = 6;
   $: maxShoeCount = playerCount;
-  const maxDuration = 4;
 
   const lanes = Array.from(Array(maxLaneCount), (_, index) => index + 1);
   $: players = Array.from(Array(playerCount), (_, index) => index + 1);
@@ -380,7 +394,7 @@
                   label="Duration"
                   bind:value={duration}
                   minValue={minDuration}
-                  maxValue={maxDuration}
+                  maxValue={maxAvailableDuration}
                   valueText={`${duration}h`} />
               </div>
             </div>
