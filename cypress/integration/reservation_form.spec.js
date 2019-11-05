@@ -117,10 +117,10 @@ describe('reservation form', () => {
 
         // Select new start time
         cy.get('@start-time-select')
-          .select('17:00')
+          .select('17')
           .invoke('val')
           .then((startTime) => {
-            reservation.date.setHours(startTime.replace(':00', ''));
+            reservation.date.setHours(startTime);
           });
 
         // --------------------

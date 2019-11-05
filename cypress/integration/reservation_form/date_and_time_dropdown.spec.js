@@ -41,7 +41,7 @@ describe('date and time dropdown', () => {
 
     // Default value
     // Format date and time string
-    const dateTimeText = formatDateAndTime(now, `${now.getHours()}:00`);
+    const dateTimeText = formatDateAndTime(now, now.getHours());
   
     // Assert that date and time text is correctly formatted
     cy.get('@date-and-time-dropdown-toggle-input-text')

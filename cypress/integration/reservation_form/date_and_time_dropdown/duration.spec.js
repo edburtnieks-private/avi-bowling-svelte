@@ -78,7 +78,7 @@ describe('duration', () => {
   it('should dynamically change duration value based on start time', () => {
     // Set start time to maximum value - 23:00
     cy.get('@start-time-select')
-      .select('23:00');
+      .select('23');
 
     // Assert that duration is 1h
     cy.get('@duration-input')
@@ -91,7 +91,7 @@ describe('duration', () => {
 
     // Set start time to 12:00
     cy.get('@start-time-select')
-      .select('12:00');
+      .select('12');
 
     // Set duration to maximum value - 4h
     cy.get('@duration-increment-button')
@@ -110,7 +110,7 @@ describe('duration', () => {
 
     // Set start time to 21:00
     cy.get('@start-time-select')
-      .select('21:00');
+      .select('21');
 
     // Assert that duration is 3h
     cy.get('@duration-input')
@@ -123,7 +123,7 @@ describe('duration', () => {
 
     // Set start time to 22:00
     cy.get('@start-time-select')
-      .select('22:00');
+      .select('22');
 
     // Assert that duration is 2h
     cy.get('@duration-input')

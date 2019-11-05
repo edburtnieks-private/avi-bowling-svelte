@@ -3,7 +3,7 @@
     return `${date.toLocaleDateString('en', {
       month: 'long',
       day: 'numeric'
-    })}, ${startTime}`;
+    })}, ${startTime}:00`;
   };
 </script>
 
@@ -18,8 +18,9 @@
   import Checkbox from '../Inputs/Checkbox/index.svelte';
   import Button from '../Button/index.svelte';
 
+  const startHour = 11;
   const nextHour = new Date().getHours() + 1;
-  const isWorkingHours = nextHour >= 11 && nextHour <= 23
+  const isWorkingHours = nextHour >= startHour && nextHour <= 23
   const isOverWorkingHours = nextHour > 23;
   const maxDuration = 4;
 
@@ -32,7 +33,7 @@
   let playerNames = Array(playerCount).fill('');
   let duration = 2;
   let maxAvailableDuration = maxDuration;
-  let startTime = isWorkingHours ? `${nextHour}:00` : '11:00';
+  let startTime = isWorkingHours ? nextHour : startHour;
   let isShoesChecked = true;
 
   let selectedDate = new Date(
@@ -43,7 +44,7 @@
 
   // When selecting start time add it to date
   $: if (startTime) {
-    selectedDate.setHours(startTime.replace(':00', ''));
+    selectedDate.setHours(startTime);
 
     // Dynamically change maximum duration depending on start time
     const availableDuration = 24 - selectedDate.getHours();
@@ -81,21 +82,7 @@
   let lastSelectedLanes = [];
   let lastPlayerNames = [];
 
-  const availableTimes = [
-    '11:00',
-    '12:00',
-    '13:00',
-    '14:00',
-    '15:00',
-    '16:00',
-    '17:00',
-    '18:00',
-    '19:00',
-    '20:00',
-    '21:00',
-    '22:00',
-    '23:00'
-  ];
+  const availableTimes = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 
   const handleSubmit = () => {
     const reservation = {
@@ -385,7 +372,8 @@
                   id="start-time"
                   label="Start time"
                   options={availableTimes}
-                  bind:value={startTime} />
+                  bind:value={startTime}
+                  customOptionTextEnd=':00' />
               </div>
 
               <div class="input-label-wrapper-reverse" data-cy="duration-increment-input">
