@@ -17,6 +17,8 @@ describe('duration', () => {
           .as('duration-decrement-button');
         cy.get('[data-cy=duration-increment-input] [data-cy=increment-button]')
           .as('duration-increment-button');
+        cy.get('[data-cy=start-time-select] [data-cy=select]')
+          .as('start-time-select');
       });
   });
 
@@ -71,5 +73,65 @@ describe('duration', () => {
     cy.get('@duration-increment-button')
       .should('not.be.disabled')
       .and('not.have.class', 'disabled-value');
+  });
+
+  it('should dynamically change duration value based on start time', () => {
+    // Set start time to maximum value - 23:00
+    cy.get('@start-time-select')
+      .select('23:00');
+
+    // Assert that duration is 1h
+    cy.get('@duration-input')
+      .should('have.value', '1h');
+
+    // Assert that duration can't be set more than 1h
+    cy.get('@duration-increment-button')
+      .should('be.disabled')
+      .and('have.class', 'disabled-value');
+
+    // Set start time to 12:00
+    cy.get('@start-time-select')
+      .select('12:00');
+
+    // Set duration to maximum value - 4h
+    cy.get('@duration-increment-button')
+      .click()
+      .click()
+      .click();
+
+    // Assert that duration is 4h
+    cy.get('@duration-input')
+      .should('have.value', '4h');
+
+    // Assert that duration can't be set more than 4h
+    cy.get('@duration-increment-button')
+      .should('be.disabled')
+      .and('have.class', 'disabled-value');
+
+    // Set start time to 21:00
+    cy.get('@start-time-select')
+      .select('21:00');
+
+    // Assert that duration is 3h
+    cy.get('@duration-input')
+      .should('have.value', '3h');
+
+    // Assert that duration can't be set more than 3h
+    cy.get('@duration-increment-button')
+      .should('be.disabled')
+      .and('have.class', 'disabled-value');
+
+    // Set start time to 22:00
+    cy.get('@start-time-select')
+      .select('22:00');
+
+    // Assert that duration is 2h
+    cy.get('@duration-input')
+      .should('have.value', '2h');
+
+    // Assert that duration can't be set more than 2h
+    cy.get('@duration-increment-button')
+      .should('be.disabled')
+      .and('have.class', 'disabled-value');
   });
 });

@@ -45,8 +45,7 @@ describe('start time', () => {
   it('should change start time by choosing different option from select input', () => {
     // Select new start time
     cy.get('@start-time-select')
-      .select('17:00');
-    cy.get('@start-time-select')
+      .select('17:00')
       .should('have.value', '17:00');
 
     // Format date and time string
