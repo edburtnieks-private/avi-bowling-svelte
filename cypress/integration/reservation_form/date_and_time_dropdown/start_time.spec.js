@@ -35,7 +35,7 @@ describe('start time', () => {
     cy.get('@start-time-select')
       .should('exist')
       .and('be.visible')
-      .and('have.value', `${now.getHours()}:00`);
+      .and('have.value', now.getHours().toString());
 
     // Label
     cy.get('@start-time-label')
@@ -46,10 +46,10 @@ describe('start time', () => {
     // Select new start time
     cy.get('@start-time-select')
       .select('17:00')
-      .should('have.value', '17:00');
+      .should('have.value', '17');
 
     // Format date and time string
-    const dateTimeText = formatDateAndTime(now, '17:00');
+    const dateTimeText = formatDateAndTime(now, 17);
 
     // Assert that date and time text is correctly formatted
     cy.get('@date-and-time-dropdown-toggle-input-text')

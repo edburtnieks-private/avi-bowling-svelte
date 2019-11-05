@@ -6,6 +6,7 @@
   export let label;
   export let options;
   export let disabled = false;
+  export let customOptionTextEnd = '';
 
   let active = false;
 
@@ -47,7 +48,9 @@
     on:click={toggleSelect}
     data-cy="select">
     {#each options as option}
-      <option value={option} on:click={closeSelect}>{option}</option>
+      <option value={option} on:click={closeSelect}>
+        {`${option}${customOptionTextEnd}`}
+      </option>
     {/each}
   </select>
 

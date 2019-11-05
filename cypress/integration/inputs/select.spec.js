@@ -76,4 +76,21 @@ describe('select', () => {
     cy.get('@caret-icon')
       .should('have.class', 'disabled');
   });
+
+  it('should show select with customOptionTextEnd prop', () => {
+    mount(Select, {
+      props: {
+        id: 'select',
+        label: 'Label',
+        options: ['first', 'second', 'third', 'fourth', 'fifth'],
+        value: 'second',
+        customOptionTextEnd: ' value'
+      }
+    });
+
+    // Assert that can select option with text 'first value' and have correct value
+    cy.get('@select')
+      .select('first value')
+      .should('have.value', 'first');
+  });
 });

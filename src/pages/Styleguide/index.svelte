@@ -29,6 +29,9 @@
   const selectOptions = [1, 2, 3, 4, 5];
   let selectSelectedOption = selectOptions[0];
 
+  const customOptionTextEndSelectOptions = [1, 2, 3, 4, 5];
+  let customOptionTextEndSelectSelectedOption = customOptionTextEndSelectOptions[0];
+
   let checkboxUnchecked = false;
   let checkboxChecked = true;
   let checkboxDisabledUnchecked = false;
@@ -832,6 +835,10 @@
           <li>
             disabled - Boolean (default = false)
           </li>
+
+          <li>
+            customOptionTextEnd - String (default = "")
+          </li>
         </ul>
 
         <h3>Bindings</h3>
@@ -861,6 +868,26 @@
   options=&#91;1, 2, 3, 4, 5&#93;
   bind:value=&#123;value&#125;
   <span class="difference">disabled</span> /&gt;
+          </code>
+        </pre>
+      </div>
+
+      <div class="component">
+        <Select
+          id="select-input-custom-option-text-end"
+          label="Custom option text end"
+          options={customOptionTextEndSelectOptions}
+          bind:value={customOptionTextEndSelectSelectedOption}
+          customOptionTextEnd=':00' />
+
+        <pre class="common">
+          <code>
+&lt;Select
+  id="select-id"
+  label="Label"
+  options=&#91;1, 2, 3, 4, 5&#93;
+  bind:value=&#123;value&#125;
+  <span class="difference">customOptionTextEnd=':00'</span> /&gt;
           </code>
         </pre>
       </div>
