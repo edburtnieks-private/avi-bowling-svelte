@@ -25,22 +25,16 @@ describe('duration', () => {
     cy.get('@duration-input')
       .should('exist')
       .and('be.visible')
-      .and('have.value', '1h');
+      .and('have.value', '2h');
 
     // Label
     cy.get('@duration-label')
       .should('have.text', 'Duration');
-
-    // Assert that duration can't be set less than 1h
-    cy.get('@duration-decrement-button')
-      .should('be.disabled')
-      .and('have.class', 'disabled-value');
   });
 
   it('should change duration value by increment and decrement buttons', () => {
     // Set duration to maximum value - 4h
     cy.get('@duration-increment-button')
-      .click()
       .click()
       .click();
 
@@ -58,13 +52,24 @@ describe('duration', () => {
       .should('be.disabled')
       .and('have.class', 'disabled-value');
 
-    // Set duration to 2h
+    // Set duration to minimum  value - 1h
     cy.get('@duration-decrement-button')
+      .click()
       .click()
       .click();
     
-    // Assert that duration is 2h
+    // Assert that duration is 1h
     cy.get('@duration-input')
-      .should('have.value', '2h');
+      .should('have.value', '1h');
+
+    // Assert that duration can't be set less than 1h
+    cy.get('@duration-decrement-button')
+      .should('be.disabled')
+      .and('have.class', 'disabled-value');
+
+    // Assert that duration can be set more than 1h
+    cy.get('@duration-increment-button')
+      .should('not.be.disabled')
+      .and('not.have.class', 'disabled-value');
   });
 });

@@ -18,6 +18,10 @@
   import Checkbox from '../Inputs/Checkbox/index.svelte';
   import Button from '../Button/index.svelte';
 
+  const nextHour = new Date().getHours() + 1;
+  const isWorkingHours = nextHour >= 11 && nextHour <= 23
+  const isOverWorkingHours = nextHour > 23;
+
   let laneCount = 1;
   let playerCount = 2;
   let shoeCount = 2;
@@ -25,15 +29,20 @@
   let contact = '';
   let laneNumbers = [];
   let playerNames = Array(playerCount).fill('');
-  let duration = 1;
-  let startTime = '12:00';
+  let duration = 2;
+  let startTime = isWorkingHours ? `${nextHour}:00` : '11:00';
   let isShoesChecked = true;
 
   let selectedDate = new Date(
     new Date().getFullYear(),
     new Date().getMonth(),
-    new Date().getDate()
+    isOverWorkingHours ? new Date().getDate() + 1 : new Date().getDate()
   );
+
+  // When selecting start time add it to date
+  $: if (startTime) {
+    selectedDate.setHours(startTime.replace(':00', ''));
+  }
 
   $: dateAndTime = formatDateAndTime(selectedDate, startTime);
 
@@ -79,7 +88,6 @@
       name,
       contact,
       date: selectedDate,
-      startTime,
       duration,
       shoeCount,
       players: playerNames,

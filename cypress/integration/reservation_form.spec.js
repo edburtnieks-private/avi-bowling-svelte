@@ -1,3 +1,11 @@
+// Set today's date
+const date = new Date(
+  new Date().getFullYear(),
+  new Date().getMonth(),
+  new Date().getDate(),
+  new Date().getHours() + 1
+);
+
 describe('reservation form', () => {
   beforeEach(() =>  {
     cy.visit('http://localhost:3000');
@@ -47,8 +55,7 @@ describe('reservation form', () => {
     const reservation = {
       name: '',
       contact: '',
-      date: new Date(),
-      startTime: '12:00',
+      date,
       duration: 1,
       shoeCount: 2,
       players: [],
@@ -112,8 +119,8 @@ describe('reservation form', () => {
         cy.get('@start-time-select')
           .select('17:00')
           .invoke('val')
-          .then(value => {
-            reservation.startTime = value;
+          .then((startTime) => {
+            reservation.date.setHours(startTime.replace(':00', ''));
           });
 
         // --------------------
@@ -122,7 +129,6 @@ describe('reservation form', () => {
 
         // Increase duration to 3
         cy.get('@duration-increment-button')
-          .click()
           .click();
 
         // Decrease duration to 2
@@ -426,11 +432,6 @@ describe('reservation form', () => {
           .and.eq('22222222');
 
         expect(reservation)
-          .to.have.property('startTime')
-          .and.be.a('string')
-          .and.eq('17:00');
-
-        expect(reservation)
           .to.have.property('duration')
           .and.be.a('number')
           .and.eq(2);
@@ -451,6 +452,8 @@ describe('reservation form', () => {
           .and.be.an('array')
           .and.have.lengthOf(3)
           .and.have.members([1, 2, 4]);
+
+        cy.log(reservation);
       });
   });
 });

@@ -18,7 +18,8 @@
   const today = new Date(
     new Date().getFullYear(),
     new Date().getMonth(),
-    new Date().getDate()
+    new Date().getDate(),
+    new Date().getHours() + 1
   );
 
   let dateGrid;
@@ -91,7 +92,12 @@
   };
 
   const createDate = date => {
-    return new Date(selectedDate.getFullYear(), selectedDate.getMonth(), date);
+    return new Date(
+      selectedDate.getFullYear(),
+      selectedDate.getMonth(),
+      date,
+      selectedDate.getHours()
+    );
   };
 </script>
 

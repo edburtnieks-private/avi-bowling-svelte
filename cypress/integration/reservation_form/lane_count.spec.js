@@ -59,5 +59,14 @@ describe('lane count', () => {
     cy.get('@lane-count-increment-button')
       .should('be.disabled')
       .and('have.class', 'disabled-value');
+
+    // Set lane count to 8
+    cy.get('@lane-count-decrement-button')
+      .click()
+      .click();
+
+    // Assert that lane count is 8
+    cy.get('@lane-count-input')
+      .should('have.value', '8');
   });
 });
