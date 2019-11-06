@@ -9,7 +9,7 @@
     padding: var(--p-0) var(--p-mobile);
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .reservation-form-wrapper {
       display: flex;
       justify-content: center;

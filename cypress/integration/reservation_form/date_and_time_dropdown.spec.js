@@ -60,7 +60,7 @@ describe('date and time dropdown', () => {
       });
   });
 
-  it('should open and close date and time dropdown by clicking toggle button', () => {
+  it('should open and close date and time dropdown', () => {
     cy.get('@date-and-time-dropdown')
       .within(() => {
         // Open date and time dropdown
@@ -76,10 +76,27 @@ describe('date and time dropdown', () => {
         cy.get('@date-and-time-dropdown-toggle-button-caret-icon')
           .should('have.class', 'active');
     
-        // Close date and time dropdown
+        // Close date and time dropdown with dropdown toggle button
         cy.get('@date-and-time-dropdown-toggle-button')
           .click();
     
+        // Assert that date and time dropdown is closed
+        cy.get('[data-cy=dropdown-content]')
+          .should('not.exist')
+          .and('not.be.visible');
+
+        // Assert that caret icon is pointing down
+        cy.get('@date-and-time-dropdown-toggle-button-caret-icon')
+          .should('not.have.class', 'active');
+
+        // Open date and time dropdown
+        cy.get('@date-and-time-dropdown-toggle-button')
+          .click();
+
+        // Close date and time dropdown with dropdown close button
+        cy.get('[data-cy=dropdown-close-button]')
+          .click();
+
         // Assert that date and time dropdown is closed
         cy.get('[data-cy=dropdown-content]')
           .should('not.exist')

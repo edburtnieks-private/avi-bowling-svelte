@@ -40,7 +40,7 @@ describe('more details dropdown', () => {
       });
   });
 
-  it('should open and close more details dropdown by clicking toggle button', () => {
+  it('should open and close more details dropdown', () => {
     cy.get('@more-details-dropdown')
       .within(() => {
         // Open more details dropdown
@@ -56,10 +56,27 @@ describe('more details dropdown', () => {
         cy.get('@more-details-dropdown-toggle-button-caret-icon')
           .should('have.class', 'active');
     
-        // Close more details dropdown
+        // Close more details dropdown with dropdown toggle button
         cy.get('@more-details-dropdown-toggle-button')
           .click();
     
+        // Assert that more details dropdown is closed
+        cy.get('[data-cy=dropdown-content]')
+          .should('not.exist')
+          .and('not.be.visible');
+
+        // Assert that caret icon is pointing down
+        cy.get('@more-details-dropdown-toggle-button-caret-icon')
+          .should('not.have.class', 'active');
+
+        // Open more details dropdown
+        cy.get('@more-details-dropdown-toggle-button')
+          .click();
+
+        // Close more details dropdown with dropdown close button
+        cy.get('[data-cy=dropdown-close-button]')
+          .click();
+
         // Assert that more details dropdown is closed
         cy.get('[data-cy=dropdown-content]')
           .should('not.exist')
