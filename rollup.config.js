@@ -3,48 +3,67 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import { postcss } from 'svelte-preprocess';
 
-const production = !process.env.ROLLUP_WATCH;
+const isDev = Boolean(process.env.ROLLUP_WATCH);
 
-export default {
-	input: 'src/main.js',
-	output: {
-		sourcemap: true,
-		format: 'iife',
-		name: 'app',
-		file: 'public/bundle.js'
-	},
-	plugins: [
-		svelte({
-			// enable run-time checks when not in production
-			dev: !production,
-			// we'll extract any component CSS out into
-			// a separate file — better for performance
-			css: css => {
-				css.write('public/bundle.css');
-			}
-		}),
+export default [
+  // Browser bundle
+  {
+    input: 'src/main.js',
+    output: {
+      sourcemap: true,
+      format: 'iife',
+      name: 'app',
+      file: 'public/bundle.js',
+    },
+    plugins: [
+      svelte({
+        hydratable: true,
+        dev: isDev,
+        css: css => {
+          css.write('public/bundle.css');
+        },
+        preprocess: [
+          postcss({
+            plugins: [require('autoprefixer')],
+          }),
+        ],
+      }),
 
-		// If you have external dependencies installed from
-		// npm, you'll most likely need these plugins. In
-		// some cases you'll need additional configuration —
-		// consult the documentation for details:
-		// https://github.com/rollup/rollup-plugin-commonjs
-		resolve({
-			browser: true,
-			dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/')
-		}),
-		commonjs(),
+      resolve({
+        browser: true,
+        dedupe: importee =>
+          importee === 'svelte' || importee.startsWith('svelte/'),
+      }),
 
-		// Watch the `public` directory and refresh the
-		// browser on changes when not in production
-		!production && livereload('public'),
+      commonjs(),
 
-		// If we're building for production (npm run build
-		// instead of npm run dev), minify
-		production && terser()
-	],
-	watch: {
-		clearScreen: false
-	}
-};
+      isDev &&
+        livereload({
+          watch: 'public/App.js',
+          delay: 200,
+        }),
+
+      !isDev && terser(),
+    ],
+  },
+  // Server bundle
+  {
+    input: 'src/App.svelte',
+    output: {
+      sourcemap: false,
+      format: 'cjs',
+      name: 'app',
+      file: 'public/App.js',
+    },
+    plugins: [
+      svelte({
+        generate: 'ssr',
+      }),
+      resolve(),
+      commonjs(),
+      !isDev && terser(),
+    ],
+  },
+];

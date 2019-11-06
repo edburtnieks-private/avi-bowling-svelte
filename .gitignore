@@ -1,3 +1,5 @@
-.DS_Store
-node_modules
-public/bundle.*
+/node_modules
+/public/App.js
+/public/bundle.*
+/cypress/videos
+/cypress/screenshots
