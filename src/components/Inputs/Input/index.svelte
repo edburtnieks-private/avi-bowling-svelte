@@ -48,6 +48,7 @@
   .increment-input {
     background-color: var(--c-white);
     color: var(--c-mine-shaft);
+    min-width: 0;
     padding: var(--p-xxs) var(--p-0);
     text-align: center;
   }
