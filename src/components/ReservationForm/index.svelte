@@ -98,12 +98,12 @@
     console.log(reservation);
   };
 
-  const toggleMoreDetailsForm = () => {
-    isMoreDetailsFormVisible = !isMoreDetailsFormVisible;
-  };
-
   const toggleDateTimeForm = () => {
     isDateTimeFormVisible = !isDateTimeFormVisible;
+  };
+
+  const toggleMoreDetailsForm = () => {
+    isMoreDetailsFormVisible = !isMoreDetailsFormVisible;
   };
 
   const toggleLane = event => {
@@ -207,7 +207,7 @@
     margin-bottom: var(--m-s);
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .reservation-form-inner-wrapper {
       display: flex;
       margin-bottom: var(--m-xs);
@@ -226,7 +226,7 @@
     margin-right: var(--m-xxs);
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .input-label-wrapper:not(:last-of-type) {
       margin-bottom: var(--m-0);
       margin-right: var(--m-xxs);
@@ -247,13 +247,13 @@
     margin-bottom: var(--m-s);
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .more-details-form-dropdown-wrapper {
       margin-bottom: var(--m-0);
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .more-details-form {
       display: flex;
     }
@@ -263,7 +263,7 @@
     margin-bottom: var(--m-m);
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .lane-information-wrapper {
       margin-bottom: var(--m-0);
       margin-right: var(--m-m);
@@ -282,18 +282,17 @@
 
   .player-shoe-wrapper {
     display: flex;
-    justify-content: space-between;
   }
 
   .player-count-input-wrapper {
-    margin-right: var(--m-xxs);
+    margin-right: var(--m-xs);
   }
 
   .date-time-wrapper {
     min-width: 200px;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .datepicker-time-wrapper {
       display: flex;
     }
@@ -303,7 +302,7 @@
     margin-bottom: var(--m-s);
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .datepicker-wrapper {
       margin-bottom: var(--m-0);
       margin-right: var(--m-s);
@@ -314,7 +313,7 @@
     display: flex;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .time-duration-wrapper {
       display: block;
     }
@@ -324,7 +323,12 @@
     position: relative;
   }
 
-  @media (min-width: 1024px) {
+  .player-count-input-wrapper,
+  .shoe-count-input-wrapper {
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
     .time-duration-wrapper,
     .player-count-input-wrapper,
     .shoe-count-input-wrapper,
@@ -339,7 +343,7 @@
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .form-footer {
       display: flex;
       justify-content: space-between;

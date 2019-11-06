@@ -5,15 +5,9 @@
   export let id = '';
   export let isInput = false;
   export let disabled = false;
+  export let isContentVisible = false;
 
   const dispatch = createEventDispatcher();
-
-  let active = false;
-
-  const toggleDropdown = () => {
-    active = !active;
-    dispatch('toggleDropdown');
-  };
 </script>
 
 <style>
@@ -52,7 +46,7 @@
   type="button"
   class:link-button={!isInput}
   class:global-input={isInput}
-  on:click={toggleDropdown}
+  on:click={() => dispatch('toggleDropdown')}
   {disabled}
   {id}
   data-cy="dropdown-toggle-button">
@@ -65,7 +59,7 @@
       </div>
 
       <div class="caret-icon-wrapper">
-        <CaretIcon {disabled} link {active} />
+        <CaretIcon {disabled} link active={isContentVisible} />
       </div>
     </div>
   {/if}

@@ -6,10 +6,10 @@
   export let isContentVisible;
 </script>
 
-<DropdownToggle {disabled} on:toggleDropdown>
+<DropdownToggle {disabled} {isContentVisible} on:toggleDropdown>
   <slot name="toggle" />
 </DropdownToggle>
 
-<DropdownContent {isContentVisible}>
+<DropdownContent {isContentVisible} on:toggleDropdown>
   <slot name="content" />
 </DropdownContent>

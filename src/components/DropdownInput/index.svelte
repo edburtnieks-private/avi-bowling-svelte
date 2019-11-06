@@ -18,7 +18,7 @@
   {disabled}
   on:toggleDropdown>
   <div slot="dropdown-content">
-    <DropdownContent {isContentVisible}>
+    <DropdownContent {isContentVisible} on:toggleDropdown>
       <slot name="content" />
     </DropdownContent>
   </div>

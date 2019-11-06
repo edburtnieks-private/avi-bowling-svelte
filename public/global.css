@@ -25,6 +25,7 @@
 
   /* Opacity Colors */
   --c-mercury-50: #e1e1e180;
+  --c-mine-shaft-30: #3a3a3a4d;
 
   /* Font Family */
   --ff-base: 'Montserrat', sans-serif;
@@ -67,8 +68,9 @@
 
   /* Z Index */
   --zi-navigation: 1;
-  --zi-dropdown: 1;
   --zi-navigation-toggle: 2;
+  --zi-dropdown-overlay: 10;
+  --zi-dropdown-content: 20;
 }
 
 html,
