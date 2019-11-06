@@ -9,6 +9,7 @@
   --bs-navigation: 0px 0px 24px 4px var(--c-mercury-50);
   --bs-input: 0px 3px 9px var(--c-mercury-50);
   --bs-input-hover: inset 0 0 0 1px var(--c-silver);
+  --bs-header: 0px 4px 8px -2px var(--c-mercury-50);
 
   /* Border Width */
   --bw-btn-s: 1px;

@@ -13,6 +13,7 @@
 <style>
   header {
     background-color: var(--c-white);
+    box-shadow: var(--bs-header);
   }
 
   div {
