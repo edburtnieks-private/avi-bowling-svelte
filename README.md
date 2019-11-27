@@ -7,6 +7,7 @@ Live site - https://avi-bowling.edburtnieks.now.sh/
 ## Table of contents
 
 - [Local development setup](#local-development-setup)
+- [Testing](#testing)
 - [Project documentation](#project-documentation)
 - [Technologies and tools](#technologies-and-tools)
 
@@ -42,13 +43,19 @@ To add all production ready features to master branch create new pull request on
 
 To deploy production ready code to live site run `now`
 
+## Testing
+
+To test with cypress run `npm run cy:open` or `npm run cy:run`
+
+New tests can be added in [cypress/integration](./cypress/integration) directory
+
 ## Project documentation
 
 [Project documentation, Structure, Guidelines](./documentation)
 
 ## Technologies and tools
 
-Project boilerplate was generated using `npx degit sveltejs/template avi-bowling` command
+Project boilerplate was generated using `npx degit sveltejs/template` command
 
 - [Svelte](https://svelte.dev/) - Javascript compiler
 - [Svelte Routing](https://github.com/EmilTholin/svelte-routing) - Routing solution
