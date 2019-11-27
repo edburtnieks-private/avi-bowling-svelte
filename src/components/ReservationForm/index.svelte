@@ -70,11 +70,12 @@
   const minShoeCount = 1;
   const minDuration = 1;
 
-  const maxLaneCount = 10;
+  const availableLaneCount = 10;
+  const maxLaneCount = 1;
   const maxPlayerCount = 6;
   $: maxShoeCount = playerCount;
 
-  const lanes = Array.from(Array(maxLaneCount), (_, index) => index + 1);
+  const lanes = Array.from(Array(availableLaneCount), (_, index) => index + 1);
   $: players = Array.from(Array(playerCount), (_, index) => index + 1);
 
   $: isLaneButtonDisabled = lane => laneNumbers.length >= laneCount && !laneNumbers.includes(lane);
